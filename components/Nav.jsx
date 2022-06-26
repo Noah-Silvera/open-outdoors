@@ -1,7 +1,46 @@
 import styles from './Nav.module.css'
 import Link from 'next/link'
+import { Navbar } from 'flowbite-react'
 
 export default function Nav() {
+  return (
+    <Navbar
+      fluid={true}
+      rounded={true}
+    >
+      <Navbar.Brand href="https://flowbite.com/">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          className="mr-3 h-6 sm:h-9"
+          alt="Flowbite Logo"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite
+        </span>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Navbar.Link
+          href="/navbars"
+          active={true}
+        >
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">
+          About
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">
+          Services
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">
+          Pricing
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">
+          Contact
+        </Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
+  )
   return (
     <nav className={"border-gray-200 header-font pr-5 md:pr-10 " + styles["nav-background"]}>
       <div className="flex flex-wrap justify-between items-center">
