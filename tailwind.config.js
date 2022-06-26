@@ -3,9 +3,21 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
+    colors: {
+      // Using modern `rgb`
+      "primary-light": 'rgb(var(--color-primary-light) / <alpha-value>)',
+      "primary-dark": 'rgb(var(--color-primary-dark) / <alpha-value>)',
+      "secondary-light": 'rgb(var(--color-secondary-light) / <alpha-value>)',
+      "secondary-dark": 'rgb(var(--color-secondary-dark) / <alpha-value>)',
+      "tertiary-light": 'rgb(var(--color-secondary-light) / 0.5)',
+      purple: '#801A86'
+    }
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ]
 }

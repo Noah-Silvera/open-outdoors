@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-primary-light: 	225	229	238;
+    --color-primary-dark: 55 57 46;
+    --color-secondary-light: 131 144 115;
+    --color-secondary-dark: 55 61 32;
+    --color-tertiary-light: 98,108,86;
+
+    --sm-breakpoint: 640px;
+    --md-breakpoint: 768px;
+    --lg-breakpoint: 1024px;
+    --xl-breakpoint: 1280px;
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -17,4 +32,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.header-font {
+  font-family: 'Oswald';
+  letter-spacing: .1em;
 }
