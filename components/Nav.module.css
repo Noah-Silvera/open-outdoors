@@ -19,3 +19,7 @@
     background: linear-gradient(-60deg, rgb(var(--color-secondary-light)) 23%, rgba(var(--color-secondary-dark)) 23%);
   }
 }
+
+.toggle button {
+  color: rgba(var(--color-primary-dark));
+}
