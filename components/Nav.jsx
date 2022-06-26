@@ -16,10 +16,10 @@ export default function Nav() {
         <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row pb-2 md:pb-0 md:space-x-8 md:mt-0 md:text-sm md:font-medium text-primary-light md:text-primary-dark">
             <li>
-              <a href="#" className="block py-2 pr-4 pl-3 md:p-0 text-2xl hover:text-blue-700" aria-current="page">Home</a>
+              <a href="#" className="block py-2 pr-4 pl-3  md:p-0 text-2xl hover:text-blue-700">About</a>
             </li>
             <li>
-              <a href="#" className="block py-2 pr-4 pl-3  md:p-0 text-2xl hover:text-blue-700">About</a>
+              <a href="#" className="block py-2 pr-4 pl-3  md:p-0 text-2xl hover:text-blue-700">Gear Swap</a>
             </li>
           </ul>
         </div>
