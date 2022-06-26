@@ -7,7 +7,7 @@ export default function Nav() {
       <div className="flex flex-wrap justify-between items-center">
         <Link href="/">
           <a className="flex items-center">
-              <img src="/logo.png" className="mr-3 h-24" alt="Flowbite Logo" />
+              <img src="/logo.png" className="mr-3 h-24" alt="Open (out)Doors" />
               <span className="self-center text-2xl sm:text-3xl font-semibold whitespace-nowrap text-primary-light">Open (out)Doors</span>
           </a>
         </Link>
