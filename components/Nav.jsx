@@ -23,12 +23,12 @@ export default function Nav() {
       </div>
       <Navbar.Collapse >
         <Navbar.Link
-          href="#"
+          href="/about"
 
         >
           <p className="text-primary-light md:text-primary-dark text-2xl">About</p>
         </Navbar.Link>
-        <Navbar.Link href="#">
+        <Navbar.Link href="/gear-swap">
           <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0">Gear Swap</p>
         </Navbar.Link>
       </Navbar.Collapse>
