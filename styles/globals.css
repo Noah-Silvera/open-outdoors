@@ -38,3 +38,17 @@ a {
   font-family: 'Oswald';
   letter-spacing: .1em;
 }
+
+.body-font {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 3em;
+  }
+}
