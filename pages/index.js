@@ -1,5 +1,8 @@
 import Head from 'next/head'
+import LeftSideText from '../components/LeftSideText'
 import Nav from '../components/Nav'
+import RightSideText from '../components/RightSideText'
+import TextBody from '../components/TextBody'
 
 export default function Home() {
   return (
@@ -27,7 +30,25 @@ export default function Home() {
           <hr className='bg-secondary-light h-1 w-11/12 mx-auto border-0 hidden sm:block mb-10'/>
           <div className='w-5/6 sm:w-4/5 md:w-3/5 md:max-w-2xl mx-auto space-y-5'>
             <h1 className='header-font hidden sm:block'>Open (out)Doors</h1>
-            <p className='text-xl body-font'>Open Outdoors is a Queer led organization that seeks to minimize the financial and logistical barriers to accessing the outdoors for groups that have been historically isolated from the outdoors industry.</p>
+            <LeftSideText>
+              <TextBody>
+                <p>
+                  Open Outdoors is a Queer led organization that seeks to minimize the barriers to accessing the outdoors for groups that have been historically isolated from the outdoors industry.
+                </p>
+              </TextBody>
+            </LeftSideText>
+            <RightSideText>
+              <TextBody>
+                <p>
+                  We consist of a few people excited to share their knowledge and resources to help queer people and other marginalized groups get outside and hike, camp, cycle, and more.
+                </p>
+              </TextBody>
+            </RightSideText>
+            <LeftSideText>
+              <TextBody>
+                <p>This organization is still in it's infancy but our dreams include:</p>
+              </TextBody>
+            </LeftSideText>
           </div>
         </div>
       </div>
