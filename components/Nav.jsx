@@ -28,7 +28,7 @@ export default function Nav() {
           <p className="text-primary-light md:text-primary-dark text-2xl">About</p>
         </Navbar.Link>
         <Navbar.Link href="/gear-swap">
-          <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0">Gear Swap</p>
+          <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0 pr-5">Gear Swap</p>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
