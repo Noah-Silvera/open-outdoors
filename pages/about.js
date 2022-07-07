@@ -1,6 +1,21 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
-import TextBody from '../components/TextBody'
+
+function BioCard({name, bio, className, imgSrc, ...props}) {
+  return (
+    <div className={['flex items-center justify-center flex-wrap flex-col sm:px-[20%] pb-4 sm:pb-0', className].filter(String).join(" ")}>
+          <img
+              src={imgSrc}
+              className="max-h-96 py-8"
+              alt=""
+          />
+          <div className='grow align-middle text-center space-y-4'>
+            <h2 className='header-font text-3xl'>{name}</h2>
+            <p className="text-xl body-font">{bio}</p>
+          </div>
+        </div>
+  )
+}
 
 export default function Home() {
   return (
@@ -16,28 +31,16 @@ export default function Home() {
       </div>
       <div className="min-h-screen">
         <h1 className='header-font text-center mx-auto py-10 bg-tertiary-light'>About Us</h1>
-        <div className='flex items-center justify-center flex-wrap flex-col md:flex-row-reverse sm:px-[20%]  pb-4 sm:pb-0'>
-          <img
-              src="/bio-photo-wren.png"
-              className="max-h-96 py-8"
-              alt=""
-          />
-          <div className='grow align-middle text-center space-y-4'>
-            <h2 className='header-font text-3xl'>Wren</h2>
-            <p className="text-xl body-font">Bio Bio Bio</p>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row items-center justify-center flex-wrap sm:px-[20%] pb-4 sm:pb-0 bg-tertiary-light'>
-          <img
-              src="/bio-photo-noah.png"
-              className="max-h-96 py-8"
-              alt="A picture of Noah Silvera smiling with a cycling helmet on, against the background of a gravel trail"
-          />
-          <div className='grow align-middle text-center space-y-4'>
-            <h2 className='header-font text-3xl'>Noah</h2>
-            <p className="text-xl body-font">Bio Bio Bio</p>
-          </div>
-        </div>
+        <BioCard className="md:flex-row-reverse"
+          name="Wren"
+          imgSrc="/bio-photo-wren.png"
+          bio="Bio Bio Bio"
+        ></BioCard>
+        <BioCard className="md:flex-row bg-tertiary-light"
+          name="Noah"
+          imgSrc="/bio-photo-noah.png"
+          bio="Bio Bio Bio"
+        ></BioCard>
       </div>
     </>
   )
