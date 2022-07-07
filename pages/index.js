@@ -10,9 +10,9 @@ export default function Home() {
       <Head>
         <title>Open (out)Doors</title>
         <link rel="icon" href="/favicon.ico" />
+        <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" async></script>
+        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'></link>
       </Head>
-      <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" async></script>
-      <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'></link>
       <div className='pb-24 sm:pb-0'>
         <Nav/>
       </div>
@@ -43,7 +43,7 @@ export default function Home() {
                   </p>
               </RightSideText>
               <LeftSideText className="py-4">
-                  <p>This organization is still in it's infancy but our dreams include:</p>
+                  <p>{"This organization is still in it's infancy but our dreams include:"}</p>
                   <ul className='list-disc ml-7 space-y-2 pt-3'>
                     <li>Coordinating gear donations from major companies</li>
                     <li>Workshops and educational opportunities</li>
