@@ -1,6 +1,9 @@
 import React from "react"
 
 export default function TextBody({children, className, ...props}) {
+  if(!Array.isArray(children)) {
+    children = [children]
+  }
   return (
     <div className={["text-xl body-font", className].filter(String).join(" ")} {...props}>
       {children.map((child) => {
