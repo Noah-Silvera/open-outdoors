@@ -1,6 +1,9 @@
+import LeftSideText from "./LeftSideText";
 
-export default function RightSideText(props) {
+export default function RightSideText({children, className, ...props}) {
   return (
-    <div className="w-11/12 text-right ml-auto">{props.children}</div>
+    <div className={className}>
+      <div className="w-11/12 ml-auto text-right" {...props}>{children}</div>
+    </div>
   )
 }
