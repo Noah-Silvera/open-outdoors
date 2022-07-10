@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import DefaultHead from '../components/DefaultHead'
 import LeftSideText from '../components/LeftSideText'
 import Nav from '../components/Nav'
 import RightSideText from '../components/RightSideText'
@@ -7,12 +7,7 @@ import TextBody from '../components/TextBody'
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Open (out)Doors</title>
-        <link rel="icon" href="/favicon.ico" />
-        <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" async></script>
-        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'></link>
-      </Head>
+      <DefaultHead/>
       <div className='pb-24 sm:pb-0'>
         <Nav/>
       </div>
