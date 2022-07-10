@@ -3,8 +3,11 @@ import LeftSideText from '../components/LeftSideText'
 import Nav from '../components/Nav'
 import RightSideText from '../components/RightSideText'
 import TextBody from '../components/TextBody'
+import { createClient } from 'contentful'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types'
 
-export default function Home() {
+export default function Home({ content }) {
   return (
     <>
       <DefaultHead/>
@@ -26,42 +29,50 @@ export default function Home() {
         <div className='bg-white pb-24 pt-2 sm:pt-10'>
           <div className='space-y-7'>
             <h1 className='header-font hidden sm:block mx-auto text-center'>Open (out)Doors</h1>
-            <TextBody>
-              <LeftSideText className="py-4">
-                <p>
-                  Open Outdoors is a Queer led organization that seeks to minimize the barriers to accessing the outdoors for groups that have been historically isolated from the outdoors industry.
-                </p>
-              </LeftSideText>
-              <RightSideText className="bg-white-alt py-4">
-                  <p>
-                    We consist of a few people excited to help queer people and other marginalized groups get outside, build relationships, and share knowledge and resources. One of our aims is to minimize financial and logistical barriers to accessing the outdoors by creating community gear share networks and building up a library of gear to lend and give away.
-                  </p>
-              </RightSideText>
-              <LeftSideText className="py-4">
-                <p>We also recognize the power of representation in enabling access to space, and want to normalize the inclusion of diverse communities, bodies, and skill levels that been historically excluded from the outdoors industry.</p>
-              </LeftSideText>
-              <RightSideText className="bg-white-alt py-4">
-                <p>
-                  We are a non-hierarchical organization, which for us means actively working to provide the resources and space to enable anyone involved to contribute, and recognizing the contributions of all involved, not just the organizers or leaders.
-                </p>
-              </RightSideText>
-              <LeftSideText className="py-4">
-                  <p>{"This organization is still in it's infancy but our dreams include:"}</p>
-                  <ul className='list-disc ml-7 space-y-2 pt-3'>
-                    <li>Gear sharing networks and swaps</li>
-                    <li>Coordinating gear donations from major companies</li>
-                    <li>Workshops and educational opportunities</li>
-                    <li>Guided trips and excursions</li>
-                    <li>Community building events</li>
-                    <li>Rideshare networks</li>
-                    <li>Adventure based communication channels</li>
-                    <li>And more!</li>
-                  </ul>
-              </LeftSideText>
-            </TextBody>
+            {content.map((document, idx) => {
+              const options = {
+                renderNode: {
+                  [BLOCKS.UL_LIST]: (node, children) => <ul className='list-disc ml-7 space-y-2 pt-3'>{children}</ul>,
+                }
+              };
+
+              let innerContent = documentToReactComponents(document, options)
+
+              if(idx % 2 == 0) {
+                return (
+                  <TextBody>
+                    <LeftSideText className="py-4">
+                      {innerContent}
+                    </LeftSideText>
+                  </TextBody>
+                )
+              } else {
+                return (
+                  <TextBody>
+                    <RightSideText className="py-4 bg-white-alt">
+                      {innerContent}
+                    </RightSideText>
+                  </TextBody>
+                )}
+            }).flat()}
           </div>
         </div>
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  })
+  const HOMEPAGE_ENTRY_ID = "4YkqRwhrDZm92thaXmVtR7"
+  let homepageContent = await client.getEntry(HOMEPAGE_ENTRY_ID)
+
+  return {
+    props: {
+      content: Object.values(homepageContent.fields)
+    }
+  }
 }
