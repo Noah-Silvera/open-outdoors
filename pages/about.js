@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import DefaultHead from '../components/DefaultHead'
 import Nav from '../components/Nav'
 
 function BioCard({name, className, imgSrc, ...props}) {

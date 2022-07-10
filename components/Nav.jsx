@@ -25,11 +25,19 @@ export default function Nav() {
           href="/about"
 
         >
-          <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-5">About Us</p>
+          <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">About Us</p>
         </Navbar.Link>
         {/* <Navbar.Link href="/gear-swap">
           <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0 pr-5">Gear Swap</p>
         </Navbar.Link> */}
+                <Navbar.Link
+          href="https://www.instagram.com/open.outdoors/"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <span class="sm:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
+          <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" class="fab fa-instagram fa-3x pr-5" title="Instagram"></i></span>
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   )
