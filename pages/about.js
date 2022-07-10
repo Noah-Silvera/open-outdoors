@@ -29,7 +29,9 @@ export default function About({ content }) {
       <div className="min-h-screen">
         <h1 className='header-font text-center mx-auto py-10 bg-tertiary-light'>About Us</h1>
         {content.map((bio, idx) => {
-          return <BioCard className={`md:flex-row-reverse ${idx % 2 == 1 && "bg-tertiary-light"}`}
+          return <BioCard
+          className={`md:flex-row-reverse ${idx % 2 == 1 && "bg-tertiary-light"}`}
+          key={bio.name}
           name={bio.name}
           imgSrc={`https://${bio.photo.fields.file.url}`}
           >

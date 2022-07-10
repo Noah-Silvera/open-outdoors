@@ -35,8 +35,8 @@ export default function Nav() {
           target="_blank"
           aria-label="Instagram"
         >
-          <span class="sm:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
-          <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" class="fab fa-instagram fa-3x pr-5" title="Instagram"></i></span>
+          <span className="sm:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
+          <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fab fa-instagram fa-3x pr-5" title="Instagram"></i></span>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
