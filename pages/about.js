@@ -43,6 +43,9 @@ export default function Home() {
           name="Noah"
           imgSrc="/bio-photo-noah.png"
         >
+          <p>Hello! My name is Noah Silvera, and I'm a queer trans women who goes by she/her pronouns. I'm also a white settler, and I moved to Victoria, on the lands of the Lekwungen speaking people 6 years ago. I enjoy spending time outdoors, spending quality time with friends, and working with Community Food Support to enable greater access to food.</p>
+          <p>I grew up exploring my world through cycling, and it has continued to grow into an important part of my life, and the main way I've engaged with the outdoors in the last decade. I've had the privilege and resources to be able to have experiences like cycle touring across Canada, and most recently, down the length of Vancouver island on logging roads. My experiences have helped to me develop an acceptance and appreciation for the power, beauty, and ability of my queer body. Cycling, camping, and hiking have and continue to be an essential survival skill to ground and empower me as I work and live through cultural transphobia and lean into embracing my queerness. They've also helped me build a deep appreciation for the complex natural systems we live among, as well as build a deeper awareness of the complex impact of current resource extraction processes.</p>
+          <p>I strive to build networks of care, joyful sharing of beauty, and pleasure in my personal life, and want to extend that desire further to enable others to access the beauty and nuturing power of being outside. I want to use my privilege, knowledge and skills to enable others to access the spaces and experiences I have. I'm an avid bikepacker, experienced camper, and amateur overnight hiker, and eager to share my skills and free camping spots with others!</p>
         </BioCard>
       </div>
     </>
