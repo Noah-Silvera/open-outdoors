@@ -1,0 +1,19 @@
+
+
+$grid-column-size: 400px;
+
+.gear-library-grid {
+  display: grid;
+  grid-template-columns: repeat(4, $grid-column-size);
+  grid-template-rows: auto;
+  grid-gap: 3em;
+  column-gap: 3em;
+  max-width: 2500px;
+}
+
+.gear-item img {
+  width: $grid-column-size;
+  height: $grid-column-size;
+  object-fit: cover;
+  object-position: center;
+}
