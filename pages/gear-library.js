@@ -13,7 +13,7 @@ export default function GearLibrary({ content }) {
       </div>
       <div className="min-h-screen" styles={styles["main-container"]}>
         <h1 className='header-font text-center mx-auto py-10 bg-tertiary-light'>Gear Library</h1>
-        <div className='bg-white-alt/70'>
+        <div className='bg-white-alt/70 h-screen'>
           <div className={[styles['gear-library-grid'], "mx-auto p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {
               return <div className={[styles['gear-item'], "shadow-xl rounded-lg bg-tertiary-light/20"].join(" ")} key={idx}>
