@@ -1,14 +1,39 @@
-
+@import './breakpoints';
 
 $grid-column-size: 400px;
 
+
 .gear-library-grid {
   display: grid;
-  grid-template-columns: repeat(4, $grid-column-size);
   grid-template-rows: auto;
   grid-gap: 3em;
   column-gap: 3em;
   max-width: 2500px;
+  justify-content: center;
+
+  grid-template-columns: repeat(4, $grid-column-size);
+
+  @include small {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include medium {
+    $grid-column-size: 250px;
+    grid-template-columns: repeat(2, $grid-column-size);
+  }
+
+  @include large {
+    $grid-column-size: 350px;
+    grid-template-columns: repeat(2, $grid-column-size);
+  }
+
+  @media (min-width: $breakpoint-lg-width) and (max-width: 1400px) {
+    grid-template-columns: repeat(2, $grid-column-size);
+  }
+
+  @media (min-width: 1400px) and (max-width: 1800px) {
+    grid-template-columns: repeat(3, $grid-column-size);
+  }
 }
 
 .gear-item img {
@@ -16,4 +41,21 @@ $grid-column-size: 400px;
   height: $grid-column-size;
   object-fit: cover;
   object-position: center;
+
+  @include small {
+    width: 100%;
+    height: auto;
+  }
+
+  @include medium {
+    $grid-column-size: 250px;
+    width: $grid-column-size;
+    height: $grid-column-size;
+  }
+
+  @include large {
+    $grid-column-size: 350px;
+    width: $grid-column-size;
+    height: $grid-column-size;
+  }
 }

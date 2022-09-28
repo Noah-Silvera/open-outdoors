@@ -1,3 +1,5 @@
+@import "./breakpoints";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,14 +17,6 @@
     --md-breakpoint: 768px;
     --lg-breakpoint: 1024px;
     --xl-breakpoint: 1280px;
-  }
-}
-
-$breakpoint-sm-width: 640px;
-
-@mixin sm-or-larger {
-  @media (min-width: #{$breakpoint-sm-width}) {
-    @content;
   }
 }
 

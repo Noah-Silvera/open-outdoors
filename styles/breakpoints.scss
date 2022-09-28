@@ -1,0 +1,27 @@
+$breakpoint-sm-width: 640px;
+$breakpoint-md-width: 768px;
+$breakpoint-lg-width: 1024px;
+
+@mixin sm-or-larger {
+  @media (min-width: #{$breakpoint-sm-width}) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media (max-width: #{$breakpoint-sm-width}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: #{$breakpoint-sm-width}) and (max-width: #{$breakpoint-md-width}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: #{$breakpoint-md-width}) and (max-width: #{$breakpoint-lg-width}) {
+    @content;
+  }
+}
