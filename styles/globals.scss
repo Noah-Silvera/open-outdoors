@@ -61,3 +61,25 @@ h1 {
     font-size: 3em;
   }
 }
+
+.nav-background {
+  background: linear-gradient(-30deg, rgb(var(--color-secondary-light)) 60%, rgba(var(--color-secondary-dark)) 60%);
+}
+
+@media only screen and (max-width: 1024px) {
+  .nav-background {
+    background: linear-gradient(-30deg, rgb(var(--color-secondary-light)) 45%, rgba(var(--color-secondary-dark)) 45%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-background {
+    background: linear-gradient(-30deg, rgb(var(--color-secondary-light)) 30%, rgba(var(--color-secondary-dark)) 30%);
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .nav-background {
+    background: linear-gradient(-60deg, rgb(var(--color-secondary-light)) 23%, rgba(var(--color-secondary-dark)) 23%);
+  }
+}

@@ -5,7 +5,6 @@ export default function Nav() {
   return (
     <Navbar
       fluid={true}
-      className={"!py-0 !pl-0 header-font fixed w-screen opacity-80" + " " + styles["nav-background"]}
     >
       <Navbar.Brand href="/">
         <img
