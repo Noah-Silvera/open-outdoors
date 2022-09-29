@@ -3,8 +3,18 @@ import Nav from '../components/Nav'
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
+import { useEffect, useRef } from 'react'
+import { shiftUpOnScroll } from '../pages/utils';
 
 export default function GearLibrary({ content }) {
+  const gearLibraryBanner = useRef();
+
+  useEffect(() => {
+    if(gearLibraryBanner.current != null) {
+      shiftUpOnScroll(gearLibraryBanner.current)
+    }
+  }, [])
+
   return (
     <>
       <DefaultHead/>
@@ -17,7 +27,7 @@ export default function GearLibrary({ content }) {
           <div className='bg-tertiary-light/70'>
             <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>Aquiring outdoor gear can be a significant barrier for like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
           </div>
-          <p className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
+          <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
         </header>
         <div className='bg-white-alt/70 h-screen'>
           <div className={[styles['gear-library-grid'], "mx-auto p-10"].join(" ")}>
@@ -36,7 +46,6 @@ export default function GearLibrary({ content }) {
     </>
   )
 }
-
 
 export async function getStaticProps() {
   const client = createClient({

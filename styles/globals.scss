@@ -82,3 +82,8 @@ h2 {
     background: linear-gradient(-60deg, rgb(var(--color-secondary-light)) 23%, rgba(var(--color-secondary-dark)) 23%);
   }
 }
+
+.is-hidden {
+  margin-top: calc(-1 * var(--navbar-height));
+  transition: transform 0.4s, opacity 0.2s;
+}
