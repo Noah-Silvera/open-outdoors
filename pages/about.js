@@ -3,13 +3,13 @@ import Nav from '../components/Nav'
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-function BioCard({name, className, imgSrc, ...props}) {
+function BioCard({name, className, imgSrc, imgAlt, ...props}) {
   return (
     <div className={['flex items-center justify-center flex-wrap flex-col px-8 sm:px-[20%] pb-12', className].filter(String).join(" ")}>
           <img
               src={imgSrc}
               className="max-h-96 py-8"
-              alt=""
+              alt={imgAlt}
           />
           <div className='grow align-middle text-center space-y-4'>
             <h2 className='header-font text-3xl'>{name}</h2>
@@ -37,6 +37,7 @@ export default function About({ content }) {
               key={bio.name}
               name={bio.name}
               imgSrc={`https://${bio.photo.fields.file.url}`}
+              imgAlt={bio.photo.fields.description}
               >
                 {documentToReactComponents(bio.body)}
             </BioCard>
