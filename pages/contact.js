@@ -1,7 +1,7 @@
 import DefaultHead from '../components/DefaultHead'
 import Nav from '../components/Nav'
 
-export default function GearLibrary({ content }) {
+export default function Contact() {
   return (
     <>
       <DefaultHead/>
