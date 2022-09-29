@@ -28,7 +28,7 @@ export default function About({ content }) {
       </div>
       <main className="min-h-screen">
         <header>
-          <h1 className='header-font text-center mx-auto py-10 bg-tertiary-light'>About Us</h1>
+          <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>About Us</h1>
         </header>
         {content.map((bio, idx) => {
           return <section key={bio.name}>
