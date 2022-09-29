@@ -4,7 +4,7 @@ import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
 import { useEffect, useRef } from 'react'
-import { shiftUpOnScroll } from '../pages/utils';
+import { shiftUpOnScroll } from '../components/utils';
 
 export default function GearLibrary({ content }) {
   const gearLibraryBanner = useRef();

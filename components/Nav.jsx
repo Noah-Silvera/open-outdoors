@@ -1,7 +1,7 @@
 import styles from './Nav.module.css'
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
-import { shiftUpOnScroll } from '../pages/utils';
+import { shiftUpOnScroll } from './utils';
 
 export default function Nav() {
   const navBarContainer = useRef();
