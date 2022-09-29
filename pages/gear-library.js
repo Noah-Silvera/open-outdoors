@@ -14,6 +14,9 @@ export default function GearLibrary({ content }) {
       <main className="min-h-screen" styles={styles["main-container"]}>
         <header>
           <h1 className='header-font text-center mx-auto pb-10 pt-36 sm:pt-24 md:pt-20 bg-tertiary-light'>Gear Library</h1>
+          <div className='bg-tertiary-light/70'>
+            <p className='text-center text-xl px-4 py-5 max-w-xl mx-auto'>Aquiring outdoor gear can be a significant barrier to being able to activities like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
+          </div>
           <p className={['text-center py-2 px-3 bg-secondary-dark/80 text-2xl text-white', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
         </header>
         <div className='bg-white-alt/70 h-screen'>
