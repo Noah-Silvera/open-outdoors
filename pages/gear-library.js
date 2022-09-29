@@ -8,7 +8,7 @@ import { shiftUpOnScroll } from '../components/utils';
 
 function GearItem({gearForLoan, ...props}) {
   return (
-  <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={props.index}>
+  <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
     <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
     <h2 className='text-center'>{gearForLoan.title}</h2>
     <div className='px-5 py-2 md:py-3 text-center text-lg'>
@@ -48,7 +48,7 @@ export default function GearLibrary({ content }) {
       <div className='navbar-padding'>
         <Nav/>
       </div>
-      <main className="min-h-screen" styles={styles["main-container"]}>
+      <main className="sm:h-screen" styles={styles["main-container"]}>
         <header>
           <h1 className='header-font text-center mx-auto pb-5 md:pb-10 pt-20 sm:pt-16 md:pt-20 bg-tertiary-light'>Gear Library</h1>
           <div className='bg-tertiary-light/70'>
@@ -56,7 +56,7 @@ export default function GearLibrary({ content }) {
           </div>
           <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
         </header>
-        <div className='bg-white-alt/70 h-screen'>
+        <div className='bg-white-alt/40 h-full'>
           <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {
               return <GearItem gearForLoan={gearForLoan} key={idx}/>
