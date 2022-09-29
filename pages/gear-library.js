@@ -6,6 +6,18 @@ import styles from '../styles/GearLibrary.module.scss'
 import { useEffect, useRef } from 'react'
 import { shiftUpOnScroll } from '../components/utils';
 
+function GearItem({gearForLoan, ...props}) {
+  return (
+    <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={props.index}>
+      <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
+      <h2 className='text-center'>{gearForLoan.title}</h2>
+      <div className='px-5 py-2 md:py-3 text-center'>
+        {documentToReactComponents(gearForLoan.description)}
+      </div>
+    </section>
+  )
+}
+
 export default function GearLibrary({ content }) {
   const gearLibraryBanner = useRef();
 
@@ -32,13 +44,7 @@ export default function GearLibrary({ content }) {
         <div className='bg-white-alt/70 h-screen'>
           <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {
-              return <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={idx}>
-                <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
-                <h2 className='text-center'>{gearForLoan.title}</h2>
-                <div className='px-5 py-2 md:py-3 text-center'>
-                  {documentToReactComponents(gearForLoan.description)}
-                </div>
-              </section>
+              return <GearItem gearForLoan={gearForLoan} key={idx}/>
             })}
           </div>
         </div>
