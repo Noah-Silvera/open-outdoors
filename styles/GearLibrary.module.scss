@@ -59,3 +59,10 @@ $grid-column-size: 400px;
     height: $grid-column-size;
   }
 }
+
+.contact-banner {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  width: 100%;
+}

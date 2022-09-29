@@ -11,7 +11,7 @@ export default function Home({ content }) {
   return (
     <>
       <DefaultHead/>
-      <div className='pb-24 sm:pb-0'>
+      <div className='navbar-padding sm:pb-0'>
         <Nav/>
       </div>
       <div className="min-h-screen">

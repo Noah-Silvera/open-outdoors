@@ -23,7 +23,7 @@ export default function About({ content }) {
   return (
     <>
       <DefaultHead/>
-      <div className='pb-24'>
+      <div className='navbar-padding'>
         <Nav/>
       </div>
       <div className="min-h-screen">

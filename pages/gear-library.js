@@ -8,11 +8,12 @@ export default function GearLibrary({ content }) {
   return (
     <>
       <DefaultHead/>
-      <div className='pb-24'>
+      <div className='navbar-padding'>
         <Nav/>
       </div>
       <div className="min-h-screen" styles={styles["main-container"]}>
-        <h1 className='header-font text-center mx-auto py-10 bg-tertiary-light'>Gear Library</h1>
+        <h1 className='header-font text-center mx-auto pb-10 pt-20 bg-tertiary-light'>Gear Library</h1>
+        <p className={['text-center py-2 bg-secondary-dark/80 text-2xl text-white', styles["contact-banner"]].join(" ")}>Want to borrow a piece of gear? Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a></p>
         <div className='bg-white-alt/70 h-screen'>
           <div className={[styles['gear-library-grid'], "mx-auto p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {

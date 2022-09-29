@@ -17,6 +17,8 @@
     --md-breakpoint: 768px;
     --lg-breakpoint: 1024px;
     --xl-breakpoint: 1280px;
+
+    --navbar-height: 6rem;
   }
 }
 
@@ -26,11 +28,6 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 * {
@@ -58,6 +55,10 @@ h1 {
 
 h2 {
   font-size: 1.6em;
+}
+
+.navbar-padding {
+  padding-bottom: var(--navbar-height);
 }
 
 .nav-background {
