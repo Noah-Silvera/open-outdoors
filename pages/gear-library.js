@@ -20,7 +20,7 @@ export default function GearLibrary({ content }) {
           <div className={[styles['gear-library-grid'], "mx-auto p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {
               return <section className={[styles['gear-item'], "shadow-xl rounded-lg bg-tertiary-light/20"].join(" ")} key={idx}>
-                <img src={gearForLoan.images[0].fields.file.url} className='mb-5 rounded-tl-lg rounded-tr-lg'></img>
+                <img src={gearForLoan.images[0].fields.file.url} className='mb-5 rounded-tl-lg rounded-tr-lg' alt={gearForLoan.images[0].fields.description}></img>
                 <h2 className='text-center'>{gearForLoan.title}</h2>
                 <div className='px-5 py-3 text-center'>
                   {documentToReactComponents(gearForLoan.description)}
