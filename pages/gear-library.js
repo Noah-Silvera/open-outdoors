@@ -11,7 +11,7 @@ function GearItem({gearForLoan, ...props}) {
   <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={props.index}>
     <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
     <h2 className='text-center'>{gearForLoan.title}</h2>
-    <div className='px-5 py-2 md:py-3 text-center'>
+    <div className='px-5 py-2 md:py-3 text-center text-lg'>
       {documentToReactComponents(gearForLoan.description)}
     </div>
     <div className='mx-5 mb-2'>
