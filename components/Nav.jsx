@@ -32,6 +32,12 @@ export default function Nav() {
         >
           <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">About Us</p>
         </Navbar.Link>
+        <Navbar.Link
+          href="/contact"
+
+        >
+          <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">Contact</p>
+        </Navbar.Link>
 
         {/* <Navbar.Link href="/gear-swap">
           <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0 pr-5">Gear Swap</p>
