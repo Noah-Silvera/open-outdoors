@@ -23,7 +23,7 @@ function GearItem({gearForLoan, ...props}) {
             <div className='flex flex-row text-lg md:text-xl my-2' key={idx}>
               <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
               <p className='mx-2 font-semibold'>to</p>
-              <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
+              <p className='underline'>{new Date(bookedDate.fields.endDate).toDateString()}</p>
             </div>
           )
         })
