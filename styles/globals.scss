@@ -83,7 +83,9 @@ h2 {
   }
 }
 
-.is-hidden {
-  margin-top: calc(-1 * var(--navbar-height));
-  transition: transform 0.4s, opacity 0.2s;
+@media only screen and (max-width: 768px) {
+  .is-hidden {
+    margin-top: calc(-1 * var(--navbar-height));
+    transition: transform 0.4s, opacity 0.2s;
+  }
 }
