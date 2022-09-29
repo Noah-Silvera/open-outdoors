@@ -11,23 +11,25 @@ export default function GearLibrary({ content }) {
       <div className='navbar-padding'>
         <Nav/>
       </div>
-      <div className="min-h-screen" styles={styles["main-container"]}>
-        <h1 className='header-font text-center mx-auto pb-10 pt-20 bg-tertiary-light'>Gear Library</h1>
-        <p className={['text-center py-2 bg-secondary-dark/80 text-2xl text-white', styles["contact-banner"]].join(" ")}>Want to borrow a piece of gear? Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a></p>
+      <main className="min-h-screen" styles={styles["main-container"]}>
+        <header>
+          <h1 className='header-font text-center mx-auto pb-10 pt-20 bg-tertiary-light'>Gear Library</h1>
+          <p className={['text-center py-2 bg-secondary-dark/80 text-2xl text-white', styles["contact-banner"]].join(" ")}>Want to borrow a piece of gear? Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a></p>
+        </header>
         <div className='bg-white-alt/70 h-screen'>
           <div className={[styles['gear-library-grid'], "mx-auto p-10"].join(" ")}>
             {content.map((gearForLoan, idx) => {
-              return <div className={[styles['gear-item'], "shadow-xl rounded-lg bg-tertiary-light/20"].join(" ")} key={idx}>
+              return <section className={[styles['gear-item'], "shadow-xl rounded-lg bg-tertiary-light/20"].join(" ")} key={idx}>
                 <img src={gearForLoan.images[0].fields.file.url} className='mb-5 rounded-tl-lg rounded-tr-lg'></img>
                 <h2 className='text-center'>{gearForLoan.title}</h2>
                 <div className='px-5 py-3 text-center'>
                   {documentToReactComponents(gearForLoan.description)}
                 </div>
-              </div>
+              </section>
             })}
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }

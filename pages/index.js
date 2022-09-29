@@ -27,7 +27,7 @@ export default function Home({ content }) {
           />
         </div>
         <div className='bg-white pb-24 pt-2 sm:pt-10'>
-          <div className='space-y-7'>
+          <main className='space-y-7'>
             <h1 className='header-font hidden sm:block mx-auto text-center'>Open (out)Doors</h1>
             {content.map((document, idx) => {
               const options = {
@@ -55,7 +55,7 @@ export default function Home({ content }) {
                   </TextBody>
                 )}
             }).flat()}
-          </div>
+          </main>
         </div>
       </div>
     </>
