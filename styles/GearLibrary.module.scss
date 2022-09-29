@@ -14,10 +14,14 @@ $grid-column-size: 400px;
   grid-template-columns: repeat(4, $grid-column-size);
 
   @include small {
+    grid-gap: 1.5em;
+    column-gap: 1.5em;
     grid-template-columns: repeat(1, 1fr);
   }
 
   @include medium {
+    grid-gap: 2em;
+    column-gap: 2em;
     $grid-column-size: 250px;
     grid-template-columns: repeat(2, $grid-column-size);
   }
