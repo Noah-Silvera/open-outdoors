@@ -84,8 +84,12 @@ h2 {
 }
 
 @media only screen and (max-width: 768px) {
+  .is-visible {
+    transition: margin-top 0.1s;
+  }
+
   .is-hidden {
     margin-top: calc(-1 * var(--navbar-height));
-    transition: transform 0.4s, opacity 0.2s;
+    transition: margin-top 0.15s;
   }
 }
