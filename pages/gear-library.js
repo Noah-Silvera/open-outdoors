@@ -50,7 +50,7 @@ export default function GearLibrary({ content }) {
       </div>
       <main className="min-h-screen" styles={styles["main-container"]}>
         <header>
-          <h1 className='header-font text-center mx-auto pb-10 pt-24 sm:pt-22 md:pt-20 bg-tertiary-light'>Gear Library</h1>
+          <h1 className='header-font text-center mx-auto pb-5 md:pb-10 pt-20 sm:pt-16 md:pt-20 bg-tertiary-light'>Gear Library</h1>
           <div className='bg-tertiary-light/70'>
             <p className='text-center text-lg md:text-xl px-4 py-5 max-w-4xl mx-auto'>Aquiring outdoor gear can be a significant barrier for like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
           </div>
