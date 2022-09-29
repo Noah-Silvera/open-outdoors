@@ -8,13 +8,28 @@ import { shiftUpOnScroll } from '../components/utils';
 
 function GearItem({gearForLoan, ...props}) {
   return (
-    <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={props.index}>
-      <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
-      <h2 className='text-center'>{gearForLoan.title}</h2>
-      <div className='px-5 py-2 md:py-3 text-center'>
-        {documentToReactComponents(gearForLoan.description)}
-      </div>
-    </section>
+  <section className={[styles['gear-item'], "border shadow-sm rounded-md"].join(" ")} key={props.index}>
+    <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
+    <h2 className='text-center'>{gearForLoan.title}</h2>
+    <div className='px-5 py-2 md:py-3 text-center'>
+      {documentToReactComponents(gearForLoan.description)}
+    </div>
+    <div className='mx-5 mb-2'>
+      <h3 className='text-lg md:text-xl font-medium'>Bookings:</h3>
+      {!gearForLoan.bookedDates ?
+        <p className='text-lg md:text-xl my-2'>No Bookings</p> :
+        gearForLoan.bookedDates.map((bookedDate, idx) => {
+          return (
+            <div className='flex flex-row text-lg md:text-xl my-2' key={idx}>
+              <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
+              <p className='mx-2 font-semibold'>to</p>
+              <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
+            </div>
+          )
+        })
+      }
+    </div>
+  </section>
   )
 }
 
