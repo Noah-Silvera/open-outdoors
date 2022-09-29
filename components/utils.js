@@ -9,6 +9,9 @@ export function shiftUpOnScroll(elem) {
     else if(((lastScrollTop - scrollTop) > 60) || scrollTop < 50){
       elem.className = elem.className.replaceAll(" is-hidden", "")
       elem.className += " is-visible"
+      if(scrollTop < 50) {
+        document.documentElement.scrollTop -= 200
+      }
     }
     lastScrollTop = scrollTop;
   });
