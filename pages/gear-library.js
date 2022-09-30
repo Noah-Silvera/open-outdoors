@@ -5,11 +5,23 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
 import { useEffect, useRef } from 'react'
 import { shiftUpOnScroll } from '../components/utils';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 function GearItem({gearForLoan, ...props}) {
   return (
   <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
-    <img src={gearForLoan.images[0].fields.file.url} className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md' alt={gearForLoan.images[0].fields.description}></img>
+    <Splide>
+      {gearForLoan.images.map((contentfulImage) => {
+        return (
+          <SplideSlide>
+            <img
+              src={contentfulImage.fields.file.url}
+              alt={gearForLoan.images[0].fields.description}
+              className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md'/>
+          </SplideSlide>
+        )
+      })}
+    </Splide>
     <h2 className='text-center'>{gearForLoan.title}</h2>
     <div className='px-5 py-2 md:py-3 text-center text-lg'>
       {documentToReactComponents(gearForLoan.description)}
