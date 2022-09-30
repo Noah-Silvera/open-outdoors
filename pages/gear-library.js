@@ -53,7 +53,7 @@ export default function GearLibrary({ content }) {
   }, [])
 
   return (
-    <main className="sm:h-screen" styles={styles["main-container"]}>
+    <main styles={styles["main-container"]}>
       <header>
         <h1 className='header-font text-center mx-auto pb-5 md:pb-10 pt-20 sm:pt-16 md:pt-20 bg-tertiary-light'>Gear Library</h1>
         <div className='bg-tertiary-light/70'>

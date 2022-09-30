@@ -3,6 +3,7 @@ import '@splidejs/react-splide/css';
 import { Flowbite } from 'flowbite-react'
 import DefaultHead from '../components/DefaultHead';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {
   return <Flowbite
@@ -13,6 +14,14 @@ function MyApp({ Component, pageProps }) {
           collapse: {
             list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-2 lg:space-x-8 md:text-sm md:font-medium'
           }
+        },
+        footer: {
+          groupLink: {
+            base: "flex flex-wrap text-sm text-white justify-end align-center",
+            link: {
+              base: "last:mr-0 mr-4 md:mr-6 flex items-center"
+            }
+          }
         }
       }
     }}
@@ -22,6 +31,7 @@ function MyApp({ Component, pageProps }) {
       <Nav/>
     </div>
     <Component {...pageProps} />
+    <Footer/>
   </Flowbite>
 }
 
