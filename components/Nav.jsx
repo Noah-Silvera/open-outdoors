@@ -1,7 +1,7 @@
 import styles from './Nav.module.css'
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
-import { shiftUpOnScroll } from './utils';
+import { shiftUpOnScroll, navLinks } from './utils';
 
 function TextNavLink({ href, title, hiddenOnDesktop }){
   return (
@@ -45,9 +45,15 @@ export default function Nav() {
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse >
-          <TextNavLink href="/gear-library" title="Gear Library"/>
-          <TextNavLink href="/about" title="About Us" hiddenOnDesktop={true}/>
-          <TextNavLink href="/contact" title="Contact"/>
+          {navLinks.map((navLink, idx) => {
+            return (
+              <TextNavLink
+                key={idx}
+                href={navLink["href"]}
+                title={navLink["text"]}
+                hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
+            )
+          })}
           <Navbar.Link
             href="https://www.instagram.com/open.outdoors/"
             target="_blank"

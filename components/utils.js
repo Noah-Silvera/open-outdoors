@@ -13,3 +13,22 @@ export function shiftUpOnScroll(elem) {
     lastScrollTop = scrollTop;
   });
 }
+
+
+export const navLinks = [
+  {
+    "href": "/gear-library",
+    "text": "Gear Library",
+    "hiddenOnDesktop": false
+  },
+  {
+    "href": "/about",
+    "text": "About Us",
+    "hiddenOnDesktop": false
+  },
+  {
+    "href": "/contact",
+    "text": "Contact",
+    "hiddenOnDesktop": false
+  }
+]
