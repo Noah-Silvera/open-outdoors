@@ -1,4 +1,5 @@
 import '../styles/globals.scss'
+import '@splidejs/react-splide/css';
 import { Flowbite } from 'flowbite-react'
 
 function MyApp({ Component, pageProps }) {
