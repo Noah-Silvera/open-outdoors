@@ -20,6 +20,8 @@ export default function Nav() {
         <Navbar.Brand href="/">
           <img
             src="/logo.png"
+            width="96"
+            height="96"
             className="mr-3 h-24 opacity-100"
             alt="Open (out)Doors"
           />
