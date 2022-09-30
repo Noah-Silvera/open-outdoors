@@ -3,6 +3,18 @@ import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
 import { shiftUpOnScroll } from './utils';
 
+function TextNavLink({ href, title, hiddenOnDesktop }){
+  return (
+    <div className={hiddenOnDesktop ? "md:hidden": ""}>
+      <Navbar.Link
+          href={href}
+        >
+        <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">{title}</p>
+      </Navbar.Link>
+    </div>
+  )
+}
+
 export default function Nav() {
   const navBarContainer = useRef();
 
@@ -33,29 +45,10 @@ export default function Nav() {
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse >
+          <TextNavLink href="/gear-library" title="Gear Library"/>
+          <TextNavLink href="/about" title="About Us" hiddenOnDesktop={true}/>
+          <TextNavLink href="/contact" title="Contact"/>
           <Navbar.Link
-            href="/gear-library"
-
-          >
-            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">Gear Library</p>
-          </Navbar.Link>
-          <Navbar.Link
-            href="/about"
-
-          >
-            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">About Us</p>
-          </Navbar.Link>
-          <Navbar.Link
-            href="/contact"
-
-          >
-            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">Contact</p>
-          </Navbar.Link>
-
-          {/* <Navbar.Link href="/gear-swap">
-            <p className="text-primary-light md:text-primary-dark text-2xl pb-2 md:pb-0 pr-5">Gear Swap</p>
-          </Navbar.Link> */}
-                  <Navbar.Link
             href="https://www.instagram.com/open.outdoors/"
             target="_blank"
             aria-label="Instagram"
