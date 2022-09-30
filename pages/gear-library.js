@@ -11,9 +11,9 @@ function GearItem({gearForLoan, ...props}) {
   return (
   <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
     <Splide>
-      {gearForLoan.images.map((contentfulImage) => {
+      {gearForLoan.images.map((contentfulImage, idx) => {
         return (
-          <SplideSlide>
+          <SplideSlide key={idx}>
             <img
               src={contentfulImage.fields.file.url}
               alt={gearForLoan.images[0].fields.description}
