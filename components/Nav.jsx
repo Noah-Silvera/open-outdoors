@@ -37,19 +37,19 @@ export default function Nav() {
             href="/gear-library"
 
           >
-            <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">Gear Library</p>
+            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">Gear Library</p>
           </Navbar.Link>
           <Navbar.Link
             href="/about"
 
           >
-            <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">About Us</p>
+            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">About Us</p>
           </Navbar.Link>
           <Navbar.Link
             href="/contact"
 
           >
-            <p className="text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-1">Contact</p>
+            <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1">Contact</p>
           </Navbar.Link>
 
           {/* <Navbar.Link href="/gear-swap">
