@@ -1,5 +1,3 @@
-import DefaultHead from '../components/DefaultHead'
-import Nav from '../components/Nav'
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
@@ -21,29 +19,23 @@ function BioCard({name, className, imgSrc, imgAlt, ...props}) {
 
 export default function About({ content }) {
   return (
-    <>
-      <DefaultHead/>
-      <div className='navbar-padding'>
-        <Nav/>
-      </div>
-      <main className="min-h-screen">
-        <header>
-          <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>About Us</h1>
-        </header>
-        {content.map((bio, idx) => {
-          return <section key={bio.name}>
-            <BioCard
-              className={`md:flex-row-reverse ${idx % 2 == 1 && "bg-tertiary-light"}`}
-              name={bio.name}
-              imgSrc={`https://${bio.photo.fields.file.url}`}
-              imgAlt={bio.photo.fields.description}
-              >
-                {documentToReactComponents(bio.body)}
-            </BioCard>
-          </section>
-        })}
-      </main>
-    </>
+    <main className="min-h-screen">
+      <header>
+        <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>About Us</h1>
+      </header>
+      {content.map((bio, idx) => {
+        return <section key={bio.name}>
+          <BioCard
+            className={`md:flex-row-reverse ${idx % 2 == 1 && "bg-tertiary-light"}`}
+            name={bio.name}
+            imgSrc={`https://${bio.photo.fields.file.url}`}
+            imgAlt={bio.photo.fields.description}
+            >
+              {documentToReactComponents(bio.body)}
+          </BioCard>
+        </section>
+      })}
+    </main>
   )
 }
 

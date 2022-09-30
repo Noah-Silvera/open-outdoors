@@ -1,6 +1,8 @@
 import '../styles/globals.scss'
 import '@splidejs/react-splide/css';
 import { Flowbite } from 'flowbite-react'
+import DefaultHead from '../components/DefaultHead';
+import Nav from '../components/Nav';
 
 function MyApp({ Component, pageProps }) {
   return <Flowbite
@@ -15,6 +17,10 @@ function MyApp({ Component, pageProps }) {
       }
     }}
   >
+    <DefaultHead/>
+    <div className='navbar-padding'>
+      <Nav/>
+    </div>
     <Component {...pageProps} />
   </Flowbite>
 }

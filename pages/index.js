@@ -1,6 +1,4 @@
-import DefaultHead from '../components/DefaultHead'
 import LeftSideText from '../components/LeftSideText'
-import Nav from '../components/Nav'
 import RightSideText from '../components/RightSideText'
 import TextBody from '../components/TextBody'
 import { createClient } from 'contentful'
@@ -8,57 +6,51 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 
 export default function Home({ content }) {
-  return (
-    <>
-      <DefaultHead/>
-      <div className='navbar-padding sm:pb-0'>
-        <Nav/>
+return (
+    <div className="min-h-screen">
+      <div className='bg-tertiary-light'>
+        <img
+          src="/banner-mobile.jpg"
+          className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto sm:hidden"
+          alt="Open (out)Doors"
+        />
+        <img
+          src="/banner.jpg"
+          className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto hidden sm:block"
+        />
       </div>
-      <div className="min-h-screen">
-        <div className='bg-tertiary-light'>
-          <img
-            src="/banner-mobile.jpg"
-            className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto sm:hidden"
-            alt="Open (out)Doors"
-          />
-          <img
-            src="/banner.jpg"
-            className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto hidden sm:block"
-          />
-        </div>
-        <div className='bg-white pb-24 pt-2 sm:pt-10'>
-          <main className='space-y-7'>
-            <h1 className='header-font hidden sm:block mx-auto text-center'>Open (out)Doors</h1>
-            {content.map((document, idx) => {
-              const options = {
-                renderNode: {
-                  [BLOCKS.UL_LIST]: (node, children) => <ul className='list-disc ml-7 space-y-2 pt-3'>{children}</ul>,
-                }
-              };
+      <div className='bg-white pb-24 pt-2 sm:pt-10'>
+        <main className='space-y-7'>
+          <h1 className='header-font hidden sm:block mx-auto text-center'>Open (out)Doors</h1>
+          {content.map((document, idx) => {
+            const options = {
+              renderNode: {
+                [BLOCKS.UL_LIST]: (node, children) => <ul className='list-disc ml-7 space-y-2 pt-3'>{children}</ul>,
+              }
+            };
 
-              let innerContent = documentToReactComponents(document, options)
+            let innerContent = documentToReactComponents(document, options)
 
-              if(idx % 2 == 0) {
-                return (
-                  <TextBody>
-                    <LeftSideText className="py-4">
-                      {innerContent}
-                    </LeftSideText>
-                  </TextBody>
-                )
-              } else {
-                return (
-                  <TextBody>
-                    <RightSideText className="py-4 bg-white-alt">
-                      {innerContent}
-                    </RightSideText>
-                  </TextBody>
-                )}
-            }).flat()}
-          </main>
-        </div>
+            if(idx % 2 == 0) {
+              return (
+                <TextBody>
+                  <LeftSideText className="py-4">
+                    {innerContent}
+                  </LeftSideText>
+                </TextBody>
+              )
+            } else {
+              return (
+                <TextBody>
+                  <RightSideText className="py-4 bg-white-alt">
+                    {innerContent}
+                  </RightSideText>
+                </TextBody>
+              )}
+          }).flat()}
+        </main>
       </div>
-    </>
+    </div>
   )
 }
 
