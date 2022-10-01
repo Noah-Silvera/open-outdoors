@@ -1,9 +1,9 @@
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-function Event({ eventPost, index }) {
+function Event({ eventPost }) {
   return (
-    <article key={index} className="pb-5 mb-8 border-b-4 last:border-b-0">
+    <article className="pb-5 mb-8 border-b-4 last:border-b-0">
       <h2 className='text-3xl mb-5 text-center md:text-left'>{eventPost.title}</h2>
       <img src={eventPost.bannerPhoto.fields.file.url} alt={eventPost.bannerPhoto.fields.description}></img>
       <div className='flex flex-row text-xl my-3 font-medium mx-3 md:mx-0'>
@@ -25,7 +25,7 @@ export default function Events({ content }) {
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Upcoming Events</h1>
         <div className='max-w-2xl mx-auto'>
           {upcomingEvents.map((eventPost, idx) => {
-            return <Event eventPost={eventPost} index={idx}/>
+            return <Event eventPost={eventPost} key={idx}/>
           })}
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function Events({ content }) {
         <h1 className='text-4xl pb-10 font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Events</h1>
         <div className='max-w-2xl mx-auto'>
           {pastEvents.map((eventPost, idx) => {
-            return <Event eventPost={eventPost} index={idx}/>
+            return <Event eventPost={eventPost} key={idx}/>
           })}
         </div>
       </section>
