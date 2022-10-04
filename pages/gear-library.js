@@ -15,7 +15,7 @@ function GearItem({gearForLoan, ...props}) {
           <SplideSlide key={idx}>
             <img
               src={contentfulImage.fields.file.url}
-              alt={gearForLoan.images[0].fields.description}
+              alt={contentfulImage.fields.description}
               className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md'/>
           </SplideSlide>
         )
