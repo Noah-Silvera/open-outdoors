@@ -6,7 +6,7 @@ import { shiftUpOnScroll } from '../components/utils';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 function GearItem({gearForLoan, ...props}) {
-  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields) || []
+  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
   return (
   <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
     <Splide>
