@@ -28,7 +28,7 @@ function GearItem({gearForLoan, ...props}) {
       <h3 className='text-lg md:text-xl font-medium'>Bookings:</h3>
       {!gearForLoan.bookedDates ?
         <p className='text-lg md:text-xl my-2'>No Bookings</p> :
-        gearForLoan.bookedDates.map((bookedDate, idx) => {
+        gearForLoan.bookedDates.filter((bookedDate) => !!bookedDate.fields).map((bookedDate, idx) => {
           return (
             <div className='flex flex-row text-lg md:text-xl my-2' key={idx}>
               <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
