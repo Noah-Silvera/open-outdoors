@@ -22,7 +22,7 @@ function GearItem({gearForLoan, ...props}) {
       })}
     </Splide>
     <h2 className='text-center'>{gearForLoan.title}</h2>
-    <div className='px-5 py-2 md:py-3 text-center text-lg'>
+    <div className={`px-5 py-2 md:py-3 text-center text-lg ${styles['gear-description']}`}>
       {documentToReactComponents(gearForLoan.description)}
     </div>
     <div className='mx-5 mb-2'>
