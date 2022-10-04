@@ -8,7 +8,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 function GearItem({gearForLoan, ...props}) {
   let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
   return (
-  <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
+  <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10 flex flex-col"].join(" ")} key={props.index}>
     <Splide>
       {gearForLoan.images.map((contentfulImage, idx) => {
         return (
@@ -25,7 +25,7 @@ function GearItem({gearForLoan, ...props}) {
     <div className={`px-5 py-2 md:py-3 text-center text-lg ${styles['gear-description']}`}>
       {documentToReactComponents(gearForLoan.description)}
     </div>
-    <div className='mx-5 mb-2'>
+    <div className='mx-5 mb-2 grow flex flex-col justify-end'>
       <h3 className='text-lg md:text-xl font-medium'>Bookings:</h3>
       {bookedDates.length == 0 ?
         <p className='text-lg md:text-xl my-2'>No Bookings</p> :
