@@ -76,4 +76,8 @@ $grid-column-size: 400px;
     text-decoration: underline;
     color: #0000EE;
   }
+
+  p:not(:first-child) {
+    margin-top: .5em;
+  }
 }
