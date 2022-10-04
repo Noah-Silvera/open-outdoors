@@ -6,6 +6,7 @@ import { shiftUpOnScroll } from '../components/utils';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 function GearItem({gearForLoan, ...props}) {
+  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields) || []
   return (
   <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10"].join(" ")} key={props.index}>
     <Splide>
@@ -26,9 +27,9 @@ function GearItem({gearForLoan, ...props}) {
     </div>
     <div className='mx-5 mb-2'>
       <h3 className='text-lg md:text-xl font-medium'>Bookings:</h3>
-      {!gearForLoan.bookedDates ?
+      {bookedDates.length == 0 ?
         <p className='text-lg md:text-xl my-2'>No Bookings</p> :
-        gearForLoan.bookedDates.filter((bookedDate) => !!bookedDate.fields).map((bookedDate, idx) => {
+        bookedDates.map((bookedDate, idx) => {
           return (
             <div className='flex flex-row text-lg md:text-xl my-2' key={idx}>
               <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
