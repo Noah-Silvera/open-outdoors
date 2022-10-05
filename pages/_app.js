@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
       }
     }}
   >
-    <DefaultHead/>
+    <DefaultHead title={pageProps.pageTitle || null}/>
     <div className='navbar-padding'>
       <Nav/>
     </div>

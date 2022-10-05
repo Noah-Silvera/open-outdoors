@@ -1,9 +1,10 @@
 import Head from 'next/head'
 
-export default function DefaultHead() {
+export default function DefaultHead({ title }) {
+  let pageTitle = [title, "Open (out)Doors"].filter((val) => !!val).join(" - ")
   return (
   <Head>
-    <title>Open (out)Doors</title>
+    <title>{pageTitle}</title>
     <link rel="icon" href="/favicon.ico" />
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" async></script>
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'></link>

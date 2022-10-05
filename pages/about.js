@@ -52,6 +52,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      pageTitle: "About",
       content: response.items.map((item) => item.fields)
     }
   }

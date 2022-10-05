@@ -8,3 +8,12 @@ export default function Contact() {
     </main>
   )
 }
+
+
+export function getStaticProps() {
+  return {
+    props: {
+      pageTitle: "Contact Us",
+    }
+  }
+}

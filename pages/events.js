@@ -53,6 +53,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      pageTitle: "Events",
       content: response.items.map((item) => item.fields)
     }
   }
