@@ -44,7 +44,31 @@ function GearItem({gearForLoan, ...props}) {
   )
 }
 
+function TypeRadioButtons({types}) {
+  return (
+    <div className='flex flex-row'>
+      {types.map((type, index) => {
+        let idAndVal = type.replace(/ /g,"_").toLowerCase();
+        return (
+          <div key={index}>
+            <label htmlFor={idAndVal}>{type}</label>
+            <input type="radio" id={idAndVal} name="gear_types" value={idAndVal}/>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function GearLibrary({ content }) {
+  let types = new Set(content.map((gearForLoan) => {
+    if (gearForLoan.types) {
+      return gearForLoan.types.map((type) => type.fields['type'])
+    } else {
+      return []
+    }
+  }).flat())
+
   const gearLibraryBanner = useRef();
 
   useEffect(() => {
@@ -63,6 +87,7 @@ export default function GearLibrary({ content }) {
         <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white z-10', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
       </header>
       <div className='bg-white-alt/40 h-full'>
+        {/* <TypeRadioButtons types={Array.from(types)}/> */}
         <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
           {content.map((gearForLoan, idx) => {
             return <GearItem gearForLoan={gearForLoan} key={idx}/>
@@ -82,7 +107,6 @@ export async function getStaticProps() {
     content_type: "gearForLoan",
     order: "sys.createdAt"
   })
-
   return {
     props: {
       pageTitle: "Gear Library",
