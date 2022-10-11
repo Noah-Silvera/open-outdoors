@@ -33,7 +33,7 @@ return (
 
             if(idx % 2 == 0) {
               return (
-                <TextBody>
+                <TextBody key={idx}>
                   <LeftSideText className="py-4">
                     {innerContent}
                   </LeftSideText>
@@ -41,7 +41,7 @@ return (
               )
             } else {
               return (
-                <TextBody>
+                <TextBody key={idx}>
                   <RightSideText className="py-4 bg-white-alt">
                     {innerContent}
                   </RightSideText>
