@@ -4,6 +4,8 @@ import styles from '../styles/GearLibrary.module.scss'
 import { useEffect, useRef, useState } from 'react'
 import { shiftUpOnScroll } from '../components/utils';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { Radio } from 'flowbite-react';
+import classNames from 'classnames';
 
 function GearItem({gearForLoan, ...props}) {
   let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
@@ -44,18 +46,28 @@ function GearItem({gearForLoan, ...props}) {
   )
 }
 
-function TypeRadioButtons({types, onTypeSelect}) {
+function TypeRadioButtons({types, onTypeSelect, selectedType}) {
   return (
-    <div className='flex flex-row'>
-      {types.map((type, index) => {
-        let idAndVal = type.replace(/ /g,"_").toLowerCase();
-        return (
-          <div key={index}>
-            <label htmlFor={idAndVal}>{type}</label>
-            <input type="radio" id={idAndVal} name="gear_types" value={idAndVal} onChange={() => onTypeSelect(type)}/>
-          </div>
-        )
-      })}
+    <div className='flex sm:justify-center px-4 py-5 sm:py-3 text-2xl sm:text-xl bg-tertiary-light w-full sm:px-5 sm:px-5 md:px-10'>
+      <div className='flex flex-col sm:flex-row flex-wrap gap-y-4 gap-x-3'>
+        {types.map((type, index) => {
+          let idAndVal = type.replace(/ /g,"_").toLowerCase();
+          let isSelected = selectedType == type;
+
+          return (
+            <div key={index} className={classNames("py-2", "px-3", "rounded-2xl", "flex", "items-center", {"bg-secondary-dark/20": isSelected})}>
+              <Radio
+                id={idAndVal}
+                name="gear_types"
+                value={idAndVal}
+                checked={isSelected}
+                onChange={() => onTypeSelect(type)}
+              />
+              <label htmlFor={idAndVal} className="ml-2 grow">{type} </label>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -100,7 +112,10 @@ export default function GearLibrary({ gearItems }) {
         <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white z-10', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
       </header>
       <div className='bg-white-alt/40 h-full'>
-        <TypeRadioButtons types={Array.from(gearTypes)} onTypeSelect={(type) => setSelectedGearType(type)}/>
+        <TypeRadioButtons
+          types={Array.from(gearTypes)}
+          onTypeSelect={(type) => setSelectedGearType(type)}
+          selectedType={selectedGearType}/>
         <GearItemGrid gearItems={filteredGearItems}></GearItemGrid>
       </div>
     </main>
