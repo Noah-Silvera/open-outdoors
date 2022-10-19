@@ -1,7 +1,7 @@
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { shiftUpOnScroll } from '../components/utils';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
@@ -44,7 +44,7 @@ function GearItem({gearForLoan, ...props}) {
   )
 }
 
-function TypeRadioButtons({types}) {
+function TypeRadioButtons({types, onTypeSelect}) {
   return (
     <div className='flex flex-row'>
       {types.map((type, index) => {
@@ -52,7 +52,7 @@ function TypeRadioButtons({types}) {
         return (
           <div key={index}>
             <label htmlFor={idAndVal}>{type}</label>
-            <input type="radio" id={idAndVal} name="gear_types" value={idAndVal}/>
+            <input type="radio" id={idAndVal} name="gear_types" value={idAndVal} onChange={() => onTypeSelect(type)}/>
           </div>
         )
       })}
@@ -60,8 +60,21 @@ function TypeRadioButtons({types}) {
   )
 }
 
-export default function GearLibrary({ content }) {
-  let types = new Set(content.map((gearForLoan) => {
+function GearItemGrid({gearItems}){
+  return (
+    <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
+    {gearItems.map((gearForLoan, idx) => {
+      return <GearItem gearForLoan={gearForLoan} key={idx}/>
+    })}
+  </div>
+  )
+}
+
+export default function GearLibrary({ gearItems }) {
+  const gearLibraryBanner = useRef();
+  const [selectedGearType, setSelectedGearType] = useState(null);
+
+  let gearTypes = new Set(gearItems.map((gearForLoan) => {
     if (gearForLoan.types) {
       return gearForLoan.types.map((type) => type.fields['type'])
     } else {
@@ -69,7 +82,7 @@ export default function GearLibrary({ content }) {
     }
   }).flat())
 
-  const gearLibraryBanner = useRef();
+  const filteredGearItems = gearItems.filter((item) => selectedGearType == null || item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType))
 
   useEffect(() => {
     if(gearLibraryBanner.current != null) {
@@ -87,12 +100,8 @@ export default function GearLibrary({ content }) {
         <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white z-10', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
       </header>
       <div className='bg-white-alt/40 h-full'>
-        {/* <TypeRadioButtons types={Array.from(types)}/> */}
-        <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
-          {content.map((gearForLoan, idx) => {
-            return <GearItem gearForLoan={gearForLoan} key={idx}/>
-          })}
-        </div>
+        <TypeRadioButtons types={Array.from(gearTypes)} onTypeSelect={(type) => setSelectedGearType(type)}/>
+        <GearItemGrid gearItems={filteredGearItems}></GearItemGrid>
       </div>
     </main>
   )
@@ -110,7 +119,7 @@ export async function getStaticProps() {
   return {
     props: {
       pageTitle: "Gear Library",
-      content: response.items.map((item) => item.fields)
+      gearItems: response.items.map((item) => item.fields)
     }
   }
 }
