@@ -46,11 +46,34 @@ function GearItem({gearForLoan, ...props}) {
   )
 }
 
+function FilterPanel({ children }) {
+  const [isOpen, setIsOpen] = useState(true)
+
+  return (
+    <div>
+      <div
+        className='text-2xl px-6 py-3 bg-tertiary-light/50 flex flex-row items-center border-y-2  border-y-tertiary-light/60'
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <p>Filter</p>
+        <i className={classNames(
+          "fas",
+          "grow",
+          "text-right",
+          {"fa-arrow-up": isOpen},
+          {"fa-arrow-down": !isOpen}
+          )}></i>
+      </div>
+      {isOpen && children}
+    </div>
+  )
+}
+
 function TypeRadioButtons({types, onTypeSelect, selectedType}) {
   let typesWithAllOption = ["All", ...types]
 
   return (
-    <div className='flex sm:justify-center px-4 py-5 sm:py-3 text-2xl sm:text-xl bg-tertiary-light sm:px-5 sm:px-5 md:px-10'>
+    <div className='flex sm:justify-center px-4 py-5 sm:py-3 text-2xl sm:text-xl bg-tertiary-light/30 sm:px-5 sm:px-5 md:px-10'>
       <div className='flex flex-col sm:flex-row flex-wrap gap-y-4 gap-x-3 w-full'>
         {typesWithAllOption.map((type, index) => {
           let idAndVal = type.replace(/ /g,"_").toLowerCase();
@@ -124,10 +147,12 @@ export default function GearLibrary({ gearItems }) {
         <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white z-10', styles["contact-banner"]].join(" ")}>Contact us at <a className='underline' href="mailto:openoutdoors.victoria@gmail.com">openoutdoors.victoria@gmail.com</a> to borrow gear!</p>
       </header>
       <div className='bg-white-alt/40 h-full'>
-        <TypeRadioButtons
-          types={Array.from(gearTypes)}
-          onTypeSelect={(type) => setSelectedGearType(type)}
-          selectedType={selectedGearType}/>
+        <FilterPanel>
+          <TypeRadioButtons
+            types={Array.from(gearTypes)}
+            onTypeSelect={(type) => setSelectedGearType(type)}
+            selectedType={selectedGearType}/>
+        </FilterPanel>
         <GearItemGrid gearItems={filteredGearItems}></GearItemGrid>
       </div>
     </main>
