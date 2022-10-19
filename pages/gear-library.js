@@ -47,7 +47,7 @@ function GearItem({gearForLoan, ...props}) {
 }
 
 function FilterPanel({ children }) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div>
