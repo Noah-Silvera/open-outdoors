@@ -22,6 +22,19 @@ function MyApp({ Component, pageProps }) {
               base: "last:mr-0 mr-4 md:mr-6 flex items-center"
             }
           }
+        },
+        formControls: {
+          label: {
+            base: "text-md sm:text-sm font-medium"
+          }
+        },
+        button: {
+          color: {
+            info: "text-white bg-secondary-light border border-transparent hover:bg-secondary-light/90 focus:ring-4 focus:ring-blue-300 disabled:hover:bg-secondary-light"
+          },
+          size: {
+            xl: "text-xl px-6 py-3"
+          }
         }
       }
     }}
