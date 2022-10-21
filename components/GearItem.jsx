@@ -4,11 +4,18 @@ import styles from '../styles/GearLibrary.module.scss'
 import { Button } from 'flowbite-react';
 import { useState } from 'react';
 
-export default function GearItem({gearForLoan, ...props}) {
-  let [startDate, setStartDate] = useState(null)
-  let [endDate, setEndDate] = useState(null)
+const humanizeDateInputString = (inputDateString) => {
+  var extractSimpleDate = new RegExp("([a-zA-z]+,\\s+\\d+\\s+[a-zA-z]+\\s+\\d+)", "g");
+  let utcString = new Date(inputDateString).toUTCString()
+  let match = extractSimpleDate.exec(utcString)
+  return match[1]
+}
 
-  let dateRange = startDate && endDate ? `${new Date(startDate).toDateString()} to ${new Date(endDate).toDateString()}` : "<ENTER DATES HERE>"
+export default function GearItem({gearForLoan, ...props}) {
+  let [startDate, setStartDate] = useState("")
+  let [endDate, setEndDate] = useState("")
+
+  let dateRange = startDate && endDate ? `${humanizeDateInputString(startDate)} to ${humanizeDateInputString(endDate)}` : "<ENTER DATES HERE>"
   let defaultBorrowMessage = `Hi!
 I would like to borrow the "${gearForLoan.title}" for the following dates:
 ${dateRange}`
@@ -51,7 +58,7 @@ ${dateRange}`
     <div className='text-lg'>
       <div className='px-5'>
         <div className='flex flex-row justify-around pb-3'>
-          <label for="start">Start date:</label>
+          <label htmlFor="start">Start date:</label>
           <input
             type="date"
             id="start"
@@ -61,7 +68,7 @@ ${dateRange}`
             value={startDate}/>
         </div>
         <div className='flex flex-row justify-around pb-3'>
-          <label for="end">End date:</label>
+          <label htmlFor="end">End date:</label>
           <input
             type="date"
             id="end"
