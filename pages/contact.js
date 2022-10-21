@@ -1,7 +1,8 @@
 import { Label, Textarea, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
+import Script from 'next/script'
 
-export default function Contact() {
+export default function Contact({ recaptchaSiteKey }) {
   let [fullName, setFullName] = useState("")
   let [email, setEmail] = useState("")
   let [message, setMessage] = useState("")
@@ -13,11 +14,13 @@ export default function Contact() {
     setErrorMessage("")
     setSuccess(null)
 
+    let recaptchaToken = await fetchRecaptchaToken();
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({
         email: email,
         fullname: fullName,
         message: message,
+        recaptchaToken: recaptchaToken
       }),
       headers: {
         "Content-Type": "application/json",
@@ -31,75 +34,88 @@ export default function Contact() {
     } else {
       setSuccess(true)
     }
+  };
+
+  const fetchRecaptchaToken = async () => {
+    return new Promise((resolve) => {
+      grecaptcha.ready(async () => {
+        grecaptcha.execute(recaptchaSiteKey, {action: 'submit'}).then(async (token) =>{
+          resolve(token)
+        });
+      });
+    })
   }
 
   return (
-    <main className="min-h-screen">
-      <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>Contact Us</h1>
-      <form className="flex flex-col gap-4 max-w-2xl mx-auto pt-6 text-2xl px-5" onSubmit={handleSubmit}>
-        <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="fullname"
-              value="Your Name"
+    <>
+      <Script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} />
+      <main className="min-h-screen">
+        <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>Contact Us</h1>
+        <form className="flex flex-col gap-4 max-w-2xl mx-auto pt-6 text-2xl px-5" onSubmit={handleSubmit}>
+          <div>
+            <div className="mb-2 block">
+              <Label
+                htmlFor="fullname"
+                value="Your Name"
+              />
+            </div>
+            <TextInput
+              id="fullname"
+              required={true}
+              type="text"
+              sizing="lg"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
-          <TextInput
-            id="fullname"
-            required={true}
-            type="text"
-            sizing="lg"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="email"
-              value="Email"
+          <div>
+            <div className="mb-2 block">
+              <Label
+                htmlFor="email"
+                value="Email"
+              />
+            </div>
+            <TextInput
+              id="email"
+              required={true}
+              type="email"
+              sizing="lg"
+              icon={() => <i aria-hidden="true" className="fas fa-envelope fa-1x" title="Instagram"></i>}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <TextInput
-            id="email"
-            required={true}
-            type="email"
-            sizing="lg"
-            icon={() => <i aria-hidden="true" className="fas fa-envelope fa-1x" title="Instagram"></i>}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="message"
-              value="Message"
+          <div>
+            <div className="mb-2 block">
+              <Label
+                htmlFor="message"
+                value="Message"
+              />
+            </div>
+            <Textarea
+              id="message"
+              required={true}
+              type="text"
+              rows={6}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
-          <Textarea
-            id="message"
-            required={true}
-            type="text"
-            rows={6}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </div>
-        <div>
-          <Button type="submit" size="xl" color="info">
-            Send Email
-          </Button>
-        </div>
-        {success &&
-          <p className="text-green-500">
-            Message sent!
-          </p>}
-        <p className="text-red-500">
-          {errorMessage}
-        </p>
-      </form>
-    </main>
+          <div>
+            <Button type="submit" size="xl" color="info">
+              Send Email
+            </Button>
+          </div>
+          {success &&
+            <p className="text-green-500">
+              Message sent!
+            </p>}
+          <p className="text-red-500">
+            {errorMessage}
+          </p>
+        </form>
+      </main>
+    </>
   )
 }
 
@@ -108,6 +124,7 @@ export function getStaticProps() {
   return {
     props: {
       pageTitle: "Contact Us",
+      recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
     }
   }
 }

@@ -2,7 +2,18 @@ import sendgrid from "@sendgrid/mail";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
+async function performRecaptchaCheck(token) {
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`;
+
+  const response = await (await fetch(url, {method: 'post'})).json()
+  if(!response.success) {
+    throw response['error-codes']
+  }
+}
+
 async function handler(req, res) {
+  await performRecaptchaCheck(req.body.recaptchaToken)
+
   try {
     await sendgrid.send({
       to: "info@openoutdoorsvictoria.ca",
