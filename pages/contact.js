@@ -3,9 +3,23 @@ import { useState } from "react";
 import Script from 'next/script'
 
 export default function Contact({ recaptchaSiteKey }) {
-  let [fullName, setFullName] = useState("")
-  let [email, setEmail] = useState("")
-  let [message, setMessage] = useState("")
+  var params = {
+    name: "",
+    email: "",
+    message: ""
+  };
+
+  if(typeof(window) != 'undefined') {
+    var urlSearchParams = new URLSearchParams(window.location.search);
+    var searchParams = Object.fromEntries(urlSearchParams.entries());
+    params.name = searchParams.name
+    params.email = searchParams.email
+    params.message = searchParams.message
+  }
+
+  let [fullName, setFullName] = useState(params.name)
+  let [email, setEmail] = useState(params.email)
+  let [message, setMessage] = useState(params.message)
   let [errorMessage, setErrorMessage] = useState("")
   let [success, setSuccess] = useState(null)
 
