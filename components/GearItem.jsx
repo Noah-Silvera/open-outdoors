@@ -1,8 +1,13 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
+import { Button } from 'flowbite-react';
 
 export default function GearItem({gearForLoan, ...props}) {
+  let defaultBorrowMessage = `Hi!
+I would like to borrow the "${gearForLoan.title}" for the following dates: <ENTER DATES HERE>
+  `
+
   let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
   return (
   <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10 flex flex-col"].join(" ")} key={props.index}>
@@ -36,6 +41,11 @@ export default function GearItem({gearForLoan, ...props}) {
           )
         })
       }
+    </div>
+    <div className='w-72 mx-auto pb-4 pt-2'>
+      <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
+        <Button size="lg">Borrow this!</Button>
+      </a>
     </div>
   </section>
   )

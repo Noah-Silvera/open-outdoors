@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps }) {
             info: "text-white bg-secondary-light border border-transparent hover:bg-secondary-light/90 focus:ring-4 focus:ring-blue-300 disabled:hover:bg-secondary-light"
           },
           size: {
+            lg: "text-lg px-5 py-2.5",
             xl: "text-xl px-6 py-3"
           }
         }
