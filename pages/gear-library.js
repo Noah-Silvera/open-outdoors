@@ -104,7 +104,6 @@ export default function GearLibrary({ gearItems }) {
         <div className='bg-tertiary-light/70'>
           <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>Aquiring outdoor gear can be a significant barrier for like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
         </div>
-        <p ref={gearLibraryBanner} className={['text-center py-2 px-3 bg-secondary-dark/80 text-md sm:text-lg md:text-2xl text-white z-10', styles["contact-banner"]].join(" ")}><a className='underline' href="/contact">Contact us to borrow gear!</a></p>
       </header>
       <div className='bg-white-alt/40 h-full'>
         <FilterPanel>

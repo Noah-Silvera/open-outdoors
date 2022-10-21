@@ -2,11 +2,16 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
 import { Button } from 'flowbite-react';
+import { useState } from 'react';
 
 export default function GearItem({gearForLoan, ...props}) {
+  let [startDate, setStartDate] = useState(null)
+  let [endDate, setEndDate] = useState(null)
+
+  let dateRange = startDate && endDate ? `${new Date(startDate).toDateString()} to ${new Date(endDate).toDateString()}` : "<ENTER DATES HERE>"
   let defaultBorrowMessage = `Hi!
-I would like to borrow the "${gearForLoan.title}" for the following dates: <ENTER DATES HERE>
-  `
+I would like to borrow the "${gearForLoan.title}" for the following dates:
+${dateRange}`
 
   let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
   return (
@@ -42,10 +47,33 @@ I would like to borrow the "${gearForLoan.title}" for the following dates: <ENTE
         })
       }
     </div>
-    <div className='w-72 mx-auto pb-4 pt-2'>
-      <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
-        <Button size="lg">Borrow this!</Button>
-      </a>
+    <div className='border-b-2 border-primary-light mb-6'></div>
+    <div className='text-lg'>
+      <div className='px-5'>
+        <div className='flex flex-row justify-around pb-3'>
+          <label for="start">Start date:</label>
+          <input
+            type="date"
+            id="start"
+            name="trip-start"
+            onChange={(e) => setStartDate(e.target.value)}
+            value={startDate}/>
+        </div>
+        <div className='flex flex-row justify-around pb-3'>
+          <label for="end">End date:</label>
+          <input
+            type="date"
+            id="end"
+            name="trip-end"
+            onChange={(e) => setEndDate(e.target.value)}
+            value={endDate}/>
+        </div>
+      </div>
+      <div className='w-72 mx-auto pb-4 pt-2'>
+        <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
+          <Button size="lg">Borrow this!</Button>
+        </a>
+      </div>
     </div>
   </section>
   )
