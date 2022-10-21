@@ -1,4 +1,5 @@
 import sendgrid from "@sendgrid/mail";
+import * as Sentry from '@sentry/nextjs';
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -46,8 +47,7 @@ async function handler(req, res) {
       </html>`,
     });
   } catch (error) {
-    // TODO - report these to an error reporting service
-    console.log(error)
+    Sentry.captureException(error);
     return res.status(error.statusCode || 500).json({ error: "Email could not be sent" });
   }
 
