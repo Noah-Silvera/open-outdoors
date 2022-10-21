@@ -56,6 +56,7 @@ ${dateRange}`
             type="date"
             id="start"
             name="trip-start"
+            className='w-40'
             onChange={(e) => setStartDate(e.target.value)}
             value={startDate}/>
         </div>
@@ -65,6 +66,7 @@ ${dateRange}`
             type="date"
             id="end"
             name="trip-end"
+            className='w-40'
             onChange={(e) => setEndDate(e.target.value)}
             value={endDate}/>
         </div>
