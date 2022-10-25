@@ -5,9 +5,11 @@ import { shiftUpOnScroll } from '../components/utils';
 import { Radio } from 'flowbite-react';
 import classNames from 'classnames';
 import GearItem from '../components/GearItem';
+import { CSSTransition } from "react-transition-group"
 
 function FilterPanel({ children }) {
   const [isOpen, setIsOpen] = useState(false)
+  const childContainer = useRef(null)
 
   return (
     <div>
@@ -24,7 +26,22 @@ function FilterPanel({ children }) {
           {"fa-arrow-down": !isOpen}
           )}></i>
       </div>
-      {isOpen && children}
+      <CSSTransition
+        in={isOpen}
+        nodeRef={childContainer}
+        timeout={300}
+        classNames={{
+          enter: styles["gear-filter-enter"],
+          enterActive: styles["gear-filter-enter-active"],
+          enterDone: styles["gear-filter-enter-done"],
+          exit: styles["gear-filter-exit"],
+          exitActive: styles["gear-filter-exit-active"],
+          exitDone: styles["gear-filter-exit-done"],
+        }}>
+          <div ref={childContainer} className={styles["gear-filter"]}>
+            {children}
+          </div>
+        </CSSTransition>
     </div>
   )
 }
