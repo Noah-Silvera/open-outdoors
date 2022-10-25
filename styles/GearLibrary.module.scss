@@ -78,3 +78,16 @@ $grid-column-size: 400px;
 .min-gear-item-width {
   min-width: 5em;
 }
+
+.booking-form {
+  overflow: hidden;
+}
+
+.booking-form-enter {
+  max-height: 0;
+}
+
+.booking-form-enter-active {
+  max-height: 500px;
+  transition: max-height 0.3s ease-out;
+}

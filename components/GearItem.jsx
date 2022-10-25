@@ -2,7 +2,9 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from '../styles/GearLibrary.module.scss'
 import { Button } from 'flowbite-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { CSSTransition } from "react-transition-group"
+import classNames from 'classnames';
 
 const humanizeDateInputString = (inputDateString) => {
   var extractSimpleDate = new RegExp("([a-zA-z]+,\\s+\\d+\\s+[a-zA-z]+\\s+\\d+)", "g");
@@ -14,41 +16,61 @@ const humanizeDateInputString = (inputDateString) => {
 function BorrowForm({gearIdentifier}) {
   let [startDate, setStartDate] = useState("")
   let [endDate, setEndDate] = useState("")
+  let [formOpen, setFormOpen] = useState(false)
 
   let dateRange = startDate && endDate ? `${humanizeDateInputString(startDate)} to ${humanizeDateInputString(endDate)}` : "<ENTER DATES HERE>"
 
   let defaultBorrowMessage = `Hi!
   I would like to borrow the "${gearIdentifier}" for the following dates:
   ${dateRange}`
+  const bookingFormRef = useRef(null);
 
   return (
     <div className='text-lg'>
-      <div className='px-5'>
-        <div className='flex flex-row justify-around pb-3'>
-          <label htmlFor="start">Start date:</label>
-          <input
-            type="date"
-            id="start"
-            name="trip-start"
-            className='w-40'
-            onChange={(e) => setStartDate(e.target.value)}
-            value={startDate}/>
+      <CSSTransition
+        in={formOpen}
+        nodeRef={bookingFormRef}
+        timeout={300}
+        unmountOnExit
+        classNames={{
+          enter: styles["booking-form-enter"],
+          enterActive: styles["booking-form-enter-active"],
+          exit: styles["booking-form-exit"],
+          exitActive: styles["booking-form-exit-active"],
+        }}>
+        <div className={classNames('px-5','mb-2', styles["booking-form"])} ref={bookingFormRef}>
+          <div className='flex flex-row justify-around pb-3'>
+            <label htmlFor="start">Start date:</label>
+            <input
+              type="date"
+              id="start"
+              name="trip-start"
+              className='w-40'
+              onChange={(e) => setStartDate(e.target.value)}
+              value={startDate}/>
+          </div>
+          <div className='flex flex-row justify-around pb-3'>
+            <label htmlFor="end">End date:</label>
+            <input
+              type="date"
+              id="end"
+              name="trip-end"
+              className='w-40'
+              onChange={(e) => setEndDate(e.target.value)}
+              value={endDate}/>
+          </div>
         </div>
-        <div className='flex flex-row justify-around pb-3'>
-          <label htmlFor="end">End date:</label>
-          <input
-            type="date"
-            id="end"
-            name="trip-end"
-            className='w-40'
-            onChange={(e) => setEndDate(e.target.value)}
-            value={endDate}/>
-        </div>
-      </div>
-      <div className='w-72 mx-auto pb-4 pt-2'>
-        <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
-          <Button size="lg" className='w-full'>Borrow this!</Button>
-        </a>
+      </CSSTransition>
+      <div className='w-72 mx-auto pb-4'>
+        {formOpen ?
+        (
+          <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
+            <Button size="lg" className='w-full'>Book now!</Button>
+          </a>
+        ) :
+        (
+          <Button size="lg" className='w-full' onClick={() => setFormOpen(true)}>Borrow this!</Button>
+        )}
       </div>
     </div>
   )
@@ -96,7 +118,7 @@ export default function GearItem({gearForLoan, ...props}) {
         {documentToReactComponents(gearForLoan.description)}
       </div>
       <Bookings bookedDates={bookedDates}/>
-      <div className='border-b-2 border-primary-light mb-6'></div>
+      <div className='border-b-2 border-primary-light mb-4'></div>
       <BorrowForm gearIdentifier={gearForLoan.title}/>
     </section>
   )
