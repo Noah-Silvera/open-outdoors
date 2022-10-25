@@ -13,10 +13,10 @@ const humanizeDateInputString = (inputDateString) => {
   return match[1]
 }
 
-function BorrowForm({gearIdentifier}) {
+function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
   let [startDate, setStartDate] = useState("")
   let [endDate, setEndDate] = useState("")
-  let [formOpen, setFormOpen] = useState(false)
+  let [formOpen, setFormOpen] = useState(defaultFormOpen)
 
   let dateRange = startDate && endDate ? `${humanizeDateInputString(startDate)} to ${humanizeDateInputString(endDate)}` : "<ENTER DATES HERE>"
 
@@ -26,7 +26,7 @@ function BorrowForm({gearIdentifier}) {
   const bookingFormRef = useRef(null);
 
   return (
-    <div className='text-lg'>
+    <div className={classNames('text-lg', className)}>
       <CSSTransition
         in={formOpen}
         nodeRef={bookingFormRef}
@@ -119,7 +119,8 @@ export default function GearItem({gearForLoan, ...props}) {
       </div>
       <Bookings bookedDates={bookedDates}/>
       <div className='border-b-2 border-primary-light mb-4'></div>
-      <BorrowForm gearIdentifier={gearForLoan.title}/>
+      <BorrowForm gearIdentifier={gearForLoan.title} className="hidden sm:block" defaultFormOpen={true}/>
+      <BorrowForm gearIdentifier={gearForLoan.title} className="sm:hidden"/>
     </section>
   )
 }
