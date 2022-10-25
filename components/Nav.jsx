@@ -1,4 +1,3 @@
-import styles from './Nav.module.css'
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
 import { shiftUpOnScroll, navLinks } from './utils';
@@ -42,9 +41,7 @@ export default function Nav() {
             Open (out)Doors
           </span>
         </Navbar.Brand>
-        <div className={styles.toggle}>
-          <Navbar.Toggle />
-        </div>
+        <Navbar.Toggle className='text-primary-dark bg-secondary-light hover:bg-secondary-light focus:ring-primary-dark/60'/>
         <Navbar.Collapse>
           {navLinks.map((navLink, idx) => {
             return (
@@ -60,8 +57,8 @@ export default function Nav() {
             target="_blank"
             aria-label="Instagram"
           >
-            <span className="sm:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
-            <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fab fa-instagram fa-3x pr-5" title="Instagram"></i></span>
+            <span className="md:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
+            <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fab fa-instagram text-3xl md:text-4xl pr-5" title="Instagram"></i></span>
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
