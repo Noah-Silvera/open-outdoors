@@ -27,6 +27,7 @@ export default function Nav() {
   return (
     <div ref={navBarContainer}>
       <Navbar
+        className="!py-0 !pl-0 header-font fixed w-screen md:hover:opacity-100 opacity-90 z-20 nav-background"
         fluid={true}
       >
         <Navbar.Brand href="/">
@@ -44,7 +45,7 @@ export default function Nav() {
         <div className={styles.toggle}>
           <Navbar.Toggle />
         </div>
-        <Navbar.Collapse >
+        <Navbar.Collapse>
           {navLinks.map((navLink, idx) => {
             return (
               <TextNavLink

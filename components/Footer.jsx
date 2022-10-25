@@ -5,10 +5,10 @@ export default function SiteFooter(){
   return (
     <Footer>
       <div className="w-full gap-8 py-5 px-6 bg-secondary-dark/90 text-white">
-        <Footer.LinkGroup col={false}>
+        <Footer.LinkGroup col={false} className="text-white justify-end align-center">
           {navLinks.map((navLink, idx) => {
             return (
-              <Footer.Link href={navLink["href"]} key={idx}>
+              <Footer.Link href={navLink["href"]} key={idx} className="mr-4 flex items-center">
                 {navLink["text"]}
               </Footer.Link>
             )

@@ -80,7 +80,7 @@ ${dateRange}`
       </div>
       <div className='w-72 mx-auto pb-4 pt-2'>
         <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`}>
-          <Button size="lg">Borrow this!</Button>
+          <Button size="lg" className='w-full'>Borrow this!</Button>
         </a>
       </div>
     </div>
