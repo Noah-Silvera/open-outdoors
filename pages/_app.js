@@ -1,11 +1,17 @@
 import '../styles/globals.scss'
 import '@splidejs/react-splide/css';
-import { Flowbite } from 'flowbite-react'
+import { Flowbite, useThemeMode } from 'flowbite-react'
 import DefaultHead from '../components/DefaultHead';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {
+  const [mode, _, toggleMode] = useThemeMode(true)
+
+  if (mode == 'dark'){
+    toggleMode()
+  }
+
   return <Flowbite
     theme={{
       theme: {
