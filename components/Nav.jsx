@@ -1,6 +1,6 @@
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
-import { shiftUpOnScroll, navLinks } from './utils';
+import { hideOnScroll, navLinks } from './utils';
 
 function TextNavLink({ href, title, hiddenOnDesktop }){
   return (
@@ -19,7 +19,7 @@ export default function Nav() {
 
   useEffect(() => {
     if(navBarContainer.current != null) {
-      shiftUpOnScroll(navBarContainer.current)
+      hideOnScroll(navBarContainer.current)
     }
   }, [])
 

@@ -1,4 +1,4 @@
-export function shiftUpOnScroll(elem) {
+export function hideOnScroll(elem) {
   var lastScrollTop;
   window.addEventListener('scroll',function(){
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;

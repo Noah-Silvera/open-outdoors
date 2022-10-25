@@ -1,7 +1,7 @@
 import { createClient } from 'contentful'
 import styles from '../styles/GearLibrary.module.scss'
 import { useEffect, useRef, useState } from 'react'
-import { shiftUpOnScroll } from '../components/utils';
+import { hideOnScroll } from '../components/utils';
 import { Radio } from 'flowbite-react';
 import classNames from 'classnames';
 import GearItem from '../components/GearItem';
@@ -110,7 +110,7 @@ export default function GearLibrary({ gearItems }) {
 
   useEffect(() => {
     if(gearLibraryBanner.current != null) {
-      shiftUpOnScroll(gearLibraryBanner.current)
+      hideOnScroll(gearLibraryBanner.current)
     }
   }, [])
 
