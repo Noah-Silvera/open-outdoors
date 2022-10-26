@@ -79,15 +79,15 @@ $grid-column-size: 400px;
   min-width: 5em;
 }
 
-.booking-form {
+.borrow-form {
   overflow: hidden;
 }
 
-.booking-form-enter {
+.borrow-form-enter {
   max-height: 0;
 }
 
-.booking-form-enter-active {
+.borrow-form-enter-active {
   max-height: 500px;
   transition: max-height 0.3s ease-out;
 }

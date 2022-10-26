@@ -33,12 +33,12 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
         timeout={300}
         unmountOnExit
         classNames={{
-          enter: styles["booking-form-enter"],
-          enterActive: styles["booking-form-enter-active"],
-          exit: styles["booking-form-exit"],
-          exitActive: styles["booking-form-exit-active"],
+          enter: styles["borrow-form-enter"],
+          enterActive: styles["borrow-form-enter-active"],
+          exit: styles["borrow-form-exit"],
+          exitActive: styles["borrow-form-exit-active"],
         }}>
-        <div className={classNames('px-5','mb-2', styles["booking-form"])} ref={bookingFormRef}>
+        <div className={classNames('px-5','mb-2', styles["borrow-form"])} ref={bookingFormRef}>
           <div className='flex flex-row justify-around pb-3'>
             <label htmlFor="start">Start date:</label>
             <input
