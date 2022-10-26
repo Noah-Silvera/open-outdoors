@@ -14,7 +14,7 @@ class PubSub {
   }
 
   publish(event, args){
-    if(this.events[event].length > 0){
+    if(this.events[event]?.length > 0){
       this.events[event].forEach(subscriber => {
         subscriber(args)
       });
@@ -24,7 +24,21 @@ class PubSub {
 
 export const GlobalPubSub = new PubSub();
 
+const hideOnScrollElements = {}
+
+export function disableHideOnScroll(identifer) {
+  hideOnScrollElements[identifer] = false;
+}
+
+export function enableHideOnScroll(identifer) {
+  hideOnScrollElements[identifer] = true;
+}
+
 export function hideOnScroll(elem, identifer) {
+  if(!hideOnScrollElements[identifer]) {
+    hideOnScrollElements[identifer] = true;
+  }
+
   var lastScrollTop;
 
   const hideElement = () => {
@@ -48,13 +62,13 @@ export function hideOnScroll(elem, identifer) {
   window.addEventListener('scroll',function(){
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if((scrollTop - lastScrollTop) > 25 && scrollTop > 200){
-      if(!elem.classList.contains("is-hidden")) {
+      if(!elem.classList.contains("is-hidden") && hideOnScrollElements[identifer]) {
         hideElement()
         dispatchHiddenEvent()
       }
     }
     else if(((lastScrollTop - scrollTop) > 60) || scrollTop < 50){
-      if(!elem.classList.contains("is-visible")) {
+      if(!elem.classList.contains("is-visible") && hideOnScrollElements[identifer]) {
         showElement()
         dispatchShownEvent()
       }

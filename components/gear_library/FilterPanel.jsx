@@ -1,5 +1,5 @@
 import { CSSTransition } from "react-transition-group"
-import { GlobalPubSub } from '../utils';
+import { disableHideOnScroll, enableHideOnScroll, GlobalPubSub } from '../utils';
 import styles from '../../styles/GearLibrary.module.scss'
 import { useRef, useState } from 'react'
 import classNames from "classnames";
@@ -7,7 +7,7 @@ import classNames from "classnames";
 export default function FilterPanel({ children }) {
   const [isOpen, setIsOpen] = useState(false)
   const childContainer = useRef(null)
-  const [navBarClosed, setNavBarClosed] = useState(true)
+  const [navBarClosed, setNavBarClosed] = useState(false)
 
   GlobalPubSub.subscribe("hidden-on-scroll", (args) => {
     if(args.identifer == "nav") {
@@ -46,6 +46,8 @@ export default function FilterPanel({ children }) {
         in={isOpen}
         nodeRef={childContainer}
         timeout={300}
+        onEnter={() => disableHideOnScroll("nav")}
+        onExited={() => enableHideOnScroll("nav")}
         classNames={{
           enter: styles["gear-filter-enter"],
           enterActive: styles["gear-filter-enter-active"],
