@@ -1,6 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import styles from '../../styles/GearLibrary.module.scss'
+import styles from '../../styles/gear_library/GearItem.module.scss'
 import { Button } from 'flowbite-react';
 import { useState, useRef } from 'react';
 import { CSSTransition } from "react-transition-group"

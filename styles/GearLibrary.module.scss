@@ -1,7 +1,5 @@
 @import './breakpoints';
-
-$grid-column-size: 400px;
-
+@import './gear_library_shared';
 
 .gear-library-grid {
   display: grid;
@@ -40,54 +38,6 @@ $grid-column-size: 400px;
   }
 }
 
-.gear-item img {
-  width: $grid-column-size;
-  height: $grid-column-size;
-  object-fit: cover;
-  object-position: center;
-
-  @include small {
-    width: 100%;
-    height: auto;
-  }
-
-  @include medium {
-    $grid-column-size: 250px;
-    width: $grid-column-size;
-    height: $grid-column-size;
-  }
-
-  @include large {
-    $grid-column-size: 350px;
-    width: $grid-column-size;
-    height: $grid-column-size;
-  }
-}
-
-.gear-description {
-  a {
-    text-decoration: underline;
-    color: #0000EE;
-  }
-
-  p:not(:first-child) {
-    margin-top: .5em;
-  }
-}
-
 .min-gear-item-width {
   min-width: 5em;
-}
-
-.borrow-form {
-  overflow: hidden;
-}
-
-.borrow-form-enter {
-  max-height: 0;
-}
-
-.borrow-form-enter-active {
-  max-height: 500px;
-  transition: max-height 0.3s ease-out;
 }
