@@ -6,13 +6,33 @@ import { Radio } from 'flowbite-react';
 import classNames from 'classnames';
 import GearItem from '../components/GearItem';
 import { CSSTransition } from "react-transition-group"
+import { GlobalPubSub } from '../components/utils';
 
 function FilterPanel({ children }) {
   const [isOpen, setIsOpen] = useState(false)
   const childContainer = useRef(null)
+  const [navBarClosed, setNavBarClosed] = useState(true)
+
+  GlobalPubSub.subscribe("hidden-on-scroll", (args) => {
+    if(args.identifer == "nav") {
+      setNavBarClosed(true)
+    }
+  })
+
+  GlobalPubSub.subscribe("shown-on-scroll", (args) => {
+    if(args.identifer == "nav") {
+      setNavBarClosed(false)
+    }
+  })
 
   return (
-    <div className={classNames(styles["sticky-filter-panel"], 'z-10')}>
+    <div className={classNames(
+      styles["sticky-filter-panel"],
+      'z-10',
+      {
+        [styles["nav-bar-closed"]] : navBarClosed
+      }
+    )}>
       <div
         className='text-2xl px-6 py-3 bg-tertiary-light flex flex-row items-center border-y-2  border-y-tertiary-light/60'
         onClick={() => setIsOpen(!isOpen)}
@@ -95,7 +115,6 @@ function GearItemGrid({gearItems}){
 }
 
 export default function GearLibrary({ gearItems }) {
-  const gearLibraryBanner = useRef();
   const [selectedGearType, setSelectedGearType] = useState(null);
 
   let gearTypes = new Set(gearItems.map((gearForLoan) => {
@@ -107,12 +126,6 @@ export default function GearLibrary({ gearItems }) {
   }).flat())
 
   const filteredGearItems = gearItems.filter((item) => selectedGearType == null || item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType))
-
-  useEffect(() => {
-    if(gearLibraryBanner.current != null) {
-      hideOnScroll(gearLibraryBanner.current)
-    }
-  }, [])
 
   return (
     <main styles={styles["main-container"]}>

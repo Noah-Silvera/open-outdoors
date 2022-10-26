@@ -20,6 +20,8 @@
     --xl-breakpoint: 1280px;
 
     --navbar-height: 6rem;
+    --navbar-visible-transition-time: 0.1s;
+    --navbar-hidden-transition-time: 0.15s;
   }
 }
 
@@ -86,11 +88,15 @@ h2 {
 
 @media only screen and (max-width: 768px) {
   .is-visible {
-    transition: margin-top 0.1s;
+    transition-property: margin-top;
+    transition-delay: 10ms;
+    transition-duration: var(--navbar-visible-transition-time);
   }
 
   .is-hidden {
     margin-top: calc(-1 * var(--navbar-height));
-    transition: margin-top 0.15s;
+    transition-delay: 25ms;
+    transition-property: margin-top;
+    transition-duration: var(--navbar-hidden-transition-time);
   }
 }
