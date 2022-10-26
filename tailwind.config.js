@@ -16,6 +16,7 @@ module.exports = {
       "secondary-light": 'rgb(var(--color-secondary-light) / <alpha-value>)',
       "secondary-dark": 'rgb(var(--color-secondary-dark) / <alpha-value>)',
       "tertiary-light": 'rgb(var(--color-tertiary-light) / <alpha-value>)',
+      "tertiary-very-light": 'rgb(var(--color-tertiary-very-light) / <alpha-value>)',
       "white-alt": 'rgb(var(--color-white-alt) / <alpha-value>)',
       purple: '#801A86'
     }
