@@ -48,12 +48,16 @@ export function hideOnScroll(elem, identifer) {
   window.addEventListener('scroll',function(){
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if((scrollTop - lastScrollTop) > 25 && scrollTop > 200){
-      hideElement()
-      dispatchHiddenEvent()
+      if(!elem.classList.contains("is-hidden")) {
+        hideElement()
+        dispatchHiddenEvent()
+      }
     }
     else if(((lastScrollTop - scrollTop) > 60) || scrollTop < 50){
-      showElement()
-      dispatchShownEvent()
+      if(!elem.classList.contains("is-visible")) {
+        showElement()
+        dispatchShownEvent()
+      }
     }
     lastScrollTop = scrollTop;
   });
