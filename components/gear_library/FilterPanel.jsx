@@ -1,6 +1,6 @@
 import { CSSTransition } from "react-transition-group"
 import { disableHideOnScroll, enableHideOnScroll, GlobalPubSub } from '../utils';
-import styles from '../../styles/GearLibrary.module.scss'
+import styles from '../../styles/gear_library/FilterPanel.module.scss'
 import { useRef, useState } from 'react'
 import classNames from "classnames";
 
@@ -30,7 +30,7 @@ export default function FilterPanel({ children }) {
       }
     )}>
       <div
-        className='text-2xl px-6 py-3 bg-tertiary-light flex flex-row items-center border-y-2  border-y-tertiary-light/60'
+        className='text-2xl px-6 py-3 bg-tertiary-light flex flex-row items-center border-y-2 border-y-tertiary-light/60'
         onClick={() => setIsOpen(!isOpen)}
       >
         <p>Filter</p>
