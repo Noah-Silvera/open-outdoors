@@ -19,7 +19,7 @@ export default function Nav() {
 
   useEffect(() => {
     if(navBarContainer.current != null) {
-      hideOnScroll(navBarContainer.current)
+      hideOnScroll(navBarContainer.current, "nav")
     }
   }, [])
 
