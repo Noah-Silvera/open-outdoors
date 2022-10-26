@@ -139,3 +139,10 @@ $grid-column-size: 400px;
 .gear-filter-exit-done {
   max-height: 0;
 }
+
+.sticky-filter-panel {
+  @include sm-or-larger {
+    position: sticky;
+    top: var(--navbar-height);
+  }
+}

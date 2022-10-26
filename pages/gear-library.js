@@ -12,9 +12,9 @@ function FilterPanel({ children }) {
   const childContainer = useRef(null)
 
   return (
-    <div>
+    <div className={classNames(styles["sticky-filter-panel"], 'z-10')}>
       <div
-        className='text-2xl px-6 py-3 bg-tertiary-light/50 flex flex-row items-center border-y-2  border-y-tertiary-light/60'
+        className='text-2xl px-6 py-3 bg-tertiary-light flex flex-row items-center border-y-2  border-y-tertiary-light/60'
         onClick={() => setIsOpen(!isOpen)}
       >
         <p>Filter</p>
