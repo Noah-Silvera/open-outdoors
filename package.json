@@ -15,7 +15,7 @@
     "@sentry/nextjs": "^7.17.1",
     "@splidejs/react-splide": "^0.7.12",
     "classnames": "^2.3.2",
-    "contentful": "^9.2.7",
+    "contentful": "^9.2.9",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.3.2",
     "next": "12.3.1",
