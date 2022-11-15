@@ -4,20 +4,26 @@ import TextBody from '../components/TextBody'
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types'
+import Image from 'next/image'
+import bannerMobile from "../public/banner-mobile.jpg"
+import bannerDesktop from "../public/banner.jpg"
 
 export default function Home({ content }) {
 return (
     <div className="min-h-screen">
       <div className='bg-tertiary-light'>
-        <img
-          src="/banner-mobile.jpg"
-          className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto sm:hidden"
-          alt="Open (out)Doors"
-        />
-        <img
-          src="/banner.jpg"
-          className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto hidden sm:block"
-        />
+        <div className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto sm:hidden">
+          <Image
+            src={bannerMobile}
+            alt="Open (out)Doors"
+          />
+        </div>
+        <div className="max-h-96 w-full md:w-3/5 md:max-w-2xl mx-auto hidden sm:block overflow-hidden">
+          <Image
+            src={bannerDesktop}
+            alt="Open (out)Doors"
+          />
+        </div>
       </div>
       <div className='bg-white pb-24 pt-2 sm:pt-10'>
         <main className='space-y-7'>
