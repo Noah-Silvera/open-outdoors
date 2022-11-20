@@ -19,26 +19,34 @@ function Event({ eventPost }) {
 export default function Events({ content }) {
   let upcomingEvents = content.filter((eventPost) => new Date(eventPost.time) >= Date.now())
   let pastEvents = content.filter((eventPost) => new Date(eventPost.time) < Date.now())
-  return (
-    <main className="min-h-screen">
-      <section>
-        <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Upcoming Events</h1>
-        <div className='max-w-2xl mx-auto'>
-          {upcomingEvents.map((eventPost, idx) => {
-            return <Event eventPost={eventPost} key={idx}/>
-          })}
-        </div>
-      </section>
-      <section className='pt-8 pb-12'>
-        <h1 className='text-4xl pb-10 font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Events</h1>
-        <div className='max-w-2xl mx-auto'>
-          {pastEvents.map((eventPost, idx) => {
-            return <Event eventPost={eventPost} key={idx}/>
-          })}
-        </div>
-      </section>
-    </main>
-  )
+  if(upcomingEvents.length == 0 && pastEvents.length == 0){
+    return (
+      <main className="min-h-screen flex flex-col">
+        <h1 className='text-4xl font-medium text-center md:px-0 py-8 md:py-10 my-auto'>Coming Soon!</h1>
+      </main>
+    )
+  } else {
+    return (
+      <main className="min-h-screen">
+        <section>
+          <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Upcoming Events</h1>
+          <div className='max-w-2xl mx-auto'>
+            {upcomingEvents.map((eventPost, idx) => {
+              return <Event eventPost={eventPost} key={idx}/>
+            })}
+          </div>
+        </section>
+        <section className='pt-8 pb-12'>
+          <h1 className='text-4xl pb-10 font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Events</h1>
+          <div className='max-w-2xl mx-auto'>
+            {pastEvents.map((eventPost, idx) => {
+              return <Event eventPost={eventPost} key={idx}/>
+            })}
+          </div>
+        </section>
+      </main>
+    )
+  }
 }
 
 export async function getStaticProps() {
