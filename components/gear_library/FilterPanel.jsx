@@ -1,5 +1,5 @@
 import { CSSTransition } from "react-transition-group"
-import { disableHideOnScroll, enableHideOnScroll, GlobalPubSub } from '../utils';
+import { disableHideOnScroll, enableHideOnScroll, GlobalPubSub } from '../../src/utils';
 import styles from '../../styles/gear_library/FilterPanel.module.scss'
 import { useRef, useState } from 'react'
 import classNames from "classnames";

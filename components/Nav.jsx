@@ -1,6 +1,6 @@
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
-import { hideOnScroll, navLinks } from './utils';
+import { hideOnScroll, navLinks } from '../src/utils';
 
 function TextNavLink({ href, title, hiddenOnDesktop }){
   return (

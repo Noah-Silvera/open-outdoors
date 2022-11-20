@@ -1,5 +1,5 @@
 import { Footer } from 'flowbite-react'
-import { navLinks } from './utils'
+import { navLinks } from '../src/utils'
 
 export default function SiteFooter(){
   return (
