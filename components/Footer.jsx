@@ -3,7 +3,7 @@ import { navLinks } from '../src/utils'
 
 export default function SiteFooter(){
   return (
-    <Footer>
+    <Footer className='justify-self-end grow flex flex-col !justify-end'>
       <div className="w-full gap-8 py-5 px-6 bg-secondary-dark/90 text-white">
         <Footer.LinkGroup col={false} className="!text-white justify-end align-center">
           {navLinks.map((navLink, idx) => {

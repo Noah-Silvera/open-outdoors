@@ -47,11 +47,13 @@ function MyApp({ Component, pageProps }) {
     }}
   >
     <DefaultHead title={pageProps.pageTitle || null}/>
-    <div className='navbar-padding'>
-      <Nav/>
+    <div className='min-h-screen flex flex-col'>
+      <div className='navbar-padding'>
+        <Nav/>
+      </div>
+      <Component {...pageProps} />
+      <Footer/>
     </div>
-    <Component {...pageProps} />
-    <Footer/>
   </Flowbite>
 }
 

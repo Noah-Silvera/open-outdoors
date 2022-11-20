@@ -63,7 +63,7 @@ export default function Contact({ recaptchaSiteKey }) {
   return (
     <>
       <Script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} />
-      <main className="min-h-screen">
+      <main>
         <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>Contact Us</h1>
         <form className="flex flex-col gap-4 max-w-2xl mx-auto pt-6 text-2xl px-5" onSubmit={handleSubmit}>
           <div>
