@@ -24,7 +24,7 @@ function WrappedNavbarLink({ href, title, hiddenOnDesktop, className }){
 
 function DropdownNavbarLink({ href, title, hiddenOnDesktop }){
   return (
-    <div className={hiddenOnDesktop ? "md:hidden": ""}>
+    <div className={classNames("py-3", {"md:hidden": hiddenOnDesktop})}>
       <a
         className='hover:bg-secondary-light'
         href={href}>
