@@ -81,13 +81,13 @@ export function hideOnScroll(elem, identifer) {
 
 export const navLinks = [
   {
-    "href": "/gear-library",
-    "text": "Gear Library",
+    "href": "/about",
+    "text": "About Us",
     "hiddenOnDesktop": false
   },
   {
-    "href": "/events",
-    "text": "Events",
+    "href": "/gear-library",
+    "text": "Gear Library",
     "hiddenOnDesktop": false
   },
   {
@@ -96,8 +96,8 @@ export const navLinks = [
     "hiddenOnDesktop": false
   },
   {
-    "href": "/about",
-    "text": "About Us",
+    "href": "/events",
+    "text": "Events",
     "hiddenOnDesktop": false
   }
 ]
