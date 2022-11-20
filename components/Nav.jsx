@@ -8,7 +8,7 @@ function TextNavLink({ href, title, hiddenOnDesktop }){
       <Navbar.Link
         className='hover:bg-secondary-light'
         href={href}>
-        <p className="text-primary-light md:text-primary-dark text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1 hover:text-secondary-dark">{title}</p>
+        <p className="text-primary-light md:text-primary-dark text-xl lg:text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1 hover:text-secondary-dark">{title}</p>
       </Navbar.Link>
     </div>
   )

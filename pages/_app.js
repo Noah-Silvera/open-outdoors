@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
       theme: {
         navbar: {
           collapse: {
-            list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-2 lg:space-x-8 md:text-sm md:font-medium'
+            list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-2 lg:space-x-6 md:font-medium'
           }
         },
         formControls: {
