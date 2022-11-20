@@ -18,9 +18,9 @@ function sliceIntoChunks(array, chunkSize) {
 }
 
 function MainFooterLinkGroups({navLinks, chunkSize, className}){
-  return sliceIntoChunks(navLinks, chunkSize).map((navLinkChunk) =>{
+  return sliceIntoChunks(navLinks, chunkSize).map((navLinkChunk, idx) =>{
     return (
-      <Footer.LinkGroup col={true} className={classNames("!text-white justify-start sm:justify-center align-right space-y-2", className)}>
+      <Footer.LinkGroup col={true} className={classNames("!text-white justify-start sm:justify-center align-right space-y-2", className)} key={idx}>
       {navLinkChunk.map((navLink, idx) => {
         return (
             <Footer.Link href={navLink["href"]} key={idx} className="text-center">
