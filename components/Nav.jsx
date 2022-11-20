@@ -1,16 +1,85 @@
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
 import { hideOnScroll, navLinks } from '../src/utils';
+import { Dropdown } from 'flowbite-react';
+import classNames from 'classnames';
 
-function TextNavLink({ href, title, hiddenOnDesktop }){
+function StyledLinkText({children, className}) {
   return (
-    <div className={hiddenOnDesktop ? "md:hidden": ""}>
+    <p className={classNames("text-primary-light md:text-primary-dark text-xl lg:text-2xl py-0 hover:text-secondary-dark wider-spacing", className)}>{children}</p>
+  )
+}
+
+function WrappedNavbarLink({ href, title, hiddenOnDesktop, className }){
+  return (
+    <div className={classNames(className, {"md:hidden": hiddenOnDesktop})}>
       <Navbar.Link
         className='hover:bg-secondary-light'
         href={href}>
-        <p className="text-primary-light md:text-primary-dark text-xl lg:text-2xl md:pr-2 lg:pr-5 py-0 sm:pt-1 hover:text-secondary-dark">{title}</p>
+        <StyledLinkText className="md:pr-2 lg:pr-5 sm:pt-1">{title}</StyledLinkText>
       </Navbar.Link>
     </div>
+  )
+}
+
+function DropdownNavbarLink({ href, title, hiddenOnDesktop }){
+  return (
+    <div className={hiddenOnDesktop ? "md:hidden": ""}>
+      <a
+        className='hover:bg-secondary-light'
+        href={href}>
+        <StyledLinkText className="md:pr-2 lg:pr-5 sm:pt-1">{title}</StyledLinkText>
+      </a>
+    </div>
+  )
+}
+
+function NavbarDropdown({navLinks, label}) {
+  return (
+    <Dropdown
+      label={<StyledLinkText className="sm:pt-1">{label}</StyledLinkText>}
+      inline={true}
+      placement="bottom"
+    >
+      <Dropdown.Item className='!py-0 hover:bg-tertiary-light/60'>
+        {navLinks.map((navLink, idx) => {
+          return (
+            <DropdownNavbarLink
+              key={idx}
+              href={navLink["href"]}
+              title={navLink["text"]}
+              hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
+          )
+        })}
+      </Dropdown.Item>
+    </Dropdown>
+  )
+}
+
+function NavbarLinks({ navLinks, maxLinksDisplayed }) {
+  return (
+    <>
+      {navLinks.slice(0,maxLinksDisplayed).map((navLink, idx) => {
+        return (
+          <WrappedNavbarLink
+            key={idx}
+            href={navLink["href"]}
+            title={navLink["text"]}
+            hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
+        )
+      })}
+      {navLinks.slice(maxLinksDisplayed).map((navLink, idx) => {
+        return (
+          <WrappedNavbarLink
+            className="md:hidden"
+            key={idx}
+            href={navLink["href"]}
+            title={navLink["text"]}
+            hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
+        )
+      })}
+      <NavbarDropdown label="More" navLinks={navLinks.slice(3)}/>
+    </>
   )
 }
 
@@ -43,15 +112,7 @@ export default function Nav() {
         </Navbar.Brand>
         <Navbar.Toggle className='!text-primary-dark !bg-secondary-light hover:!bg-secondary-light focus:!ring-0'/>
         <Navbar.Collapse>
-          {navLinks.map((navLink, idx) => {
-            return (
-              <TextNavLink
-                key={idx}
-                href={navLink["href"]}
-                title={navLink["text"]}
-                hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
-            )
-          })}
+          <NavbarLinks navLinks={navLinks} maxLinksDisplayed={3}/>
           <Navbar.Link
             href="https://www.instagram.com/open.outdoors/"
             target="_blank"

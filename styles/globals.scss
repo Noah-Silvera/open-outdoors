@@ -37,9 +37,17 @@ body {
   box-sizing: border-box;
 }
 
+@mixin wider-spacing {
+  letter-spacing: .1em;
+}
+
 .header-font {
   font-family: 'Oswald';
-  letter-spacing: .1em;
+  @include wider-spacing;
+}
+
+.wider-spacing {
+  @include wider-spacing;
 }
 
 .body-font {

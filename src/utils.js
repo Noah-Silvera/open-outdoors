@@ -81,26 +81,23 @@ export function hideOnScroll(elem, identifer) {
 
 export const navLinks = [
   {
-    "href": "/about",
-    "text": "About Us",
+    "href": "/gear-library",
+    "text": "Gear Library",
     "hiddenOnDesktop": false
   },
   {
-    "href": "/gear-library",
-    "text": "Gear Library",
+    "href": "/events",
+    "text": "Events",
     "hiddenOnDesktop": false
   },
   {
     "href": "/contact",
     "text": "Contact",
     "hiddenOnDesktop": false
+  },
+  {
+    "href": "/about",
+    "text": "About Us",
+    "hiddenOnDesktop": false
   }
 ]
-
-if(!inProduction) {
-  navLinks.splice(1, 0,   {
-    "href": "/events",
-    "text": "Events",
-    "hiddenOnDesktop": false
-  });
-}

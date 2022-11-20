@@ -33,6 +33,15 @@ function MyApp({ Component, pageProps }) {
             lg: "text-lg px-5 py-2.5",
             xl: "text-xl px-6 py-3"
           }
+        },
+        dropdown: {
+          arrowIcon: 'h-8 w-8 lg:h-10 lg:w-10 text-primary-dark pt-2 hidden md:block',
+          inlineWrapper: 'flex items-center hidden md:flex',
+          floating: {
+            style: {
+              auto: 'bg-tertiary-light text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white drop-shadow-xl'
+            }
+          }
         }
       }
     }}
