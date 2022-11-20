@@ -1,12 +1,12 @@
 import LeftSideText from '../components/LeftSideText'
 import RightSideText from '../components/RightSideText'
 import TextBody from '../components/TextBody'
-import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types'
 import Image from 'next/image'
 import bannerMobile from "../public/banner-mobile.jpg"
 import bannerDesktop from "../public/banner.jpg"
+import contentfulClient from '../src/contentful_client';
 
 export default function Home({ content }) {
 return (
@@ -61,12 +61,8 @@ return (
 }
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  })
   const HOMEPAGE_ENTRY_ID = "4YkqRwhrDZm92thaXmVtR7"
-  let homepageContent = await client.getEntry(HOMEPAGE_ENTRY_ID)
+  let homepageContent = await contentfulClient.getEntry(HOMEPAGE_ENTRY_ID)
 
   return {
     props: {

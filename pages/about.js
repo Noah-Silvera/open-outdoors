@@ -1,5 +1,5 @@
-import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import contentfulClient from '../src/contentful_client'
 
 function BioCard({name, className, imgSrc, imgAlt, ...props}) {
   return (
@@ -41,11 +41,7 @@ export default function About({ content }) {
 
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  })
-  let response = await client.getEntries({
+  let response = await contentfulClient.getEntries({
     content_type: "bio",
     order: "sys.createdAt"
   })

@@ -1,9 +1,9 @@
-import { createClient } from 'contentful'
 import styles from '../styles/GearLibrary.module.scss'
 import { useState } from 'react'
 import GearItem from '../components/gear_library/GearItem';
 import FilterPanel from "../components/gear_library/FilterPanel"
 import TypeRadioButtons from '../components/gear_library/TypeRadioButtons';
+import contentfulClient from '../src/contentful_client';
 
 function GearItemGrid({gearItems}){
   return (
@@ -50,11 +50,8 @@ export default function GearLibrary({ gearItems }) {
 }
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  })
-  let response = await client.getEntries({
+  console.log(contentfulClient)
+  let response = await contentfulClient.getEntries({
     content_type: "gearForLoan",
     order: "sys.createdAt"
   })
