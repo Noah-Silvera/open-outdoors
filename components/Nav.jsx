@@ -41,7 +41,7 @@ export default function Nav() {
             Open (out)Doors
           </span>
         </Navbar.Brand>
-        <Navbar.Toggle className='text-primary-dark bg-secondary-light hover:bg-secondary-light focus:ring-primary-dark/60'/>
+        <Navbar.Toggle className='!text-primary-dark !bg-secondary-light hover:!bg-secondary-light focus:!ring-0'/>
         <Navbar.Collapse>
           {navLinks.map((navLink, idx) => {
             return (
