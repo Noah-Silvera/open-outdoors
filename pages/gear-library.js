@@ -51,7 +51,6 @@ export default function GearLibrary({ gearItems, pageTitle }) {
 }
 
 export async function getStaticProps() {
-  console.log(contentfulClient)
   let response = await contentfulClient.getEntries({
     content_type: "gearForLoan",
     order: "sys.createdAt"

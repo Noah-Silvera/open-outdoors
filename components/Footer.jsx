@@ -8,7 +8,6 @@ function sliceIntoChunks(array, chunkSize) {
   let idx = 0
   let firstChunk = array.slice(idx, leftover_amount)
   result.push(firstChunk)
-  console.log(result)
   idx += leftover_amount;
   while (idx < array.length) {
     const chunk = array.slice(idx, (idx+chunkSize));
