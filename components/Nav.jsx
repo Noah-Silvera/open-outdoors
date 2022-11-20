@@ -41,17 +41,19 @@ function NavbarDropdown({navLinks, label}) {
       inline={true}
       placement="bottom"
     >
-      <Dropdown.Item className='!py-0 hover:bg-tertiary-light/60'>
-        {navLinks.map((navLink, idx) => {
-          return (
-            <DropdownNavbarLink
-              key={idx}
-              href={navLink["href"]}
-              title={navLink["text"]}
-              hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
-          )
-        })}
-      </Dropdown.Item>
+      {navLinks.map((navLink, idx) => {
+        return (
+          <>
+            <Dropdown.Item className='!py-0 hover:bg-tertiary-light/60'>
+                <DropdownNavbarLink
+                  key={idx}
+                  href={navLink["href"]}
+                  title={navLink["text"]}
+                  hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
+            </Dropdown.Item>
+          </>
+        )
+      })}
     </Dropdown>
   )
 }
