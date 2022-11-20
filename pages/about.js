@@ -1,4 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BasicHeader } from '../components/BasicHeader'
 import contentfulClient from '../src/contentful_client'
 
 function BioCard({name, className, imgSrc, imgAlt, ...props}) {
@@ -20,9 +21,7 @@ function BioCard({name, className, imgSrc, imgAlt, ...props}) {
 export default function About({ content }) {
   return (
     <main className="min-h-screen">
-      <header>
-        <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>About Us</h1>
-      </header>
+      <BasicHeader>About Us</BasicHeader>
       {content.map((bio, idx) => {
         return <section key={bio.name}>
           <BioCard

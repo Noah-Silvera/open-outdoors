@@ -1,3 +1,5 @@
+import { BasicHeader } from "../components/BasicHeader"
+
 function EmbeddedSignupForm({ className }) {
   const rawHTML = `
   <!-- Begin Mailchimp Signup Form -->
@@ -44,7 +46,7 @@ export default function MailingList({ pageTitle }) {
   return (
     <>
       <main className="">
-        <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>{pageTitle}</h1>
+        <BasicHeader>{pageTitle}</BasicHeader>
         <div className="align-middle text-center space-y-6 pt-8 max-w-2xl mx-auto px-2">
           <p className="text-xl body-font">
             We will contact you about upcoming events and new organizational developments. You can unsubscribe anytime.

@@ -1,8 +1,9 @@
 import { Label, Textarea, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
 import Script from 'next/script'
+import { BasicHeader } from '../components/BasicHeader'
 
-export default function Contact({ recaptchaSiteKey }) {
+export default function Contact({ recaptchaSiteKey, pageTitle }) {
   var params = {
     name: "",
     email: "",
@@ -64,7 +65,7 @@ export default function Contact({ recaptchaSiteKey }) {
     <>
       <Script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} />
       <main>
-        <h1 className='header-font text-center mx-auto py-5 md:py-10 bg-tertiary-light'>Contact Us</h1>
+        <BasicHeader>{pageTitle}</BasicHeader>
         <form className="flex flex-col gap-4 max-w-2xl mx-auto pt-6 text-2xl px-5" onSubmit={handleSubmit}>
           <div>
             <div className="mb-2 block">

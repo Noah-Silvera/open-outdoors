@@ -4,6 +4,7 @@ import GearItem from '../components/gear_library/GearItem';
 import FilterPanel from "../components/gear_library/FilterPanel"
 import TypeRadioButtons from '../components/gear_library/TypeRadioButtons';
 import contentfulClient from '../src/contentful_client';
+import { BasicHeader } from '../components/BasicHeader';
 
 function GearItemGrid({gearItems}){
   return (
@@ -15,7 +16,7 @@ function GearItemGrid({gearItems}){
   )
 }
 
-export default function GearLibrary({ gearItems }) {
+export default function GearLibrary({ gearItems, pageTitle }) {
   const [selectedGearType, setSelectedGearType] = useState(null);
 
   let gearTypes = new Set(gearItems.map((gearForLoan) => {
@@ -31,7 +32,7 @@ export default function GearLibrary({ gearItems }) {
   return (
     <main styles={styles["main-container"]}>
       <header>
-        <h1 className='header-font text-center mx-auto pb-5 md:pb-10 pt-5 md:pt-10 bg-tertiary-light'>Gear Library</h1>
+        <BasicHeader>{pageTitle}</BasicHeader>
         <div className='bg-tertiary-light/70'>
           <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>Aquiring outdoor gear can be a significant barrier for like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
         </div>
