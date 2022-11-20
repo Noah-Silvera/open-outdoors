@@ -5,7 +5,7 @@ function Event({ eventPost }) {
   return (
     <article className="pb-5 mb-8 border-b-4 last:border-b-0">
       <h2 className='text-3xl mb-5 text-center md:text-left'>{eventPost.title}</h2>
-      <img src={eventPost.bannerPhoto.fields.file.url} alt={eventPost.bannerPhoto.fields.description}></img>
+      <img src={eventPost.bannerPhoto.fields.file.url} alt={eventPost.bannerPhoto.fields.description} className="h-full sm:h-96"></img>
       <div className='flex flex-row text-xl my-3 font-medium mx-3 md:mx-0'>
         <p>{new Date(eventPost.time).toDateString()}</p>
         <p className='mx-1'>at</p>
