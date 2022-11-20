@@ -99,5 +99,10 @@ export const navLinks = [
     "href": "/events",
     "text": "Events",
     "hiddenOnDesktop": false
+  },
+  {
+    "href": "/mailing-list",
+    "text": "Mailing List",
+    "hiddenOnDesktop": false
   }
 ]
