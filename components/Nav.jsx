@@ -44,7 +44,7 @@ function NavbarDropdown({navLinks, label}) {
       {navLinks.map((navLink, idx) => {
         return (
           <>
-            <Dropdown.Item className='!py-0 hover:bg-tertiary-light/60'>
+            <Dropdown.Item className='!py-0 hover:bg-tertiary-light/60' key={idx}>
                 <DropdownNavbarLink
                   key={idx}
                   href={navLink["href"]}
