@@ -6,8 +6,11 @@ export default function TextBody({children, className, ...props}) {
   }
   return (
     <div className={["text-xl body-font", className].filter(String).join(" ")} {...props}>
-      {children.map((child) => {
-        return React.cloneElement(child, {className: [child.props.className, "px-[15%] sm:px-[20%] lg:px-[25%]"].filter(String).join(" ")})
+      {children.map((child, idx) => {
+        return React.cloneElement(child, {
+          className: [child.props.className, "px-[15%] sm:px-[20%] lg:px-[25%]"].filter(String).join(" "),
+          key: idx
+        })
       })}
     </div>
   )
