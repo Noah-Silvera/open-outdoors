@@ -1,3 +1,5 @@
+import { inProduction } from "./environment";
+
 class PubSub {
   constructor() {
     this.events = {
@@ -84,11 +86,6 @@ export const navLinks = [
     "hiddenOnDesktop": false
   },
   {
-    "href": "/events",
-    "text": "Events",
-    "hiddenOnDesktop": false
-  },
-  {
     "href": "/gear-library",
     "text": "Gear Library",
     "hiddenOnDesktop": false
@@ -99,3 +96,11 @@ export const navLinks = [
     "hiddenOnDesktop": false
   }
 ]
+
+if(!inProduction) {
+  navLinks.splice(1, 0,   {
+    "href": "/events",
+    "text": "Events",
+    "hiddenOnDesktop": false
+  });
+}
