@@ -7,9 +7,9 @@ export default function MeetingMinutes({ pageTitle, content }){
   return (
     <main>
       <BasicHeader>{pageTitle}</BasicHeader>
-      {content.map((minutes) => {
+      {content.map((minutes, idx) => {
         return (
-          <section className='max-w-3xl mx-auto py-10'>
+          <section className='max-w-3xl mx-auto py-10' key={idx}>
             <h2 className='text-3xl mb-5 text-center md:text-left'>{minutes.meetingTitle} - {new Date(minutes.meetingDate).toDateString()}</h2>
             <div className={classNames(styles["google-doc-iframe"], "border-black border-2")} dangerouslySetInnerHTML={{__html: minutes.googleDocEmbedLink.content[0].content[0].value}} />;
           </section>
