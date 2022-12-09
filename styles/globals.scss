@@ -108,3 +108,29 @@ h2 {
     transition-duration: var(--navbar-hidden-transition-time);
   }
 }
+
+.contentful-rich-text {
+  line-height: 1.55em;
+
+  a {
+    text-decoration: underline;
+    color: #0000EE;
+  }
+
+  p, ul {
+    margin-bottom: 10px;
+
+    @include small {
+      margin-bottom: 20px;
+    }
+  }
+
+  ul {
+    margin-left: 35px;
+    list-style: disc;
+
+    li p {
+      margin-bottom: 5px;
+    }
+  }
+}
