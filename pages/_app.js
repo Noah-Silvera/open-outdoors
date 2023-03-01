@@ -4,6 +4,7 @@ import { Flowbite, useThemeMode } from 'flowbite-react'
 import DefaultHead from '../components/DefaultHead';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({ Component, pageProps }) {
   const [mode, _, toggleMode] = useThemeMode(true)
@@ -53,6 +54,7 @@ function MyApp({ Component, pageProps }) {
       </div>
       <Component {...pageProps} />
       <Footer/>
+      <Analytics />
     </div>
   </Flowbite>
 }
