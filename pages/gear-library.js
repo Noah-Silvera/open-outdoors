@@ -35,7 +35,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
         <BasicHeader>{pageTitle}</BasicHeader>
         <div className='bg-tertiary-light/70'>
           <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>Aquiring outdoor gear can be a significant barrier for like camping, cycling, hiking, and more. We maintain a library of gear that can be taken out for trips to help make them possible!</p>
-          <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>If we don't have what your looking for, check if <a href="https://www.instagram.com/foundoffthegrid/" className='underline text-blue-800'>Found off the Grid</a> has the gear <a href="https://linktr.ee/foundoffthegrid" className='underline text-blue-800'>in their library!</a></p>
+          <p className='text-center text-xl px-4 py-5 max-w-4xl mx-auto'>If we don&apos;t have what your looking for, check if <a href="https://www.instagram.com/foundoffthegrid/" className="underline text-blue-800">Found off the Grid</a> has the gear <a href="https://linktr.ee/foundoffthegrid" className="underline text-blue-800">in their library!</a></p>
         </div>
       </header>
       <div className='bg-white-alt/40 h-full'>
