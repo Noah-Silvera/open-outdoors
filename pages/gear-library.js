@@ -25,9 +25,17 @@ export default function GearLibrary({ gearItems, pageTitle }) {
     } else {
       return []
     }
-  }).flat())
+  }).concat(["Other"]).flat())
 
-  const filteredGearItems = gearItems.filter((item) => selectedGearType == null || !item.types || item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType))
+  const filteredGearItems = gearItems.filter((item) => {
+    if(selectedGearType == null) {
+      return true
+    } else if(selectedGearType == "Other") {
+      return item.types == null
+    } else {
+      return !!item.types && item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType)
+    }
+  })
 
   return (
     <main styles={styles["main-container"]}>
