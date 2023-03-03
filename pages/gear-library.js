@@ -27,7 +27,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
     }
   }).flat())
 
-  const filteredGearItems = gearItems.filter((item) => selectedGearType == null || item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType))
+  const filteredGearItems = gearItems.filter((item) => selectedGearType == null || !item.types || item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType))
 
   return (
     <main styles={styles["main-container"]}>
