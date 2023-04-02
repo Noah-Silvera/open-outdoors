@@ -5,6 +5,9 @@ import { Button } from 'flowbite-react';
 import { useState, useRef } from 'react';
 import { CSSTransition } from "react-transition-group"
 import classNames from 'classnames';
+import { enGB } from 'date-fns/locale'
+import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
 
 const humanizeDateInputString = (inputDateString) => {
   var extractSimpleDate = new RegExp("([a-zA-z]+,\\s+\\d+\\s+[a-zA-z]+\\s+\\d+)", "g");
@@ -14,11 +17,15 @@ const humanizeDateInputString = (inputDateString) => {
 }
 
 function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
-  let [startDate, setStartDate] = useState("")
-  let [endDate, setEndDate] = useState("")
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
+  const [focus, setFocus] = useState(START_DATE)
   let [formOpen, setFormOpen] = useState(defaultFormOpen)
-
   let dateRange = startDate && endDate ? `${humanizeDateInputString(startDate)} to ${humanizeDateInputString(endDate)}` : "<ENTER DATES HERE>"
+
+  const handleFocusChange = newFocus => {
+    setFocus(newFocus || START_DATE)
+  }
 
   let defaultBorrowMessage = `Hi!
   I would like to borrow the "${gearIdentifier}" for the following dates:
@@ -39,25 +46,16 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
           exitActive: styles["borrow-form-exit-active"],
         }}>
         <div className={classNames('px-5','mb-2', styles["borrow-form"])} ref={bookingFormRef}>
-          <div className='flex flex-row justify-around pb-3'>
-            <label htmlFor="start">Start date:</label>
-            <input
-              type="date"
-              id="start"
-              name="trip-start"
-              className='w-40'
-              onChange={(e) => setStartDate(e.target.value)}
-              value={startDate}/>
-          </div>
-          <div className='flex flex-row justify-around pb-3'>
-            <label htmlFor="end">End date:</label>
-            <input
-              type="date"
-              id="end"
-              name="trip-end"
-              className='w-40'
-              onChange={(e) => setEndDate(e.target.value)}
-              value={endDate}/>
+          <div className='justify-around pb-3'>
+            <DateRangePickerCalendar
+              startDate={startDate}
+              endDate={endDate}
+              focus={focus}
+              onStartDateChange={setStartDate}
+              onEndDateChange={setEndDate}
+              onFocusChange={handleFocusChange}
+              locale={enGB}
+            />
           </div>
         </div>
       </CSSTransition>
