@@ -112,13 +112,12 @@ export default function GearItem({gearForLoan, ...props}) {
         })}
       </Splide>
       <h2 className='text-center'>{gearForLoan.title}</h2>
-      <div className={`px-5 py-2 md:py-3 text-center text-lg ${styles['gear-description']}`}>
+      <div className={`px-5 py-2 md:py-3 text-center text-lg grow ${styles['gear-description']}`}>
         {documentToReactComponents(gearForLoan.description)}
       </div>
       <Bookings bookedDates={bookedDates}/>
       <div className='border-b-2 border-primary-light mb-4'></div>
-      <BorrowForm gearIdentifier={gearForLoan.title} className="hidden sm:block" defaultFormOpen={true}/>
-      <BorrowForm gearIdentifier={gearForLoan.title} className="sm:hidden"/>
+      <BorrowForm gearIdentifier={gearForLoan.title}/>
     </section>
   )
 }
