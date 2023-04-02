@@ -109,5 +109,10 @@ export const navLinks = [
     "href": "/meeting-minutes",
     "text": "Meeting Minutes",
     "hiddenOnDesktop": false
+  },
+  {
+    "href": "/dehydration-cookbook",
+    "text": "Dehydration Cookbook",
+    "hiddenOnDesktop": false
   }
 ]
