@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { enGB } from 'date-fns/locale'
 import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+import isWithinInterval from 'date-fns/isWithinInterval'
 
 const humanizeDateInputString = (inputDateString) => {
   var extractSimpleDate = new RegExp("([a-zA-z]+,\\s+\\d+\\s+[a-zA-z]+\\s+\\d+)", "g");
@@ -16,7 +17,7 @@ const humanizeDateInputString = (inputDateString) => {
   return match[1]
 }
 
-function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
+function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [focus, setFocus] = useState(START_DATE)
@@ -27,10 +28,27 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
     setFocus(newFocus || START_DATE)
   }
 
+  const isWithinBookedDateRange = (date) => {
+    return bookedDates.some((bookedDateRange) => {
+      return isWithinInterval(date, {
+        start: bookedDateRange.startDate,
+        end: bookedDateRange.endDate
+      })
+    })
+  }
+
   let defaultBorrowMessage = `Hi!
   I would like to borrow the "${gearIdentifier}" for the following dates:
   ${dateRange}`
   const bookingFormRef = useRef(null);
+
+  const modifiers = {
+    disabled: (date) => isWithinBookedDateRange(date)
+  }
+
+  const modifiersClassNames = {
+    disabled: '-disabled'
+  }
 
   return (
     <div className={classNames('text-lg', className)}>
@@ -55,6 +73,8 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
               onEndDateChange={setEndDate}
               onFocusChange={handleFocusChange}
               locale={enGB}
+              modifiers={modifiers}
+              modifiersClassNames={modifiersClassNames}
             />
           </div>
         </div>
@@ -74,28 +94,8 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className}) {
   )
 }
 
-function Bookings({ bookedDates }) {
-  return (
-    <div className='mx-5 mb-2 grow flex flex-col justify-end'>
-      <h3 className='text-lg md:text-xl font-medium'>Bookings:</h3>
-      {bookedDates.length == 0 ?
-        <p className='text-lg md:text-xl my-2'>No Bookings</p> :
-        bookedDates.map((bookedDate, idx) => {
-          return (
-            <div className='flex flex-row text-lg md:text-xl my-2' key={idx}>
-              <p className='underline'>{new Date(bookedDate.fields.startDate).toDateString()}</p>
-              <p className='mx-2 font-semibold'>to</p>
-              <p className='underline'>{new Date(bookedDate.fields.endDate).toDateString()}</p>
-            </div>
-          )
-        })
-      }
-    </div>
-  )
-}
-
 export default function GearItem({gearForLoan, ...props}) {
-  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!bookedDate.fields?.length > 0) || []
+  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!Object.keys(bookedDate.fields || {}).length > 0) || []
 
   return (
     <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10 flex flex-col"].join(" ")} key={props.index}>
@@ -115,9 +115,10 @@ export default function GearItem({gearForLoan, ...props}) {
       <div className={`px-5 py-2 md:py-3 text-center text-lg grow ${styles['gear-description']}`}>
         {documentToReactComponents(gearForLoan.description)}
       </div>
-      <Bookings bookedDates={bookedDates}/>
       <div className='border-b-2 border-primary-light mb-4'></div>
-      <BorrowForm gearIdentifier={gearForLoan.title}/>
+      <BorrowForm gearIdentifier={gearForLoan.title} bookedDates={bookedDates.map((bookedDate) =>{
+        return {startDate: new Date(bookedDate.fields.startDate), endDate: new Date(bookedDate.fields.endDate)}
+      })}/>
     </section>
   )
 }
