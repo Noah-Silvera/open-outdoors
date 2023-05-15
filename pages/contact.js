@@ -3,12 +3,15 @@ import { useState } from "react";
 import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
 import { sendEmail } from "../src/client/email";
+import { bookDates } from "../src/client/book_dates";
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
   var params = {
     name: "",
     email: "",
-    message: ""
+    message: "",
+    startDate: null,
+    endDate: null
   };
 
   if(typeof(window) != 'undefined') {
@@ -17,6 +20,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     params.name = searchParams.name
     params.email = searchParams.email
     params.message = searchParams.message
+    params.startDate = searchParams.startDate ? new Date(searchParams.startDate) : null
+    params.endDate = searchParams.endDate ? new Date(searchParams.endDate) : null
   }
 
   let [fullName, setFullName] = useState(params.name)
@@ -30,8 +35,15 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     setErrorMessage("")
     setSuccess(null)
 
-    const success = await sendEmail(email, fullName, message, recaptchaSiteKey)
-    if (success) {
+    const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
+    try {
+      await bookDates({ startDate: params.startDate, endDate: params.endDate, fullName: fullName }, recaptchaSiteKey)
+    } catch(error) {
+      throw error
+      // Sentry.captureException(error);
+    }
+
+    if (sendEmailSuccess) {
       setSuccess(true)
     } else {
       setErrorMessage("Sorry, your email could not be sent.");

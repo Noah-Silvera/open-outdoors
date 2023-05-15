@@ -39,6 +39,19 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
     })
   }
 
+  const generateContactFormLink = () => {
+    let parameters = new URLSearchParams()
+
+    parameters.set("message", defaultBorrowMessage)
+
+    if(startDate && endDate) {
+      parameters.set("startDate", startDate.toISOString())
+      parameters.set("endDate", endDate.toISOString())
+    }
+
+    return `/contact?${parameters.toString()}`
+  }
+
   let defaultBorrowMessage = `Hi!
   I would like to borrow the "${gearIdentifier}" for the following dates:
   ${dateRange}`
@@ -95,7 +108,7 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
       <div className='w-72 mx-auto pb-4'>
         {formOpen ?
         (
-          <a href={`/contact?message=${encodeURIComponent(defaultBorrowMessage)}`} className={classNames({"pointer-events-none": dateRangeInvalid})}>
+          <a href={generateContactFormLink()} className={classNames({"pointer-events-none": dateRangeInvalid})}>
             {dateRangeInvalid && <p className="text-red-500 text-sm pb-3">A date in your selected range has already been booked</p>}
             <Button size="lg" className='w-full' disabled={dateRangeInvalid}>Book now!</Button>
           </a>
