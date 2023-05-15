@@ -3,7 +3,7 @@ import { useState } from 'react'
 import GearItem from '../components/gear_library/GearItem';
 import FilterPanel from "../components/gear_library/FilterPanel"
 import TypeRadioButtons from '../components/gear_library/TypeRadioButtons';
-import contentfulClient from '../src/contentful_client';
+import contentfulClient from '../src/server/contentful_client';
 import { BasicHeader } from '../components/BasicHeader';
 
 function GearItemGrid({gearItems}){

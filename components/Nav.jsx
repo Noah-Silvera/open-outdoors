@@ -1,6 +1,6 @@
 import { Navbar } from 'flowbite-react'
 import { useEffect, useRef } from 'react';
-import { hideOnScroll, navLinks } from '../src/utils';
+import { hideOnScroll, navLinks } from '../src/client/utils';
 import { Dropdown } from 'flowbite-react';
 import classNames from 'classnames';
 

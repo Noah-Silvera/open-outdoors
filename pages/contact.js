@@ -2,7 +2,7 @@ import { Label, Textarea, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
 import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
-import { sendEmail } from "../src/email";
+import { sendEmail } from "../src/client/email";
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
   var params = {

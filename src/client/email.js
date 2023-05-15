@@ -1,4 +1,4 @@
-import { fetchRecaptchaToken } from "../src/recaptcha_utils";
+import { fetchRecaptchaToken } from "./recaptcha_utils";
 
 export const sendEmail = async (email, fullName, message, recaptchaSiteKey) => {
   let recaptchaToken = await fetchRecaptchaToken(recaptchaSiteKey);

@@ -1,4 +1,4 @@
-import { inProduction } from "./environment";
+import { inProduction } from "../server/environment";
 
 class PubSub {
   constructor() {

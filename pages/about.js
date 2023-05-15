@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BasicHeader } from '../components/BasicHeader'
-import contentfulClient from '../src/contentful_client'
+import contentfulClient from '../src/server/contentful_client'
 
 function BioCard({name, className, imgSrc, imgAlt, ...props}) {
   return (

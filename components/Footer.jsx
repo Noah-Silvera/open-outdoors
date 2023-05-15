@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Footer } from 'flowbite-react'
-import { navLinks } from '../src/utils'
+import { navLinks } from '../src/client/utils';
 
 function sliceIntoChunks(array, chunkSize) {
   const result = [];

@@ -1,4 +1,4 @@
-import contentfulClient from '../src/contentful_client'
+import contentfulClient from '../src/server/contentful_client';
 import { BasicHeader } from '../components/BasicHeader'
 import styles from '../styles/MeetingMinutes.module.scss'
 import classNames from 'classnames'

@@ -1,5 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import contentfulClient from '../src/contentful_client'
+import contentfulClient from '../src/server/contentful_client'
 
 function Event({ eventPost }) {
   return (

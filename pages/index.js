@@ -6,7 +6,7 @@ import { BLOCKS } from '@contentful/rich-text-types'
 import Image from 'next/image'
 import bannerMobile from "../public/banner-mobile.jpg"
 import bannerDesktop from "../public/banner.jpg"
-import contentfulClient from '../src/contentful_client';
+import contentfulClient from '../src/server/contentful_client';
 
 export default function Home({ content }) {
 return (
