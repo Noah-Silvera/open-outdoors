@@ -111,7 +111,7 @@ function BorrowForm({gearTitle, gearId, defaultFormOpen, className, bookedDates}
         (
           <a href={generateContactFormLink()} className={classNames({"pointer-events-none": dateRangeInvalid})}>
             {dateRangeInvalid && <p className="text-red-500 text-sm pb-3">A date in your selected range has already been booked</p>}
-            <Button size="lg" className='w-full' disabled={dateRangeInvalid}>Book now!</Button>
+            <Button size="lg" className='w-full' disabled={dateRangeInvalid || (!startDate && !endDate)}>Book now!</Button>
           </a>
         ) :
         (
