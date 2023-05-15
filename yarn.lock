@@ -14,6 +14,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@contentful/rich-text-plain-text-renderer@^16.0.4":
+  version "16.0.4"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-plain-text-renderer/-/rich-text-plain-text-renderer-16.0.4.tgz#1601f1b409a4fce110569b0bc25515a7bcc6ab1c"
+  integrity sha512-rlnZ8ps+9htfAG+iNRLZpH7KspqQBf0m6ccO0BFwq5N6AIxZp6O5SsY/b1O0XncVZo5u7lR3tdQ0035ZbJ9/oQ==
+  dependencies:
+    "@contentful/rich-text-types" "^16.1.0"
+
 "@contentful/rich-text-react-renderer@^15.16.2":
   version "15.16.4"
   resolved "https://registry.yarnpkg.com/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-15.16.4.tgz#30b157b3340cc981f999c74cd1e229a021b268f2"

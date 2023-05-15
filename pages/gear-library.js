@@ -5,19 +5,36 @@ import FilterPanel from "../components/gear_library/FilterPanel"
 import TypeRadioButtons from '../components/gear_library/TypeRadioButtons';
 import contentfulClient from '../src/server/contentful_client';
 import { BasicHeader } from '../components/BasicHeader';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+
+function SearchPanel({ onChange, initialSearch}) {
+  let [search, setSearch] = useState(initialSearch)
+
+  const onSearchChange = (event) => {
+    let newSearchVal = event.target.value
+
+    setSearch(newSearchVal)
+    onChange(newSearchVal)
+  }
+
+  return (
+    <input onChange={onSearchChange} value={search} className="w-full text-xl p-4 bg-tertiary-light/20" placeholder={"search"}></input>
+  )
+}
 
 function GearItemGrid({gearItems}){
   return (
     <div className={[styles['gear-library-grid'], "mx-auto p-4 md:p-10"].join(" ")}>
-    {gearItems.map((gearForLoan, idx) => {
+    {gearItems.length > 0 ? gearItems.map((gearForLoan, idx) => {
       return <GearItem gearForLoan={gearForLoan} key={idx}/>
-    })}
+    }) : <p>Sorry, no gear matches your filter criteria. You can request gear using our contact form!</p>}
   </div>
   )
 }
 
 export default function GearLibrary({ gearItems, pageTitle }) {
   const [selectedGearType, setSelectedGearType] = useState(null);
+  const [search, setSearch] = useState("")
 
   const defaultGearRequestMessage = "Hi! I am emailing to ask if you could stock the following gear in your library for me to use: "
 
@@ -29,7 +46,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
     }
   }).concat(["Other"]).flat())
 
-  const filteredGearItems = gearItems.filter((item) => {
+  const isSelectedType = (item) => {
     if(selectedGearType == null) {
       return true
     } else if(selectedGearType == "Other") {
@@ -37,6 +54,22 @@ export default function GearLibrary({ gearItems, pageTitle }) {
     } else {
       return !!item.types && item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType)
     }
+  }
+
+  const matchesSearch = (item) => {
+    let searchTerm = search.trim();
+
+    if(searchTerm.length == 0){
+      return true
+    }
+    var regex = new RegExp(searchTerm, "i");
+
+    let description = documentToPlainTextString(item.description)
+    return item.title.match(regex) || description.match(regex)
+  }
+
+  const filteredGearItems = gearItems.filter((item) => {
+    return isSelectedType(item) && matchesSearch(item)
   })
 
   return (
@@ -50,6 +83,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
         </div>
       </header>
       <div className='bg-white-alt/40 h-full'>
+        <SearchPanel onChange={setSearch} initialSearch={search}/>
         <FilterPanel>
           <TypeRadioButtons
             types={Array.from(gearTypes)}
