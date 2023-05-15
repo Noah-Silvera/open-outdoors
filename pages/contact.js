@@ -2,6 +2,7 @@ import { Label, Textarea, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
 import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
+import { sendEmail } from "../src/email";
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
   var params = {
@@ -29,37 +30,13 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     setErrorMessage("")
     setSuccess(null)
 
-    let recaptchaToken = await fetchRecaptchaToken();
-    const res = await fetch("/api/sendgrid", {
-      body: JSON.stringify({
-        email: email,
-        fullname: fullName,
-        message: message,
-        recaptchaToken: recaptchaToken
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-
-    const response = await res.json();
-    if (response.error) {
-      setErrorMessage("Sorry, your email could not be sent.");
-    } else {
+    const success = await sendEmail(email, fullName, message, recaptchaSiteKey)
+    if (success) {
       setSuccess(true)
+    } else {
+      setErrorMessage("Sorry, your email could not be sent.");
     }
   };
-
-  const fetchRecaptchaToken = async () => {
-    return new Promise((resolve) => {
-      grecaptcha.ready(async () => {
-        grecaptcha.execute(recaptchaSiteKey, {action: 'submit'}).then(async (token) =>{
-          resolve(token)
-        });
-      });
-    })
-  }
 
   return (
     <>
