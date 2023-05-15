@@ -31,10 +31,12 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
   let [message, setMessage] = useState(params.message)
   let [errorMessage, setErrorMessage] = useState("")
   let [success, setSuccess] = useState(null)
+  let [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("")
+    setLoading(true)
     setSuccess(null)
 
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
@@ -50,6 +52,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     } else {
       setErrorMessage("Sorry, your email could not be sent.");
     }
+
+    setLoading(false)
   };
 
   return (
@@ -71,6 +75,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               type="text"
               sizing="lg"
               value={fullName}
+              disabled={loading}
               onChange={(e) => setFullName(e.target.value)}
             />
           </div>
@@ -88,6 +93,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               sizing="lg"
               icon={() => <i aria-hidden="true" className="fas fa-envelope fa-1x" title="Instagram"></i>}
               value={email}
+              disabled={loading}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -104,11 +110,12 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               type="text"
               rows={6}
               value={message}
+              disabled={loading}
               onChange={(e) => setMessage(e.target.value)}
             />
           </div>
           <div>
-            <Button type="submit" size="xl" color="info">
+            <Button type="submit" size="xl" color="info" disabled={loading}>
               Send Email
             </Button>
           </div>
