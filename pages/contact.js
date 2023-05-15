@@ -11,7 +11,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     email: "",
     message: "",
     startDate: null,
-    endDate: null
+    endDate: null,
+    gearId: null
   };
 
   if(typeof(window) != 'undefined') {
@@ -22,6 +23,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     params.message = searchParams.message
     params.startDate = searchParams.startDate ? new Date(searchParams.startDate) : null
     params.endDate = searchParams.endDate ? new Date(searchParams.endDate) : null
+    params.gearId = searchParams.gearId
   }
 
   let [fullName, setFullName] = useState(params.name)
@@ -37,7 +39,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
 
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
     try {
-      await bookDates({ startDate: params.startDate, endDate: params.endDate, fullName: fullName }, recaptchaSiteKey)
+      await bookDates({ startDate: params.startDate, endDate: params.endDate, fullName: fullName, gearId: params.gearId}, recaptchaSiteKey)
     } catch(error) {
       throw error
       // Sentry.captureException(error);

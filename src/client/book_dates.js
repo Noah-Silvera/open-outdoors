@@ -1,12 +1,13 @@
 import { fetchRecaptchaToken } from "./recaptcha_utils";
 
-export const bookDates = async ({ startDate, endDate, fullName }, recaptchaSiteKey) => {
+export const bookDates = async ({ startDate, endDate, fullName, gearId }, recaptchaSiteKey) => {
   let recaptchaToken = await fetchRecaptchaToken(recaptchaSiteKey);
   const res = await fetch("/api/book_dates", {
     body: JSON.stringify({
       startDate: startDate,
       endDate: endDate,
       fullName: fullName,
+      gearId: gearId,
       recaptchaToken: recaptchaToken
     }),
     headers: {

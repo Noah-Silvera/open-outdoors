@@ -18,7 +18,7 @@ const humanizeDateInputString = (inputDateString) => {
   return match[1]
 }
 
-function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
+function BorrowForm({gearTitle, gearId, defaultFormOpen, className, bookedDates}) {
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [focus, setFocus] = useState(START_DATE)
@@ -43,6 +43,7 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
     let parameters = new URLSearchParams()
 
     parameters.set("message", defaultBorrowMessage)
+    parameters.set("gearId", gearId)
 
     if(startDate && endDate) {
       parameters.set("startDate", startDate.toISOString())
@@ -53,7 +54,7 @@ function BorrowForm({gearIdentifier, defaultFormOpen, className, bookedDates}) {
   }
 
   let defaultBorrowMessage = `Hi!
-  I would like to borrow the "${gearIdentifier}" for the following dates:
+  I would like to borrow the "${gearTitle}" for the following dates:
   ${dateRange}`
   const bookingFormRef = useRef(null);
 
@@ -143,7 +144,7 @@ export default function GearItem({gearForLoan, ...props}) {
         {documentToReactComponents(gearForLoan.description)}
       </div>
       <div className='border-b-2 border-primary-light mb-4'></div>
-      <BorrowForm gearIdentifier={gearForLoan.title} bookedDates={bookedDates.map((bookedDate) =>{
+      <BorrowForm gearTitle={gearForLoan.title} gearId={gearForLoan.id} bookedDates={bookedDates.map((bookedDate) =>{
         return {startDate: new Date(bookedDate.fields.startDate), endDate: new Date(bookedDate.fields.endDate)}
       })}/>
     </section>

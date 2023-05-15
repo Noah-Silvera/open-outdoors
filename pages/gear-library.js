@@ -70,7 +70,9 @@ export async function getStaticProps() {
   return {
     props: {
       pageTitle: "Gear Library",
-      gearItems: response.items.map((item) => item.fields)
+      gearItems: response.items.map((item) => {
+        return {...item.fields, id: item.sys.id}
+      })
     }
   }
 }
