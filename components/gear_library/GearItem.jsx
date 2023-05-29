@@ -15,7 +15,7 @@ export default function GearItem({gearForLoan, ...props}) {
               <img
                 src={contentfulImage.fields.file.url}
                 alt={contentfulImage.fields.description}
-                className=' mb-2 md:mb-3 rounded-tl-md rounded-tr-md'/>
+                className='mx-auto mb-2 md:mb-3 rounded-tl-md rounded-tr-md'/>
             </SplideSlide>
           )
         })}
