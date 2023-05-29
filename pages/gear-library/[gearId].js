@@ -36,7 +36,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      gearItem: response.fields
+      gearItem: {...response.fields, id: response.sys.id}
     }
   }
 }

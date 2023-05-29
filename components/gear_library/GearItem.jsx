@@ -20,7 +20,7 @@ export default function GearItem({gearForLoan, ...props}) {
           )
         })}
       </Splide>
-      <h2 className='text-center'>{gearForLoan.title}</h2>
+      <h2 className='text-center'><a href={`/gear-library/${gearForLoan.id}`}>{gearForLoan.title}</a></h2>
       <div className={`px-5 py-2 md:py-3 text-center text-lg grow ${styles['gear-description']}`}>
         {documentToReactComponents(gearForLoan.description)}
       </div>
