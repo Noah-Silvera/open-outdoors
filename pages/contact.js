@@ -41,10 +41,14 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
 
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
     try {
-      await bookDates({ startDate: params.startDate, endDate: params.endDate, fullName: fullName, gearId: params.gearId}, recaptchaSiteKey)
+      await bookDates({
+        startDate: params.startDate.setDate(params.startDate.getDate() + 1),
+        endDate: params.endDate.setDate(params.endDate.getDate() + 1),
+        fullName: fullName,
+        gearId: params.gearId
+      }, recaptchaSiteKey)
     } catch(error) {
-      throw error
-      // Sentry.captureException(error);
+      Sentry.captureException(error);
     }
 
     if (sendEmailSuccess) {
