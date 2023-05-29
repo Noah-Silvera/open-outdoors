@@ -12,7 +12,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     message: "",
     startDate: null,
     endDate: null,
-    gearId: null
+    gearId: null,
+    gearTitle: null
   };
 
   if(typeof(window) != 'undefined') {
@@ -24,6 +25,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     params.startDate = searchParams.startDate ? new Date(searchParams.startDate) : null
     params.endDate = searchParams.endDate ? new Date(searchParams.endDate) : null
     params.gearId = searchParams.gearId
+    params.gearTitle = searchParams.gearTitle
   }
 
   let [fullName, setFullName] = useState(params.name)
@@ -39,10 +41,12 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     setLoading(true)
     setSuccess(null)
 
+    message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${params.gearId}">${params.gearTitle}</a>`
+
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
     try {
       await bookDates({
-        startDate: params.startDate.setDate(params.startDate.getDate() + 1),
+        startDate: params.startDate.setDate(params.startDate.getDate() - 1),
         endDate: params.endDate.setDate(params.endDate.getDate() + 1),
         fullName: fullName,
         gearId: params.gearId

@@ -42,6 +42,7 @@ export default function BorrowForm({gearTitle, gearId, defaultFormOpen, classNam
 
     parameters.set("message", defaultBorrowMessage)
     parameters.set("gearId", gearId)
+    parameters.set("gearTitle", gearTitle)
 
     if(startDate && endDate) {
       parameters.set("startDate", startDate.toISOString())
