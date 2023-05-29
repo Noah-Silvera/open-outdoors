@@ -1,7 +1,7 @@
 import GearItem from "../../components/gear_library/GearItem";
 import contentfulClient from "../../src/server/contentful_client";
 
-export default function({ gearItem }){
+export default function GearPage({ gearItem }){
   return (
     <div className="bg-tertiary-light/70">
       <div className="max-w-lg mx-auto pt-8 pb-8">
