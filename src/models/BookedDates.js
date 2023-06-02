@@ -23,6 +23,8 @@ export default class BookedDates {
     return json
   }
 
+
+
   static fromJSON(json) {
     return new BookedDates({
       'startDate': json.startDate,
