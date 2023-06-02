@@ -1,5 +1,6 @@
 import GearItem from "../../components/gear_library/GearItem";
 import contentfulClient from "../../src/server/contentful_client";
+import GearForLoan from "../../src/models/GearForLoan";
 
 export default function GearPage({ gearItem }){
   return (
@@ -36,7 +37,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      gearItem: {...response.fields, id: response.sys.id}
+      gearItem: GearForLoan.fromContentfulObject(response, { excludeDates: true }).toJSON()
     }
   }
 }
