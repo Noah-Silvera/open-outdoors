@@ -6,6 +6,7 @@ import TypeRadioButtons from '../components/gear_library/TypeRadioButtons';
 import contentfulClient from '../src/server/contentful_client';
 import { BasicHeader } from '../components/BasicHeader';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import GearForLoan from '../src/models/GearForLoan';
 
 function SearchPanel({ onChange, initialSearch}) {
   let [search, setSearch] = useState(initialSearch)
@@ -39,11 +40,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
   const defaultGearRequestMessage = "Hi! I am emailing to ask if you could stock the following gear in your library for me to use: "
 
   let gearTypes = new Set(gearItems.map((gearForLoan) => {
-    if (gearForLoan.types) {
-      return gearForLoan.types.map((type) => type.fields['type'])
-    } else {
-      return []
-    }
+    return gearForLoan.types || []
   }).concat(["Other"]).flat())
 
   const isSelectedType = (item) => {
@@ -104,9 +101,7 @@ export async function getStaticProps() {
   return {
     props: {
       pageTitle: "Gear Library",
-      gearItems: response.items.map((item) => {
-        return {...item.fields, id: item.sys.id}
-      })
+      gearItems: response.items.map((gearForLoan) => GearForLoan.fromContentfulObject(gearForLoan, { excludeDates: true }).toJSON())
     }
   }
 }

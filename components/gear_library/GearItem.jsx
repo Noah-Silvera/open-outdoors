@@ -9,12 +9,12 @@ export default function GearItem({gearForLoan, ...props}) {
   return (
     <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10 flex flex-col"].join(" ")} key={props.index}>
       <Splide>
-        {gearForLoan.images.map((contentfulImage, idx) => {
+        {gearForLoan.images.map((image, idx) => {
           return (
             <SplideSlide key={idx}>
               <img
-                src={contentfulImage.fields.file.url}
-                alt={contentfulImage.fields.description}
+                src={image.url}
+                alt={image.description}
                 className='mx-auto mb-2 md:mb-3 rounded-tl-md rounded-tr-md'/>
             </SplideSlide>
           )

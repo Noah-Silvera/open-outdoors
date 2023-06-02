@@ -8,13 +8,19 @@ export default class BookedDates {
     this.requestedGear = requestedGear || []
   }
 
-  toJSON() {
-    return {
+  toJSON({excludeGear} = {}) {
+    let json = {
       'startDate': this.startDate,
       'endDate': this.endDate,
       'bookedBy': this.bookedBy,
-      'requestedGear': this.requestedGear.map((gear) => gear.toJSON()),
+      'requestedGear': this.requestedGear.map((gear) => gear.toJSON({ excludeDates: true}))
     }
+
+    if(excludeGear){
+      delete json['requestedGear']
+    }
+
+    return json
   }
 
   static fromJSON(json) {
@@ -26,15 +32,15 @@ export default class BookedDates {
     })
   }
 
-  static fromContentfulObject(contentfulBookedDate) {
+  static fromContentfulObject(contentfulBookedDate, {excludeGear} = {}) {
     let requestedGear = contentfulBookedDate.fields.gearBooked || []
 
     return new BookedDates({
       startDate: contentfulBookedDate.fields.startDate,
       endDate: contentfulBookedDate.fields.endDate,
       bookedBy: contentfulBookedDate.fields.bookedBy,
-      requestedGear: requestedGear.map((gear) => {
-        return GearForLoan.fromContentfulObject(gear)
+      requestedGear: excludeGear ? [] : requestedGear.map((gear) => {
+        return GearForLoan.fromContentfulObject(gear, { excludeDates: true})
       }),
     })
   }
