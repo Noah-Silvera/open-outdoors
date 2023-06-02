@@ -23,6 +23,17 @@ async function handler(req, res) {
         },
         endDate: {
           'en-US': endDate.toISOString()
+        },
+        gearBooked: {
+          'en-US': [
+            {
+              'sys': {
+                'type': 'Link',
+                'linkType': 'Entry',
+                'id': req.body.gearId
+              }
+            }
+          ]
         }
       }
     })
