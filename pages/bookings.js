@@ -9,7 +9,7 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear}) => {
       <p> -&gt; </p>
       <p>{new Date(endDate).toLocaleDateString()}</p>
       <p> - </p>
-      {requestedGear.map((requestedGear, idx) => <p key={idx}>{requestedGear}</p>)}
+      {requestedGear.map((requestedGear, idx) => <a key={idx} href={`/gear-library/${requestedGear.id}`} className="underline text-blue-700" target="_blank">{requestedGear.title}</a>)}
     </div>
   )
 }
@@ -26,7 +26,7 @@ export default function Bookings({ content }) {
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Active Bookings</h1>
         {
           activeBookings.map((booking, idx) => {
-            return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear.map((gear) => gear.title)} key={idx}></Booking>
+            return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} key={idx}></Booking>
           })
         }
       </section>
@@ -34,7 +34,7 @@ export default function Bookings({ content }) {
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Bookings</h1>
         {
           pastBookings.map((booking, idx) => {
-            return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear.map((gear) => gear.title)} key={idx}></Booking>
+            return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} key={idx}></Booking>
           })
         }
       </section>
