@@ -53,7 +53,7 @@ export default function BorrowForm({gearTitle, gearId, defaultFormOpen, classNam
   }
 
   let defaultBorrowMessage = `Hi!
-  I would like to borrow the "${gearTitle}" for the following dates:
+  I would like to borrow this gear for the following dates:
   ${dateRange}`
   const bookingFormRef = useRef(null);
 

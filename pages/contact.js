@@ -1,39 +1,51 @@
 import { Label, Textarea, TextInput, Button } from "flowbite-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
 import { sendEmail } from "../src/client/email";
 import { bookDates } from "../src/client/book_dates";
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
-  var params = {
-    name: "",
-    email: "",
-    message: "",
-    startDate: null,
-    endDate: null,
-    gearId: null,
-    gearTitle: null
-  };
-
-  if(typeof(window) != 'undefined') {
-    var urlSearchParams = new URLSearchParams(window.location.search);
-    var searchParams = Object.fromEntries(urlSearchParams.entries());
-    params.name = searchParams.name
-    params.email = searchParams.email
-    params.message = searchParams.message
-    params.startDate = searchParams.startDate ? new Date(searchParams.startDate) : null
-    params.endDate = searchParams.endDate ? new Date(searchParams.endDate) : null
-    params.gearId = searchParams.gearId
-    params.gearTitle = searchParams.gearTitle
-  }
-
-  let [fullName, setFullName] = useState(params.name)
-  let [email, setEmail] = useState(params.email)
-  let [message, setMessage] = useState(params.message)
+  let [fullName, setFullName] = useState(null)
+  let [email, setEmail] = useState(null)
+  let [selectedGear, setSelectedGear] = useState(null)
+  let [message, setMessage] = useState(null)
+  let [startDate, setStartDate] = useState(null)
+  let [endDate, setEndDate] = useState(null)
   let [errorMessage, setErrorMessage] = useState("")
   let [success, setSuccess] = useState(null)
   let [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if(typeof(window) != 'undefined') {
+      var urlSearchParams = new URLSearchParams(window.location.search);
+      var searchParams = Object.fromEntries(urlSearchParams.entries());
+
+      if(fullName == null) {
+        setFullName(searchParams.name)
+      }
+
+      if(email == null) {
+        setEmail(searchParams.email)
+      }
+
+      if(message == null) {
+        setMessage(searchParams.message)
+      }
+
+      if(startDate == null) {
+        setStartDate(new Date(searchParams.startDate))
+      }
+
+      if(endDate == null) {
+        setEndDate(new Date(searchParams.endDate))
+      }
+
+      if(selectedGear == null){
+        setSelectedGear([{ gearTitle: searchParams.gearTitle, gearId: searchParams.gearId}])
+      }
+    }
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,18 +53,22 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     setLoading(true)
     setSuccess(null)
 
-    message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${params.gearId}">${params.gearTitle}</a>`
+    if(selectedGear) {
+      message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${selectedGear[0].gearId}">${selectedGear[0].gearTitle}</a>`
+    }
 
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
-    try {
-      await bookDates({
-        startDate: params.startDate.setDate(params.startDate.getDate() - 1),
-        endDate: params.endDate.setDate(params.endDate.getDate() + 1),
-        fullName: fullName,
-        gearId: params.gearId
-      }, recaptchaSiteKey)
-    } catch(error) {
-      Sentry.captureException(error);
+    if(selectedGear) {
+      try {
+        await bookDates({
+          startDate: params.startDate.setDate(params.startDate.getDate() - 1),
+          endDate: params.endDate.setDate(params.endDate.getDate() + 1),
+          fullName: fullName,
+          gearId: selectedGear[0].gearId
+        }, recaptchaSiteKey)
+      } catch(error) {
+        Sentry.captureException(error);
+      }
     }
 
     if (sendEmailSuccess) {
@@ -122,6 +138,18 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               onChange={(e) => setMessage(e.target.value)}
             />
           </div>
+          {selectedGear &&
+            (
+              <div className="mb-6">
+                <h2 className="text-2xl mb-2 font-bold">Requested Gear</h2>
+                <ul className="list-disc ml-12">
+                  <li>
+                    <a href={`/gear-library/${selectedGear[0].gearId}`} className="underline text-blue-700">{selectedGear[0].gearTitle}</a>
+                  </li>
+                </ul>
+              </div>
+            )
+          }
           <div>
             <Button type="submit" size="xl" color="info" disabled={loading}>
               Send Email
