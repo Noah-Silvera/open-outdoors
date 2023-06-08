@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
 import { sendEmail } from "../src/client/email";
 import { bookDates } from "../src/client/book_dates";
+import * as Sentry from '@sentry/nextjs';
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
   let [fullName, setFullName] = useState(null)
@@ -61,8 +62,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     if(selectedGear) {
       try {
         await bookDates({
-          startDate: params.startDate.setDate(params.startDate.getDate() - 1),
-          endDate: params.endDate.setDate(params.endDate.getDate() + 1),
+          startDate: startDate.setDate(startDate.getDate() - 1),
+          endDate: endDate.setDate(endDate.getDate() + 1),
           fullName: fullName,
           gearId: selectedGear[0].gearId
         }, recaptchaSiteKey)
