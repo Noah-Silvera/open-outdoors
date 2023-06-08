@@ -49,7 +49,7 @@ export default function GearLibrary({ gearItems, pageTitle }) {
     } else if(selectedGearType == "Other") {
       return item.types == null
     } else {
-      return !!item.types && item.types.some((typeObj) => typeObj.fields['type'] == selectedGearType)
+      return !!item.types && item.types.some((type) => type === selectedGearType)
     }
   }
 
