@@ -16,14 +16,28 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear}) => {
 
 export default function Bookings({ content }) {
   let bookedDates = content.map((bookedDatesJSON) => BookedDates.fromJSON(bookedDatesJSON))
+
+  let activeBookings = bookedDates.filter((bookedDate) => new Date(bookedDate.endDate) >= new Date())
+  let pastBookings = bookedDates.filter((bookedDate) => new Date(bookedDate.endDate) < new Date())
+
   return (
     <main className="min-h-screen">
+      <section>
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Active Bookings</h1>
         {
-          bookedDates.map((booking, idx) => {
+          activeBookings.map((booking, idx) => {
             return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear.map((gear) => gear.title)} key={idx}></Booking>
           })
         }
+      </section>
+      <section>
+        <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Bookings</h1>
+        {
+          pastBookings.map((booking, idx) => {
+            return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear.map((gear) => gear.title)} key={idx}></Booking>
+          })
+        }
+      </section>
     </main>
   )
 }
@@ -31,8 +45,7 @@ export default function Bookings({ content }) {
 export async function getStaticProps() {
   let response = await contentfulClient.getEntries({
     content_type: "dateRange",
-    order: "-fields.startDate",
-    'fields.endDate[gte]': new Date().toISOString()
+    order: "-fields.startDate"
   })
 
   return {
