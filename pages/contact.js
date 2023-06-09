@@ -22,27 +22,27 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
       var urlSearchParams = new URLSearchParams(window.location.search);
       var searchParams = Object.fromEntries(urlSearchParams.entries());
 
-      if(fullName == null) {
+      if(fullName == null && searchParams.name) {
         setFullName(searchParams.name)
       }
 
-      if(email == null) {
+      if(email == null && searchParams.email) {
         setEmail(searchParams.email)
       }
 
-      if(message == null) {
+      if(message == null && searchParams.message) {
         setMessage(searchParams.message)
       }
 
-      if(startDate == null) {
+      if(startDate == null && searchParams.startDate) {
         setStartDate(new Date(searchParams.startDate))
       }
 
-      if(endDate == null) {
+      if(endDate == null && searchParams.endDate) {
         setEndDate(new Date(searchParams.endDate))
       }
 
-      if(selectedGear == null){
+      if(selectedGear == null && searchParams.gearTitle && searchParams.gearId){
         setSelectedGear([{ gearTitle: searchParams.gearTitle, gearId: searchParams.gearId}])
       }
     }
