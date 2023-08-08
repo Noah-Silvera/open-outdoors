@@ -1,7 +1,8 @@
 import GearForLoan from "./GearForLoan";
 
 export default class BookedDates {
-  constructor({startDate, endDate, bookedBy, requestedGear, returned}) {
+  constructor({contentfulId, startDate, endDate, bookedBy, requestedGear, returned}) {
+    this.contentfulId = contentfulId;
     this.startDate = startDate;
     this.endDate = endDate;
     this.bookedBy = bookedBy;
@@ -11,6 +12,7 @@ export default class BookedDates {
 
   toJSON({excludeGear} = {}) {
     let json = {
+      'contentfulId': this.contentfulId,
       'startDate': this.startDate,
       'endDate': this.endDate,
       'bookedBy': this.bookedBy,
@@ -29,6 +31,7 @@ export default class BookedDates {
 
   static fromJSON(json) {
     return new BookedDates({
+      'contentfulId': json.contentfulId,
       'startDate': json.startDate,
       'endDate': json.endDate,
       'bookedBy': json.bookedBy,
@@ -41,6 +44,7 @@ export default class BookedDates {
     let requestedGear = contentfulBookedDate.fields.gearBooked || []
 
     return new BookedDates({
+      contentfulId: contentfulBookedDate.sys.id,
       startDate: contentfulBookedDate.fields.startDate,
       endDate: contentfulBookedDate.fields.endDate,
       bookedBy: contentfulBookedDate.fields.bookedBy,
