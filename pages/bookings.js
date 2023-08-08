@@ -1,7 +1,7 @@
 import contentfulClient from '../src/server/contentful_client'
 import BookedDates from '../src/models/BookedDates'
 
-const Booking = ({ startDate, endDate, bookedBy, requestedGear}) => {
+const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned}) => {
   return (
     <tr className="border-4 border-primary-light">
       <td className="hidden sm:table-cell font-semibold">{bookedBy}</td>
@@ -11,6 +11,7 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear}) => {
         <div>{new Date(startDate).toLocaleDateString()} -&gt; {new Date(endDate).toLocaleDateString()}</div>
       </td>
       <td className="w-1/3 px-2">{requestedGear.map((requestedGear, idx) => <a key={idx} href={`/gear-library/${requestedGear.id}`} className="underline text-blue-700 break-words" target="_blank">{requestedGear.title}</a>)}</td>
+      <td><label className="mr-2" for="returned">returned?</label><input type="checkbox" checked={returned} name="returned"></input></td>
     </tr>
   )
 }
@@ -25,20 +26,20 @@ export default function Bookings({ content }) {
     <main className="min-h-screen">
       <section>
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Active Bookings</h1>
-        <table className="gap-x-8 sm:mx-10 w-full text-sm sm:text-xl">
+        <table className="gap-x-8 w-full text-sm sm:text-xl sm:w-[64rem] sm:mx-auto">
           {
             activeBookings.map((booking, idx) => {
-              return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} key={idx}></Booking>
+              return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} returned={booking.returned} key={idx}></Booking>
             })
           }
         </table>
       </section>
       <section>
         <h1 className='text-4xl font-medium text-center md:px-0 bg-tertiary-light py-8 md:py-10 mb-6 md:mb-10'>Past Bookings</h1>
-        <table className="gap-x-8 sm:mx-10 w-full text-sm sm:text-xl">
+        <table className="gap-x-8 w-full text-sm sm:text-xl sm:w-[64rem] sm:mx-auto">
           {
             pastBookings.map((booking, idx) => {
-              return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} key={idx}></Booking>
+              return <Booking startDate={booking.startDate} endDate={booking.endDate} bookedBy={booking.bookedBy} requestedGear={booking.requestedGear} returned={booking.returned} key={idx}></Booking>
             })
           }
         </table>

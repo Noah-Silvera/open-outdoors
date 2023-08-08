@@ -1,10 +1,11 @@
 import GearForLoan from "./GearForLoan";
 
 export default class BookedDates {
-  constructor({startDate, endDate, bookedBy, requestedGear}) {
+  constructor({startDate, endDate, bookedBy, requestedGear, returned}) {
     this.startDate = startDate;
     this.endDate = endDate;
-    this.bookedBy = bookedBy
+    this.bookedBy = bookedBy;
+    this.returned = returned || false;
     this.requestedGear = requestedGear || []
   }
 
@@ -13,6 +14,7 @@ export default class BookedDates {
       'startDate': this.startDate,
       'endDate': this.endDate,
       'bookedBy': this.bookedBy,
+      'returned': this.returned,
       'requestedGear': this.requestedGear.map((gear) => gear.toJSON({ excludeDates: true}))
     }
 
@@ -30,6 +32,7 @@ export default class BookedDates {
       'startDate': json.startDate,
       'endDate': json.endDate,
       'bookedBy': json.bookedBy,
+      'returned': json.returned,
       'requestedGear': json.requestedGear.map((gearJSON) => GearForLoan.fromJSON(gearJSON))
     })
   }
@@ -41,6 +44,7 @@ export default class BookedDates {
       startDate: contentfulBookedDate.fields.startDate,
       endDate: contentfulBookedDate.fields.endDate,
       bookedBy: contentfulBookedDate.fields.bookedBy,
+      returned: contentfulBookedDate.fields.returned,
       requestedGear: excludeGear ? [] : requestedGear.map((gear) => {
         return GearForLoan.fromContentfulObject(gear, { excludeDates: true})
       }),
