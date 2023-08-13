@@ -88,6 +88,8 @@ export default function Bookings({ content, recaptchaSiteKey }) {
 }
 
 export async function getStaticProps() {
+  // TODO - replace this with a client side rendered page as we need fresh up to date copies and not these stale copies
+  // TODO - is this a problem when we use the contact form also? does it not update the date ranges seen by users?
   let response = await contentfulClient.getEntries({
     content_type: "dateRange",
     order: "-fields.startDate"
