@@ -101,7 +101,7 @@ export async function getStaticProps() {
   return {
     props: {
       pageTitle: "Gear Library",
-      gearItems: response.items.map((gearForLoan) => GearForLoan.fromContentfulObject(gearForLoan, { excludeDates: true }).toJSON())
+      gearItems: response.items.map((gearForLoan) => GearForLoan.fromContentfulObject(gearForLoan).toJSON())
     }
   }
 }

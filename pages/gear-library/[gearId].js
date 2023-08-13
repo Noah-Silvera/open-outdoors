@@ -35,9 +35,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   let response = await contentfulClient.getEntry(params.gearId)
 
+  let gearItem = GearForLoan.fromContentfulObject(response).toJSON()
   return {
     props: {
-      gearItem: GearForLoan.fromContentfulObject(response, { excludeDates: true }).toJSON()
+      gearItem: gearItem
     }
   }
 }

@@ -4,7 +4,7 @@ import styles from '../../styles/gear_library/GearItem.module.scss'
 import BorrowForm from './BorrowForm';
 
 export default function GearItem({gearForLoan, ...props}) {
-  let bookedDates = gearForLoan.bookedDates?.filter((bookedDate) => !!Object.keys(bookedDate.fields || {}).length > 0) || []
+  let bookedDates = gearForLoan.bookedDatesArray || []
 
   return (
     <section className={[styles['gear-item'], "border shadow-sm rounded-md bg-white-alt/10 flex flex-col"].join(" ")} key={props.index}>
@@ -26,7 +26,7 @@ export default function GearItem({gearForLoan, ...props}) {
       </div>
       <div className='border-b-2 border-primary-light mb-4'></div>
       <BorrowForm gearTitle={gearForLoan.title} gearId={gearForLoan.id} bookedDates={bookedDates.map((bookedDate) =>{
-        return {startDate: new Date(bookedDate.fields.startDate), endDate: new Date(bookedDate.fields.endDate)}
+        return {startDate: new Date(bookedDate.startDate), endDate: new Date(bookedDate.endDate)}
       })}/>
     </section>
   )

@@ -37,11 +37,22 @@ export default class GearForLoan {
       gearTypes = []
     }
 
+
+    let bookedDatesArray;
+
+    if(excludeDates) {
+      bookedDatesArray = [];
+    } else if(contentfulGearForLoan.fields.bookedDates) {
+      bookedDatesArray = contentfulGearForLoan.fields.bookedDates.filter((bookedDate) => bookedDate.sys['type'] === 'Entry').map((bookedDate) => BookedDates.fromContentfulObject(bookedDate, { excludeGear: true }))
+    } else {
+      bookedDatesArray = [];
+    }
+
     return new GearForLoan({
       id: contentfulGearForLoan.sys.id,
       title: contentfulGearForLoan.fields.title,
       description: contentfulGearForLoan.fields.description,
-      bookedDatesArray: excludeDates ? [] : contentfulGearForLoan.fields.bookedDates.map((bookedDate) => BookedDates.fromContentfulObject(bookedDate, { excludeGear: true })),
+      bookedDatesArray: bookedDatesArray,
       types: gearTypes.map((type) => type.fields['type']),
       images: contentfulGearForLoan.fields.images.map((image) => {
         return {
