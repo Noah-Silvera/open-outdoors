@@ -18,6 +18,9 @@ async function handler(req, res) {
         bookedBy: {
           'en-US': req.body.fullName,
         },
+        bookedByEmail: {
+          'en-US': req.body.email,
+        },
         startDate: {
           'en-US': startDate.toISOString()
         },

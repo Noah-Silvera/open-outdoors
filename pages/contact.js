@@ -69,6 +69,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
           startDate: startDate.setDate(startDate.getDate() - 1),
           endDate: endDate.setDate(endDate.getDate() + 1),
           fullName: fullName,
+          email: email,
           gearId: selectedGear[0].id
         }, recaptchaSiteKey)
       } catch(error) {
