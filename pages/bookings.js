@@ -3,8 +3,9 @@ import BookedDates from '../src/models/BookedDates'
 import { markAsReturned } from '../src/client/mark_as_returned'
 import Script from 'next/script'
 import { useState } from 'react'
+import { sendReadyForPickupEmail } from '../src/client/email'
 
-const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned }) => {
+const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup }) => {
   let [isReturned, setIsReturned] = useState(returned)
 
   const handleMarkAsReturned = async () => {
@@ -25,14 +26,17 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAs
         <div>{new Date(startDate).toLocaleDateString()} -&gt; {new Date(endDate).toLocaleDateString()}</div>
       </td>
       <td className="w-1/3 px-2">{requestedGear.map((requestedGear, idx) => <a key={idx} href={`/gear-library/${requestedGear.id}`} className="underline text-blue-700 break-words" target="_blank">{requestedGear.title}</a>)}</td>
-      <td>
-        <label className="mr-2" htmlFor="returned">returned?</label>
-        <input type="checkbox"
-          checked={isReturned}
-          disabled={isReturned}
-          name="returned"
-          onChange={handleMarkAsReturned}
-        ></input>
+      <td className='flex flex-row'>
+        <div className='flex flex-row items-center'>
+          <label className="mr-2" htmlFor="returned">returned?</label>
+          <input type="checkbox"
+            checked={isReturned}
+            disabled={isReturned}
+            name="returned"
+            onChange={handleMarkAsReturned}
+          ></input>
+        </div>
+        <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={markAsReadyForPickup}>Send Pickup Ready Email</button>
       </td>
     </tr>
   )
@@ -56,10 +60,12 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                 return <Booking startDate={booking.startDate}
                   endDate={booking.endDate}
                   bookedBy={booking.bookedBy}
+                  bookedByEmail={booking.bookedByEmail}
                   requestedGear={booking.requestedGear}
                   returned={booking.returned}
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, recaptchaSiteKey)}
+                  markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }
@@ -77,6 +83,7 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   returned={booking.returned}
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, recaptchaSiteKey)}
+                  markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }

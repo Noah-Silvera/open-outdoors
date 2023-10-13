@@ -32,17 +32,9 @@ async function handler(req, res) {
               <div style="font-size: 16px;">
               <p>Message:</p>
               <p>Hi ${req.body.name},<p>
-              <br/>
-
               <p>I have your gear request ready! It is in the sunroom of 213 Vancouver Street!</p>
-              <br/>
-
               <p>The front door to the sunroom is always unlocked, so you can come whenever! There are dogs in the main house, so please just let yourself in and out without knocking! There is a sign that says gear library pick up and drop off, and there is a bin or milk crate with your name labeled on it! Please be sure to only take your items! You can come whenever works for you.</p>
-
-              <br/>
               <p>For the return, once you're back in town, we appreciate if items can be returned as soon as possible! A few days is okay, but if it is going to be longer please let us know :) The gear library lends out lots of items frequently, so we are trying to keep things as available as possible.</p>
-
-              <br/>
               <p>Thanks so much!</p>
               <p>Wren and Noah</p>
               </div>
