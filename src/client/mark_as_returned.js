@@ -1,10 +1,11 @@
 import { fetchRecaptchaToken } from "./recaptcha_utils";
 
-export const markAsReturned = async (bookedDateContentfulId, recaptchaSiteKey) => {
+export const markAsReturned = async (bookedDateContentfulId, returned, recaptchaSiteKey) => {
   let recaptchaToken = await fetchRecaptchaToken(recaptchaSiteKey);
   const res = await fetch("/api/mark_returned", {
     body: JSON.stringify({
       bookedDateId: bookedDateContentfulId,
+      returned: returned,
       recaptchaToken: recaptchaToken
     }),
     headers: {

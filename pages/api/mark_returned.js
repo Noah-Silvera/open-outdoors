@@ -10,7 +10,7 @@ async function handler(req, res) {
 
     let bookedDate = await contentfulEnvironment.getEntry(req.body.bookedDateId)
 
-    bookedDate.fields.returned['en-US'] = true
+    bookedDate.fields.returned['en-US'] = req.body.returned
 
     bookedDate = await bookedDate.update()
     await bookedDate.publish()
