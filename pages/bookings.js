@@ -3,9 +3,9 @@ import BookedDates from '../src/models/BookedDates'
 import { markAsReturned } from '../src/client/mark_as_returned'
 import Script from 'next/script'
 import { useState } from 'react'
-import { sendReadyForPickupEmail } from '../src/client/email'
+import { sendGearRequestReceivedEmail, sendReadyForPickupEmail } from '../src/client/email'
 
-const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup }) => {
+const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup, markAsReceived }) => {
   let [isReturned, setIsReturned] = useState(returned)
 
   const handleMarkAsReturned = async () => {
@@ -36,6 +36,7 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAs
             onChange={handleMarkAsReturned}
           ></input>
         </div>
+        <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={markAsReceived}>Send Request Received Email</button>
         <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={markAsReadyForPickup}>Send Pickup Ready Email</button>
       </td>
     </tr>
@@ -66,6 +67,7 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
+                  markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }
@@ -84,6 +86,7 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
+                  markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }
