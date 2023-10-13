@@ -41,8 +41,7 @@ export default function BorrowForm({gearTitle, gearId, defaultFormOpen, classNam
     let parameters = new URLSearchParams()
 
     parameters.set("message", defaultBorrowMessage)
-    parameters.set("gearId", gearId)
-    parameters.set("gearTitle", gearTitle)
+    parameters.set("gearList", JSON.stringify([{ "id": gearId, "title": gearTitle}]))
 
     if(startDate && endDate) {
       parameters.set("startDate", startDate.toISOString())

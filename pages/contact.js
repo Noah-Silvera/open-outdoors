@@ -43,7 +43,11 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
       }
 
       if(selectedGear == null && searchParams.gearTitle && searchParams.gearId){
-        setSelectedGear([{ gearTitle: searchParams.gearTitle, gearId: searchParams.gearId}])
+        setSelectedGear([{ title: searchParams.gearTitle, id: searchParams.gearId}])
+      }
+
+      if(selectedGear == null && searchParams.gearList) {
+        setSelectedGear(JSON.parse(searchParams.gearList))
       }
     }
   })
@@ -55,7 +59,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
     setSuccess(null)
 
     if(selectedGear) {
-      message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${selectedGear[0].gearId}">${selectedGear[0].gearTitle}</a>`
+      message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${selectedGear[0].id}">${selectedGear[0].title}</a>`
     }
 
     const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
@@ -65,7 +69,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
           startDate: startDate.setDate(startDate.getDate() - 1),
           endDate: endDate.setDate(endDate.getDate() + 1),
           fullName: fullName,
-          gearId: selectedGear[0].gearId
+          gearId: selectedGear[0].id
         }, recaptchaSiteKey)
       } catch(error) {
         Sentry.captureException(error);
@@ -145,7 +149,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
                 <h2 className="text-2xl mb-2 font-bold">Requested Gear</h2>
                 <ul className="list-disc ml-12">
                   <li>
-                    <a href={`/gear-library/${selectedGear[0].gearId}`} className="underline text-blue-700">{selectedGear[0].gearTitle}</a>
+                    <a href={`/gear-library/${selectedGear[0].id}`} className="underline text-blue-700">{selectedGear[0].title}</a>
                   </li>
                 </ul>
               </div>
