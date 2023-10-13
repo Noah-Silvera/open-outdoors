@@ -2,7 +2,7 @@ import { Label, Textarea, TextInput, Button } from "flowbite-react";
 import { useState, useEffect } from "react";
 import Script from 'next/script'
 import { BasicHeader } from '../components/BasicHeader'
-import { sendEmail } from "../src/client/email";
+import { sendContactEmail } from "../src/client/email";
 import { bookDates } from "../src/client/book_dates";
 import * as Sentry from '@sentry/nextjs';
 
@@ -62,7 +62,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
       message += `<br/><br/>Link to Requested Gear: <a href="${window.location.origin}/gear-library/${selectedGear[0].id}">${selectedGear[0].title}</a>`
     }
 
-    const sendEmailSuccess = await sendEmail(email, fullName, message, recaptchaSiteKey)
+    const sendEmailSuccess = await sendContactEmail(email, fullName, message, recaptchaSiteKey)
     if(selectedGear) {
       try {
         await bookDates({
