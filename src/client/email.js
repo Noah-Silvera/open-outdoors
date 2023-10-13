@@ -58,3 +58,22 @@ export const sendGearRequestReceivedEmail = async (email, name, recaptchaSiteKey
   return !response.error
 }
 
+export const sendRequestToReturnEmail = async (email, name, recaptchaSiteKey) => {
+  let recaptchaToken = await fetchRecaptchaToken(recaptchaSiteKey);
+  const res = await fetch("/api/please_return", {
+    body: JSON.stringify({
+      email: email,
+      name: name,
+      recaptchaToken: recaptchaToken
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
+
+  const response = await res.json();
+
+  return !response.error
+}
+

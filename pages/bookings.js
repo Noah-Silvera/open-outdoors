@@ -3,7 +3,7 @@ import BookedDates from '../src/models/BookedDates'
 import { markAsReturned } from '../src/client/mark_as_returned'
 import Script from 'next/script'
 import { useState } from 'react'
-import { sendGearRequestReceivedEmail, sendReadyForPickupEmail } from '../src/client/email'
+import { sendGearRequestReceivedEmail, sendReadyForPickupEmail, sendRequestToReturnEmail } from '../src/client/email'
 
 const LoadingSpinner = () => {
   return <div role="status">
@@ -15,7 +15,7 @@ const LoadingSpinner = () => {
 </div>
 }
 
-const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup, markAsReceived, markAsStillOut }) => {
+const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail }) => {
   let [isReturned, setIsReturned] = useState(returned)
   let [loading, setLoading] = useState(false)
 
@@ -43,6 +43,12 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAs
     setLoading(false)
   }
 
+  const handleSendRequestToReturnEmail = async () => {
+    setLoading(true)
+    await sendRequestToReturnEmail()
+    setLoading(false)
+  }
+
   return (
     <tr className="border-4 border-primary-light">
       <td className="hidden sm:table-cell font-semibold">{bookedBy}</td>
@@ -64,7 +70,8 @@ const Booking = ({ startDate, endDate, bookedBy, requestedGear, returned, markAs
               ></input>
             </div>
             <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendRequestReceivedEmail}>Send Request Received Email</button>
-            <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendMarkAsReadyForPickupEmail}>Send Pickup Ready Email</button></>
+            <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendMarkAsReadyForPickupEmail}>Send Pickup Ready Email</button>
+            <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendRequestToReturnEmail}>Send Request To Return Email</button></>
         }
       </td>
     </tr>
@@ -97,6 +104,7 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   markAsStillOut={async () => await markAsReturned(booking.contentfulId, false, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
+                  sendRequestToReturnEmail={async () => await sendRequestToReturnEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }
@@ -117,6 +125,7 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   markAsStillOut={async () => await markAsReturned(booking.contentfulId, false, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
+                  sendRequestToReturnEmail={async () => await sendRequestToReturnEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                 ></Booking>
               })
             }
