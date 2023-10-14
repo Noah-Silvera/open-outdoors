@@ -82,7 +82,7 @@ export function hideOnScroll(elem, identifer) {
 export const navLinks = [
   {
     "href": "/about",
-    "text": "About Us",
+    "text": "About",
     "hiddenOnDesktop": false
   },
   {

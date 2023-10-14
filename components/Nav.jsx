@@ -34,12 +34,13 @@ function DropdownNavbarLink({ href, title, hiddenOnDesktop }){
   )
 }
 
-function NavbarDropdown({navLinks, label}) {
+function NavbarDropdown({navLinks, label, arrowIcon = true}) {
   return (
     <Dropdown
-      label={<StyledLinkText className="sm:pt-1">{label}</StyledLinkText>}
+      label={label}
       inline={true}
       placement="bottom"
+      arrowIcon={arrowIcon}
     >
       {navLinks.map((navLink, idx) => {
         return (
@@ -54,6 +55,19 @@ function NavbarDropdown({navLinks, label}) {
           </>
         )
       })}
+    </Dropdown>
+  )
+}
+
+function CartDropdown({label, arrowIcon = true}) {
+  return (
+    <Dropdown
+      label={label}
+      inline={true}
+      placement="bottom"
+      arrowIcon={arrowIcon}
+    >
+      <div>Work in Progress</div>
     </Dropdown>
   )
 }
@@ -80,8 +94,17 @@ function NavbarLinks({ navLinks, maxLinksDisplayed }) {
             hiddenOnDesktop={navLink["hiddenOnDesktop"]}/>
         )
       })}
-      <NavbarDropdown label="More" navLinks={navLinks.slice(3)}/>
+      <NavbarDropdown label={<StyledLinkText className="sm:pt-1">More</StyledLinkText>} navLinks={navLinks.slice(3)}/>
     </>
+  )
+}
+
+const CartLabel = () => {
+  return (
+    <div>
+      <span className="md:sr-only text-primary-light md:text-primary-dark text-2xl py-0 sm:pt-2">Cart</span>
+      <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fas fa-shopping-cart text-xl md:text-2xl lg:text-3xl pr-2" title="Cart"></i></span>
+    </div>
   )
 }
 
@@ -108,7 +131,7 @@ export default function Nav() {
             className="mr-3 h-24 opacity-100"
             alt="Open (out)Doors"
           />
-          <span className="self-center whitespace-nowrap text-2xl sm:text-3xl font-semibold text-primary-light">
+          <span className="self-center whitespace-nowrap text-2xl md:text-xl sm:text-3xl font-semibold text-primary-light">
             Open (out)Doors
           </span>
         </Navbar.Brand>
@@ -120,9 +143,10 @@ export default function Nav() {
             target="_blank"
             aria-label="Instagram"
           >
-            <span className="md:sr-only text-primary-light md:text-primary-dark text-2xl pr-5 py-0 sm:pt-2">Instagram</span>
-            <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fab fa-instagram text-3xl md:text-4xl pr-5" title="Instagram"></i></span>
+            <span className="md:sr-only text-primary-light md:text-primary-dark text-2xl py-0 sm:pt-2">Instagram</span>
+            <span className='text-primary-light md:text-primary-dark'><i aria-hidden="true" className="fab fa-instagram text-xl md:text-3xl lg:text-4xl pr-2" title="Instagram"></i></span>
           </Navbar.Link>
+          <CartDropdown label={<CartLabel/>} arrowIcon={false}/>
         </Navbar.Collapse>
       </Navbar>
     </div>
