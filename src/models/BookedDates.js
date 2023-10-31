@@ -48,8 +48,8 @@ export default class BookedDates {
 
     return new BookedDates({
       contentfulId: contentfulBookedDate.sys.id,
-      startDate: contentfulBookedDate.fields.startDate,
-      endDate: contentfulBookedDate.fields.endDate,
+      startDate: contentfulBookedDate.fields.startDate || null,
+      endDate: contentfulBookedDate.fields.endDate || null,
       bookedBy: contentfulBookedDate.fields.bookedBy,
       bookedByEmail: contentfulBookedDate.fields.bookedByEmail,
       returned: contentfulBookedDate.fields.returned,
