@@ -5,6 +5,7 @@ import { BasicHeader } from '../components/BasicHeader'
 import { sendContactEmail } from "../src/client/email";
 import { bookDates } from "../src/client/book_dates";
 import * as Sentry from '@sentry/nextjs';
+import { Toast } from "flowbite-react";
 
 export default function Contact({ recaptchaSiteKey, pageTitle }) {
   let [fullName, setFullName] = useState(null)
@@ -156,15 +157,19 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               </div>
             )
           }
-          <div>
-            <Button type="submit" size="xl" color="info" disabled={loading}>
-              Send Email
-            </Button>
+          <div className="flex flex-row">
+            <div className="grow">
+              <Button type="submit" size="xl" color="info" disabled={loading}>
+                Send Email
+              </Button>
+            </div>
+            {success && <Toast className="!bg-green-200">
+                <div className="ml-3 text-sm font-normal">
+                  Message Sent! If you don't receive a confirmation email within a few days, please check your spam folder.
+                </div>
+                <Toast.Toggle />
+            </Toast>}
           </div>
-          {success &&
-            <p className="text-green-500">
-              Message sent!
-            </p>}
           <p className="text-red-500">
             {errorMessage}
           </p>
