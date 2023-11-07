@@ -165,7 +165,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
             </div>
             {success && <Toast className="!bg-green-200">
                 <div className="ml-3 text-sm font-normal">
-                  Message Sent! If you don't receive a confirmation email within a few days, please check your spam folder.
+                  Message Sent! If you don&apos;t receive a confirmation email within a few days, please check your spam folder.
                 </div>
                 <Toast.Toggle />
             </Toast>}
