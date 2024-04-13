@@ -50,11 +50,10 @@ function MyApp({ Component, pageProps }) {
     <DefaultHead title={pageProps.pageTitle || null}/>
     <div className='min-h-screen flex flex-col'>
       <div className='navbar-padding'>
-        {/* <Nav/> */}
+        <Nav/>
       </div>
-      <h1>The gear library is temporarily unavailable. We are sorry for inconvenience.</h1>
-      {/* <Component {...pageProps} /> */}
-      {/* <Footer/> */}
+      <Component {...pageProps} />
+      <Footer/>
       <Analytics />
     </div>
   </Flowbite>
