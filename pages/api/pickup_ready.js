@@ -32,7 +32,10 @@ async function handler(req, res) {
               <div style="font-size: 16px;">
               <p>Hi ${req.body.name},<p>
               <p>I have your gear request ready! It is in the sunroom of 213 Vancouver Street!</p>
-              <p>The front door to the sunroom is always unlocked, so you can come whenever! There are dogs in the main house, so please just let yourself in and out without knocking! There is a sign that says gear library pick up and drop off, and there is a bin or milk crate with your name labeled on it! Please be sure to only take your items! You can come whenever works for you.</p>
+              <p><b> PLEASE READ INSTRUCTIONS HAVE CHANGED RECENTLY <b></p>
+              <p>Please email info@openoutdoorsvictoria.ca with an approximate time of arrival. If you arrival changes, <b>please</b> email us again with the new time.</p>
+              <p>Please come between the hours of 9am and 9pm and text 778 879 3907 when you arrive. Please DO NOT ring the doorbell, unless you cannot reach 778 879 3907 by text or phone.</p>
+              <p>There are dogs in the main house, We are trying to train! There is a sign that says gear library pick up and drop off, and there is a bin or milk crate with your name labeled on it! Please be sure to only take your items!</p>
               <p>For the return, once you're back in town, we appreciate if items can be returned as soon as possible! A few days is okay, but if it is going to be longer please let us know :) The gear library lends out lots of items frequently, so we are trying to keep things as available as possible.</p>
               <p>Thanks so much!</p>
               <p>Wren and Noah</p>
