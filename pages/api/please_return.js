@@ -1,11 +1,15 @@
 import sendgrid from "@sendgrid/mail";
 import * as Sentry from '@sentry/nextjs';
 import { performRecaptchaCheck } from "../../src/server/recaptcha_utils";
+import { PLEASE_RETURN_EMAIL_CONTENTFUL_ID } from "../../src/server/contentful_management_client";
+import { buildEmailContent } from "../../src/server/email_builder";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function handler(req, res) {
   await performRecaptchaCheck(req.body.recaptchaToken)
+
+  let { subject, htmlEmailBody } = await buildEmailContent(PLEASE_RETURN_EMAIL_CONTENTFUL_ID, { name: req.body.name })
 
   try {
     await sendgrid.send({
@@ -15,28 +19,8 @@ async function handler(req, res) {
         email: "info@openoutdoorsvictoria.ca",
         name: "Open Outdoors"
       },
-      subject: `[Open Outdoors]: Gear return reminder`,
-      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
-        <link rel="stylesheet" href="css/styles.css?v=1.0">
-      </head>
-
-      <body>
-        <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
-            </div>
-              <div class="container" style="margin-left: 20px;margin-right: 20px;">
-              <div style="font-size: 16px;">
-              <p>Hi ${req.body.name},<p>
-              <p>We just wanted to send you a friendly email to remind you to return your gear so we can lend it out to other folks! You can come down to 213 Vancouver Street anytime to dropoff your gear in the sunroom, the door is always unlocked.</p>
-              <p>Thanks so much!</p>
-              <p>Wren and Noah</p>
-              </div>
-            </div>
-      </body>
-      </html>`,
+      subject: `[Open Outdoors] : ${subject}`,
+      html: htmlEmailBody
     });
   } catch (error) {
     Sentry.captureException(error);

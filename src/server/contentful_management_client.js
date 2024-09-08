@@ -12,3 +12,7 @@ const initContentfulEnvironment = async () => {
 }
 
 export default initContentfulEnvironment;
+
+export const PICKUP_EMAIL_CONTENTFUL_ID = '17RmtsREAMfF13ID21PODn'
+export const PLEASE_RETURN_EMAIL_CONTENTFUL_ID = '1hvrOlyxJvN9cGgIC0cp7H'
+export const REQUEST_RECEIVED_EMAIL_CONTENTFUL_ID = '4HFNSULx9t1jakmLPZpANi'
