@@ -1,6 +1,7 @@
 import contentfulClient from '../src/server/contentful_client'
 import BookedDates from '../src/models/BookedDates'
 import { markAsReturned } from '../src/client/mark_as_returned'
+import { markAsPickedUp } from '../src/client/mark_as_picked_up'
 import Script from 'next/script'
 import { sendGearRequestReceivedEmail, sendReadyForPickupEmail, sendRequestToReturnEmail } from '../src/client/email'
 import Booking from '../components/Booking'
@@ -26,9 +27,12 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   bookedByEmail={booking.bookedByEmail}
                   requestedGear={booking.requestedGear}
                   returned={booking.returned}
+                  pickedUp={booking.pickedUp}
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, true, recaptchaSiteKey)}
                   markAsStillOut={async () => await markAsReturned(booking.contentfulId, false, recaptchaSiteKey)}
+                  markAsPickedUp={async () => await markAsPickedUp(booking.contentfulId, true, recaptchaSiteKey)}
+                  markAsNotPickedUp={async () => await markAsPickedUp(booking.contentfulId, false, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   sendRequestToReturnEmail={async () => await sendRequestToReturnEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
@@ -47,9 +51,12 @@ export default function Bookings({ content, recaptchaSiteKey }) {
                   bookedBy={booking.bookedBy}
                   requestedGear={booking.requestedGear}
                   returned={booking.returned}
+                  pickedUp={booking.pickedUp}
                   key={idx}
                   markAsReturned={async () => await markAsReturned(booking.contentfulId, true, recaptchaSiteKey)}
                   markAsStillOut={async () => await markAsReturned(booking.contentfulId, false, recaptchaSiteKey)}
+                  markAsPickedUp={async () => await markAsPickedUp(booking.contentfulId, true, recaptchaSiteKey)}
+                  markAsNotPickedUp={async () => await markAsPickedUp(booking.contentfulId, false, recaptchaSiteKey)}
                   markAsReadyForPickup={async () => await sendReadyForPickupEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   markAsReceived={async () => await sendGearRequestReceivedEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}
                   sendRequestToReturnEmail={async () => await sendRequestToReturnEmail(booking.bookedByEmail, booking.bookedBy, recaptchaSiteKey)}

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 
-export default ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail }) => {
+export default ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, pickedUp, markAsPickedUp, markAsNotPickedUp, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail }) => {
   let [isReturned, setIsReturned] = useState(returned)
+  let [isPickedUp, setIsPickedUp] = useState(pickedUp)
   let [loading, setLoading] = useState(false)
 
   const handleChangeReturnStatus = async () => {
@@ -13,6 +14,18 @@ export default ({ startDate, endDate, bookedBy, requestedGear, returned, markAsR
     } else {
       await markAsReturned()
       setIsReturned(true)
+    }
+    setLoading(false)
+  }
+
+  const handleChangePickupStatus = async () => {
+    setLoading(true)
+    if(isPickedUp) {
+      await markAsNotPickedUp()
+      setIsPickedUp(false)
+    } else {
+      await markAsPickedUp()
+      setIsPickedUp(true)
     }
     setLoading(false)
   }
@@ -47,14 +60,25 @@ export default ({ startDate, endDate, bookedBy, requestedGear, returned, markAsR
       <td className='flex flex-row'>
         {loading
           ? <LoadingSpinner/>
-          : <><div className='flex flex-row items-center'>
-              <label className="mr-2" htmlFor="returned">returned?</label>
-              <input type="checkbox"
-                checked={isReturned}
-                name="returned"
-                onChange={handleChangeReturnStatus}
-              ></input>
-            </div>
+          : <>
+              <div className='flex flex-col items-center justify-center'>
+              <div className='flex flex-row items-center text-xs border-2 m-1 p-1'>
+                  <label className="mr-2" htmlFor="returned">picked up?</label>
+                  <input type="checkbox"
+                    checked={isPickedUp}
+                    name="returned"
+                    onChange={handleChangePickupStatus}
+                  ></input>
+                </div>
+                <div className='flex flex-row items-center text-xs border-2 m-1 p-1'>
+                  <label className="mr-2" htmlFor="returned">returned?</label>
+                  <input type="checkbox"
+                    checked={isReturned}
+                    name="returned"
+                    onChange={handleChangeReturnStatus}
+                  ></input>
+                </div>
+              </div>
             <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendRequestReceivedEmail}>Send Request Received Email</button>
             <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendMarkAsReadyForPickupEmail}>Send Pickup Ready Email</button>
             <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendRequestToReturnEmail}>Send Request To Return Email</button></>
