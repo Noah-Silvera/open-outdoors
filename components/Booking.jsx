@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 
-export default ({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, pickedUp, markAsPickedUp, markAsNotPickedUp, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail }) => {
+export default function Booking({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, pickedUp, markAsPickedUp, markAsNotPickedUp, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail }) {
   let [isReturned, setIsReturned] = useState(returned)
   let [isPickedUp, setIsPickedUp] = useState(pickedUp)
   let [loading, setLoading] = useState(false)
