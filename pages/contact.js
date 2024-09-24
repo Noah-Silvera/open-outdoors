@@ -157,6 +157,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               </div>
             )
           }
+          <p class='text-sm'>We are a small organization with limited capacity! We will try to fufill all requests, but <b>cannot guarantee any requests,</b> and in particular requests made within <b>72 hours</b> of a trip.</p>
           <div className="flex flex-row">
             <div className="grow">
               <Button type="submit" size="xl" color="info" disabled={loading}>
