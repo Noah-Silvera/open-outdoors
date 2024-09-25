@@ -6,8 +6,10 @@ import { sendContactEmail } from "../src/client/email";
 import { bookDates } from "../src/client/book_dates";
 import * as Sentry from '@sentry/nextjs';
 import { Toast } from "flowbite-react";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import contentfulClient from '../src/server/contentful_client';
 
-export default function Contact({ recaptchaSiteKey, pageTitle }) {
+export default function Contact({ recaptchaSiteKey, pageTitle, aboveSendButtonBlurbDocument }) {
   let [fullName, setFullName] = useState(null)
   let [email, setEmail] = useState(null)
   let [selectedGear, setSelectedGear] = useState(null)
@@ -17,6 +19,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
   let [errorMessage, setErrorMessage] = useState("")
   let [success, setSuccess] = useState(null)
   let [loading, setLoading] = useState(false)
+  let [aboveSendButtonBlurb, setAboveSendButtonBlurb] = useState(null)
 
   useEffect(() => {
     if(typeof(window) != 'undefined') {
@@ -50,6 +53,8 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
       if(selectedGear == null && searchParams.gearList) {
         setSelectedGear(JSON.parse(searchParams.gearList))
       }
+
+      setAboveSendButtonBlurb(documentToReactComponents(aboveSendButtonBlurbDocument))
     }
   })
 
@@ -157,7 +162,7 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
               </div>
             )
           }
-          <p class='text-sm'>We are a small organization with limited capacity! We will try to fufill all requests, but <b>cannot guarantee any requests,</b> and in particular requests made within <b>72 hours</b> of a trip.</p>
+          <p className='text-sm'>{aboveSendButtonBlurb}</p>
           <div className="flex flex-row">
             <div className="grow">
               <Button type="submit" size="xl" color="info" disabled={loading}>
@@ -181,11 +186,15 @@ export default function Contact({ recaptchaSiteKey, pageTitle }) {
 }
 
 
-export function getStaticProps() {
+export async function getStaticProps() {
+  const CONTACT_PAGE_ENTRY_ID = "011LhUNgTj6TaGZUhiCL6k"
+  let contactPageContent = await contentfulClient.getEntry(CONTACT_PAGE_ENTRY_ID)
+
   return {
     props: {
       pageTitle: "Contact Us",
-      recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
+      recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY,
+      aboveSendButtonBlurbDocument: contactPageContent.fields['aboveSendButtonBlurb']
     }
   }
 }
