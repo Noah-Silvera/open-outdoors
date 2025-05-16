@@ -7,6 +7,10 @@ export default function Toast() {
   const { toastMessage, setToastMessage } = useContext(ToastContext)
   let isOpen = !!toastMessage
   if (isOpen) {
+    setTimeout(() => {
+      setToastMessage(null)
+    }, 5000)
+
     return (
       <div id="toast-default" className="fixed top-28 right-2 flex items-center w-full max-w-xs p-4 text-gray-500 bg-gray-100 rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800" role="alert">
         <div className="inline-flex items-center justify-center shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-blue-800 dark:text-blue-200">
