@@ -81,8 +81,8 @@ export default function Booking({ startDate, endDate, bookedBy, requestedGear, r
           : <div>
             {currentGearArray.map((gear, idx) => {
               return (
-                <div className='flex flex-row items-center'>
-                  <GearSelect gearTypeMap={gearTypeMap} selectedGear={gear} idx={idx} onChange={handleChangeGear} />
+                <div className='flex flex-row items-center' key={idx}>
+                  <GearSelect gearTypeMap={gearTypeMap} selectedGear={gear} onChange={handleChangeGear} key={idx} />
                   <a href={`/gear-library/${gear.id}`} target="_blank">
                     <span className='underline text-blue-500 flex flex-row items-center'><i aria-hidden="true" className="fas fa-external-link-alt pl-3" title="View Gear">
                     </i></span>
@@ -119,11 +119,11 @@ export default function Booking({ startDate, endDate, bookedBy, requestedGear, r
             <button className='bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded text-sm ml-5' onClick={handleSendRequestToReturnEmail}>Send Request To Return Email</button></>
         }
       </td>
-    </tr >
+    </tr>
   )
 }
 
-function GearSelect({ gearTypeMap, selectedGear, idx, onChange }) {
+function GearSelect({ gearTypeMap, selectedGear, key, onChange }) {
   let allGear = Object.values(gearTypeMap).flatMap((x) => x);
   let typeMapCopy = { ...gearTypeMap };
   let relatedGear = {}
@@ -137,19 +137,19 @@ function GearSelect({ gearTypeMap, selectedGear, idx, onChange }) {
     unrelatedGear[type] = typeMapCopy[type]
   })
 
-  return <select key={idx} defaultValue={selectedGear.id} onChange={(e) => onChange(selectedGear, allGear.find((x) => x.id === e.target.value))}>
-    <option value={selectedGear.id} key={`${idx}-${selectedGear.id}`}>{selectedGear.title}</option>
+  return <select key={key} defaultValue={selectedGear.id} onChange={(e) => onChange(selectedGear, allGear.find((x) => x.id === e.target.value))}>
+    <option value={selectedGear.id} key={`${key}-${selectedGear.id}`}>{selectedGear.title}</option>
     {Object.keys(relatedGear).map((type) => {
-      return <optgroup label={`Other ${type}`} key={`${idx}-${type}`}>
+      return <optgroup label={`Other ${type}`} key={`${key}-${type}`}>
         {relatedGear[type].map((gear) => {
-          return <option value={gear.id} key={`${idx}-${gear.id}`}>{gear.title}</option>
+          return <option value={gear.id} key={`${key}-${gear.id}`}>{gear.title}</option>
         })}
       </optgroup>
     })}
     {Object.keys(unrelatedGear).map((type) => {
-      return <optgroup label={type} key={`${idx}-${type}`}>
+      return <optgroup label={type} key={`${key}-${type}`}>
         {unrelatedGear[type].map((gear) => {
-          return <option value={gear.id} key={`${idx}-${gear.id}`}>{gear.title}</option>
+          return <option value={gear.id} key={`${key}-${gear.id}`}>{gear.title}</option>
         })}
       </optgroup>
     })}
