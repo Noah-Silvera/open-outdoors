@@ -1,7 +1,7 @@
 import BookedDates from "./BookedDates";
 
 export default class GearForLoan {
-  constructor({id, title, description, bookedDatesArray, types, images}) {
+  constructor({ id, title, description, bookedDatesArray, types, images }) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -10,17 +10,17 @@ export default class GearForLoan {
     this.images = images;
   }
 
-  toJSON({excludeDates} = {}) {
+  toJSON({ excludeDates } = {}) {
     let json = {
       'id': this.id,
       'title': this.title,
       'description': this.description,
-      'bookedDatesArray': this.bookedDatesArray.map((bookedDates) => bookedDates.toJSON({ excludeGear: true})),
+      'bookedDatesArray': this.bookedDatesArray.map((bookedDates) => bookedDates.toJSON({ excludeGear: true })),
       'types': this.types,
       'images': this.images
     }
 
-    if(excludeDates) {
+    if (excludeDates) {
       delete json['bookedDatesArray']
     }
 
@@ -31,18 +31,17 @@ export default class GearForLoan {
     return new GearForLoan(json)
   }
 
-  static fromContentfulObject(contentfulGearForLoan, {excludeDates} = {}) {
+  static fromContentfulObject(contentfulGearForLoan, { excludeDates } = {}) {
     let gearTypes = contentfulGearForLoan.fields.types || [];
-    if(gearTypes.length > 0 && gearTypes[0].sys.type == 'Link'){
+    if (gearTypes.length > 0 && gearTypes[0].sys.type == 'Link') {
       gearTypes = []
     }
 
-
     let bookedDatesArray;
 
-    if(excludeDates) {
+    if (excludeDates) {
       bookedDatesArray = [];
-    } else if(contentfulGearForLoan.fields.bookedDates) {
+    } else if (contentfulGearForLoan.fields.bookedDates) {
       bookedDatesArray = contentfulGearForLoan.fields.bookedDates.filter((bookedDate) => bookedDate.sys['type'] === 'Entry').map((bookedDate) => BookedDates.fromContentfulObject(bookedDate, { excludeGear: true }))
     } else {
       bookedDatesArray = [];
