@@ -52,13 +52,12 @@ export default function Booking({ startDate, endDate, bookedBy, requestedGear, r
     setLoading(false)
   }
 
-  const handleChangeGear = async (oldGear, newGear) => {
+  const handleChangeGear = async (oldGear, newGear, select) => {
     setLoading(true)
     if (confirm("Are you sure you want to change the gear for this booking from " + oldGear.title + " to " + newGear.title + "?") == true) {
       let { error, newGearForLoan } = await updateGear(oldGear, newGear)
       if (error) {
         alert(error)
-        setCurrentGearArray([...currentGearArray])
       } else {
         let newGearArray = currentGearArray.filter((gear) => gear.id !== oldGear.id)
         newGearArray.push(newGearForLoan)
@@ -66,7 +65,7 @@ export default function Booking({ startDate, endDate, bookedBy, requestedGear, r
         setToastMessage("Gear changed successfully. Please wait a few minutes for your changes to be reflected on refresh.")
       }
     } else {
-      setCurrentGearArray([...currentGearArray])
+      select.value = oldGear.id
     }
     setLoading(false)
   }
@@ -133,15 +132,15 @@ function GearSelect({ gearTypeMap, selectedGear, key, onChange }) {
   let relatedGear = {}
   let unrelatedGear = {}
   selectedGear.types.forEach((type) => {
-    relatedGear[type] = typeMapCopy[type]
+    relatedGear[type] = typeMapCopy[type].filter((x) => x.id !== selectedGear.id)
     delete typeMapCopy[type]
   })
 
   Object.keys(typeMapCopy).forEach((type) => {
-    unrelatedGear[type] = typeMapCopy[type]
+    unrelatedGear[type] = typeMapCopy[type].filter((x) => x.id !== selectedGear.id)
   })
 
-  return <select key={key} defaultValue={selectedGear.id} onChange={(e) => onChange(selectedGear, allGear.find((x) => x.id === e.target.value))}>
+  return <select key={key} defaultValue={selectedGear.id} onChange={(e) => onChange(selectedGear, allGear.find((x) => x.id === e.target.value), e.target)}>
     <option value={selectedGear.id} key={`${key}-${selectedGear.id}`}>{selectedGear.title}</option>
     {Object.keys(relatedGear).map((type) => {
       return <optgroup label={`Other ${type}`} key={`${key}-${type}`}>
