@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
+import { useContext } from 'react';
+import { ToastContext } from './Toast';
 
 export default function Booking({ startDate, endDate, bookedBy, requestedGear, returned, markAsReturned, pickedUp, markAsPickedUp, markAsNotPickedUp, markAsReadyForPickup, markAsReceived, markAsStillOut, sendRequestToReturnEmail, updateGear, gearTypeMap }) {
   let [isReturned, setIsReturned] = useState(returned)
   let [isPickedUp, setIsPickedUp] = useState(pickedUp)
   let [loading, setLoading] = useState(false)
   let [currentGearArray, setCurrentGearArray] = useState(requestedGear)
+  const { setToastMessage } = useContext(ToastContext);
 
   const handleChangeReturnStatus = async () => {
     setLoading(true)
@@ -60,6 +63,7 @@ export default function Booking({ startDate, endDate, bookedBy, requestedGear, r
         let newGearArray = currentGearArray.filter((gear) => gear.id !== oldGear.id)
         newGearArray.push(newGearForLoan)
         setCurrentGearArray(newGearArray)
+        setToastMessage("Gear changed successfully. Please wait a few minutes for your changes to be reflected on refresh.")
       }
     } else {
       setCurrentGearArray([...currentGearArray])

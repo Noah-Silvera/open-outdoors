@@ -5,11 +5,15 @@ import DefaultHead from '../components/DefaultHead';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { Analytics } from '@vercel/analytics/react';
+import { ToastContext } from '../components/Toast';
+import Toast from '../components/Toast';
+import { useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
   const [mode, _, toggleMode] = useThemeMode(true)
+  let [toastMessage, setToastMessage] = useState('')
 
-  if (mode == 'dark'){
+  if (mode == 'dark') {
     toggleMode()
   }
 
@@ -47,15 +51,18 @@ function MyApp({ Component, pageProps }) {
       }
     }}
   >
-    <DefaultHead title={pageProps.pageTitle || null}/>
-    <div className='min-h-screen flex flex-col'>
-      <div className='navbar-padding'>
-        <Nav/>
+    <DefaultHead title={pageProps.pageTitle || null} />
+    <ToastContext.Provider value={{ toastMessage, setToastMessage }}>
+      <Toast />
+      <div className='min-h-screen flex flex-col'>
+        <div className='navbar-padding'>
+          <Nav />
+        </div>
+        <Component {...pageProps} />
+        <Footer />
+        <Analytics />
       </div>
-      <Component {...pageProps} />
-      <Footer/>
-      <Analytics />
-    </div>
+    </ToastContext.Provider>
   </Flowbite>
 }
 
