@@ -14,6 +14,7 @@ async function handler(req, res) {
   let oldGearId = req.body.oldGearId
   let newGearId = req.body.newGearId
   let newGear;
+  let newGearObject;
   let bookedDate;
 
   try {
@@ -30,7 +31,7 @@ async function handler(req, res) {
     bookedDate = await bookedDate.update()
     await bookedDate.publish()
 
-    let newGearObject = await contentfulClient.getEntry(newGearId)
+    newGearObject = await contentfulClient.getEntry(newGearId)
     newGear = GearForLoan.fromContentfulObject(newGearObject, { excludeDates: true })
 
   } catch (error) {
@@ -38,14 +39,12 @@ async function handler(req, res) {
     return res.status(error.statusCode || 500).json({ error: "An error occurred, and the given booking may not have been updated with the new gear. Please manually confirm." });
   }
 
-  let oldGear = await contentfulEnvironment.getEntry(oldGearId)
+  let oldGearObject = await contentfulClient.getEntry(oldGearId)
 
-  let oldGearTitle = oldGear.fields.title['en-US']
-  let newGearTitle = newGear.fields.title['en-US']
+  let oldGearTitle = oldGearObject.fields.title
+  let newGearTitle = newGearObject.fields.title
   let oldGearLink = `https://openoutdoorsvictoria.ca/gear-library/${oldGearId}`
   let newGearLink = `https://openoutdoorsvictoria.ca/gear-library/${newGearId}`
-
-  debugger;
 
   let { subject, htmlEmailBody } = await buildEmailContent(
     CONTENTFUL_GEAR_SWAPPED_EMAIL_CONTENTFUL_ID,
