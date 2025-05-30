@@ -51,7 +51,7 @@ async function handler(req, res) {
     {
       originalGearDescription: oldGearTitle,
       newGearDescription: newGearTitle,
-      oldGearLink: oldGearLink,
+      originalGearLink: oldGearLink,
       newGearLink: newGearLink
     })
 
