@@ -7,6 +7,8 @@ import { buildEmailContent } from "../../src/server/email_builder";
 import { CONTENTFUL_GEAR_SWAPPED_EMAIL_CONTENTFUL_ID } from "../../src/server/contentful_management_client";
 import sendgrid from "@sendgrid/mail";
 
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+
 async function handler(req, res) {
   await performRecaptchaCheck(req.body.recaptchaToken)
 
